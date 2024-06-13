@@ -1,16 +1,33 @@
 <div class="main posts-show">
   <div class="container">
     <div class="posts-show-item">
+      <div class="post-user-name">
+        <img src= <%= "/user_images/#{@user.image_name}" %>>
+        <%= link_to(@user.name,"/users/#{@user.id}")%>
+      </div>
       <p>
         <%= @post.content %>
       </p>
       <div class="post-time">
         <%= @post.created_at %>
       </div>
+      <% if Like.find_by(user_id: @current_user.id, post_id: @post.id)%>
+       <%= link_to("/likes/#{@post.id}/destroy", data: {turbo_method: "post"})do%>
+        <span class="fa fa-heart liked-btn"></span>
+       <% end %>
+      <% else %>
+       <%= link_to("/likes/#{@post.id}/create", data: {turbo_method: "post"})do%>
+        <span class="fa fa-heart unliked-btn"></span>
+       <% end %>
+      <% end %>
+      <%= @likes_count %>
+
+      <% if @post.user_id == @current_user.id %>
       <div class="post-menus">
         <%= link_to("編集", "/posts/#{@post.id}/edit") %>
         <%= link_to("削除", "/posts/#{@post.id}/destroy",data: {turbo_method: "post"}) %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

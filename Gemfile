@@ -75,3 +75,5 @@ group :test do
 end
 
 gem 'importmap-rails'
+
+gem 'bcrypt'
