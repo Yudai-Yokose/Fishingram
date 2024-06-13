@@ -19,13 +19,17 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(
       content: params[:content],
-      user_id: @current_user.id
+      user_id: @current_user.id,
+      image_name: params[:image]
     )
     if @post.save
+      @post.image_name = "#{@post.id}.jpg"
+      image = params[:image]
+      File.binwrite("public/post_images/#{@post.image_name}",image.read)
       flash[:notice] = "投稿を作成しました"
       redirect_to("/posts/index")
     else
-      render("posts/new")
+      render("posts/new", status: :unprocessable_entity)
     end
   end
 
@@ -40,7 +44,7 @@ class PostsController < ApplicationController
       flash[:notice] = "投稿を編集しました"
       redirect_to("/posts/index")
     else
-      render("posts/edit")
+      render("posts/edit",status: :unprocessable_entity)
     end
   end
 
