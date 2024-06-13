@@ -147,7 +147,7 @@
   }
 
   .copy-right{
-    font-size: 10px;
+    font-size: 5px;
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -158,8 +158,19 @@
   
   /* about ================================ */
   .about-main {
-    padding: 180px 8% 0;
+    padding: 100px 100px 100px 100px;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
     color: white;
+    background-color: #323838;
+    background-repeat: no-repeat;
+    background-position: center 50%;
+    background-size: cover;
+    background-image: url("/about.jpg");
   }
   
   .about-main h2 {
@@ -175,6 +186,16 @@
   
   .about-img {
     width: 84%;
+  }
+
+  .copy-right{
+    font-size: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 5px;
+    border-radius: 3px;
+    color: white;
   }
   
   /* フォーム================================ */
@@ -320,6 +341,19 @@
 .post-time {
   color: #8899a6;
   margin-bottom: 10px;
+}
+
+.unliked-btn {
+  color: #116fb7;
+}
+
+.liked-btn {
+  color: #dc3b0a;
+}
+
+.posts-show-item .fa {
+  font-size: 16px;
+  margin-right: 3px;
 }
 
 .post-menus {
