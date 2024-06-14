@@ -80,7 +80,7 @@
     color: white;
     font-size: 40px;
   }
-  
+
   .header-menus {
     float: right;
     padding-right: 20px;
@@ -91,7 +91,7 @@
     line-height: 64px;
     font-size: 15px;
     color: white;
-    padding-left: 15px;
+    padding-left: 30px;
   }
   
   .header-menus a {
@@ -99,7 +99,31 @@
     font-size: 15px;
     color: white;
   }
+
+  .hover-Uline {
+    position: relative;/*疑似要素の親を固定*/
+    cursor: pointer;/*カーソルをポインターへ*/
+    text-decoration: none; /*ホバーなしは非表示*/
+  }
   
+  .hover-Uline:before {
+    content: ""; /*疑似要素の中身は空（記述は必須）*/
+    position: absolute; /*子要素として疑似要素を固定*/
+    left: -40; /*長さはテキストの両端まで*/
+    right: 10; /*長さはテキストの両端まで*/
+    bottom: 20px;  /*線の上下位置*/
+    width: 80%; /*線の長さ*/
+    height: 1px; /*線の太さ*/
+    background-color: #d3dada; /*線の色*/
+    transform: scale(0, 0); /*横方向に0状態から全体まで線を入れる*/
+    transform-origin: left; /*中央を起点にアニメーション*/
+    transition: transform .5s; /*アニメーションの時間*/
+  }
+  
+  .hover-Uline:hover:before {
+    transform: scale(1); /*ホバー時に等倍へ拡大*/
+  }
+
   .header-menus .fa {
     padding-right: 5px;
   }
@@ -260,7 +284,7 @@
   .flash {
     padding: 10px 0;
     color: white;
-    background: rgb(100, 166, 213);
+    background: rgb(73, 77, 80);
     text-align: center;
     position: absolute;
     top: 64px;
@@ -430,8 +454,8 @@
   font-weight: 600;
 }
 
-.user-name a:hover {
-  color: #3ecdc6;
+.user-right a:hover {
+  color: #d3dada;
 }
 
 .user-left {
@@ -483,7 +507,7 @@
 }
 
 .user span {
-  color: #afb6bf;
+  color: #bfb4af;
   font-weight: 200;
   padding: 0 6px 0 8px;
 }
@@ -500,7 +524,7 @@
 }
 
 .user-tabs li.active {
-  border-bottom: 2px solid #3ecdc6;
+  border-bottom: 2px solid #d3dada;
 }
 
 .user-tabs li.active a {
@@ -510,7 +534,7 @@
 .user-tabs a {
   display: inline-block;
   padding: 16px 30px;
-  color: #afb6bf;
+  color: #bfb5af;
 }
 
 /* users/new, users/edit ================================ */

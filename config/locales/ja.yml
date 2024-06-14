@@ -1,0 +1,20 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        image_name: 画像
+        password: パスワード
+      post:
+        content: コメント
+        image_name: JPG画像
+    errors:
+      messeages:
+        blank: "をアップロードしてください"
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      short: "%m/%d %H:%M"
