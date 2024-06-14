@@ -11,7 +11,7 @@
         <img src="<%= "/post_images/#{@post.id}.jpg"%>">
       </p>
       <div class="post-time">
-        <%= @post.created_at %>
+        <%= l @post.created_at, format: :short %>
       </div>
       <% if Like.find_by(user_id: @current_user.id, post_id: @post.id)%>
        <%= link_to("/likes/#{@post.id}/destroy", data: {turbo_method: "post"})do%>

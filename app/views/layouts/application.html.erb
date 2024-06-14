@@ -17,34 +17,35 @@
       <div class="header-logo">
         <%= link_to("Fishingram","/")%>
       </div>
+      
       <ul class="header-menus">
         <% if @current_user %>
-          <li>
-            <%= link_to("現在ログイン中：#{@current_user.name}","/users/#{@current_user.id}") %>
+          <li class="link hover-Uline">
+            <%= link_to(@current_user.name,"/users/#{@current_user.id}") %>
           </li>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("Fishingramとは", "/about") %>
           </li>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("新規投稿", "/posts/new") %>
           </li>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("投稿一覧", "/posts/index") %>
           </li>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("ユーザー一覧", "/users/index") %>
           </li>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("ログアウト", "/logout",data: {turbo_method: "post"})%>
           </li>
         <% else %>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("Fishingramとは", "/about") %>
           </li>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("新規登録", "/signup") %>
           </li>
-          <li>
+          <li class="link hover-Uline">
             <%= link_to("ログイン", "/login") %>
           </li>
         <% end %>

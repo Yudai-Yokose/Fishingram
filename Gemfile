@@ -77,3 +77,5 @@ end
 gem 'importmap-rails'
 
 gem 'bcrypt'
+
+gem 'rails-i18n', '~> 7.0.0'
