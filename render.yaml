@@ -1,0 +1,22 @@
+databases:
+  - name: Fishingram_db
+    databaseName: fishingram_db
+    user: Fishingram
+    region: singapore
+
+services:
+  - type: web
+    name: Fishingram
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: Fishingram_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
+
