@@ -1,7 +1,148 @@
-<h1 class="text-3xl font-bold underline">
-    Hello world!
-</h1>
+<div class="intro text-center flex items-center justify-center min-h-[60vh] hidden">
+  <div class="intro-message">
+    <h1 class="text-4xl font-bold text-white">Welcome to Fishingram</h1>
+    <p class="mt-4 text-xl text-gray-300">記録しよう、より手軽に。</p>
+  </div>
+</div>
 
-<button class="bg-gray-900 hover:bg-gray-800 text-white rounded px-4 py-2">tailwind</button>
+<section class="pt-2 pb-8 hidden">
+  <div class="container mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="feature p-2 text-white rounded-lg flex items-center transform transition duration-500 hover:scale-105">
+        <div class="icon bg-red-500 text-white rounded-full p-2 flex items-center justify-center mr-4">
+          <i class="fas fa-lightbulb fa-2x"></i> <!-- ランプのアイコン -->
+        </div>
+        <div>
+          <p class="text-lg">Fishingramは手軽に釣果を記録することができるサービスです。</p>
+        </div>
+      </div>
+      <div class="feature p-2 text-white rounded-lg flex flex-col items-start transform transition duration-500 hover:scale-105">
+        <p class="text-2xl font-bold">主な機能</p>
+        <div class="line mt-2 mb-4"></div>
+      </div>
+      <div class="feature p-2 text-white rounded-lg flex items-center transform transition duration-500 hover:scale-105">
+        <div class="icon bg-blue-500 text-white rounded-full p-2 flex items-center justify-center mr-4">
+          <i class="fas fa-camera fa-2x"></i>
+        </div>
+        <div>
+          <p class="text-lg">写真と一緒に潮位や魚のサイズを簡単に記録できます。</p>
+        </div>
+      </div>
+      <div class="feature p-2 text-white rounded-lg flex items-center transform transition duration-500 hover:scale-105">
+        <div class="icon bg-green-500 text-white rounded-full p-2 flex items-center justify-center mr-4">
+          <i class="fas fa-book fa-2x"></i>
+        </div>
+        <div>
+          <p class="text-lg">自分しか見れない日記機能で、手軽に釣行の振り返りができます。</p>
+        </div>
+      </div>
+      <div class="feature p-2 text-white rounded-lg flex flex-col items-start transform transition duration-500 hover:scale-105">
+        <div class="flex items-center mb-4">
+          <div class="icon bg-yellow-500 text-white rounded-full p-2 flex items-center justify-center mr-4">
+            <i class="fas fa-search fa-2x"></i>
+          </div>
+          <div>
+            <p class="text-lg">みんなの釣果を手軽に覗くことができ、コメント機能で交流もできます。</p>
+          </div>
+        </div>
+        <div class="line mt-8 mb-4 w-full"></div> <!-- 余白を大きく -->
+      </div>
+      <div class="feature p-2 text-white rounded-lg flex items-center transform transition duration-500 hover:scale-105">
+        <div class="icon bg-purple-500 text-white rounded-full p-2 flex items-center justify-center mr-4">
+          <i class="fas fa-arrow-down fa-2x"></i> <!-- 矢印のアイコン -->
+        </div>
+        <div>
+          <p class="text-lg">まずは下のボタンからみんなの釣果を覗いてみましょう。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<button class="btn">daisyUI</button>
+<style>
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes lineGrow {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+
+  .fade-out {
+    animation: fadeOut 1s forwards;
+  }
+
+  .slide-up {
+    animation: slideUp 1s ease-out forwards;
+  }
+
+  .line {
+    height: 2px;
+    background-color: white;
+    width: 0;
+    animation: lineGrow 1s forwards;
+  }
+
+  .hidden {
+    opacity: 0;
+  }
+
+  .feature .icon i {
+    font-size: 1.5rem; /* アイコンのサイズ調整 */
+  }
+
+  .feature p {
+    font-size: 1.125rem; /* テキストサイズ調整 */
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const intro = document.querySelector('.intro');
+    const features = document.querySelectorAll('.feature');
+    const section = document.querySelector('section');
+
+    // Slide up the intro message when the page loads
+    intro.classList.remove('hidden');
+    intro.classList.add('slide-up');
+
+    // Fade out the intro message after 3 seconds
+    setTimeout(() => {
+      intro.classList.add('fade-out');
+    }, 3000);
+
+    // Slide up the features after the intro message
+    setTimeout(() => {
+      intro.classList.add('hidden');
+      section.classList.remove('hidden');
+      features.forEach((feature, index) => {
+        feature.classList.add('hidden');
+        setTimeout(() => {
+          feature.classList.remove('hidden');
+          feature.classList.add('slide-up');
+        }, index * 300); // Add a delay of 0.3 seconds between each feature
+      });
+    }, 4000); // Start sliding up the features after the intro message has faded out
+  });
+</script>
