@@ -1,0 +1,55 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-base-100 rounded-lg shadow-lg bg-opacity-70">
+  <h3 class="text-3xl font-bold mb-6 text-center animate-fade-in" style="animation-delay: 0s;">Sign Up</h3>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "space-y-6" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="form-control animate-fade-in" style="animation-delay: 0.2s;">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-user text-gray-400"></i>
+        </span>
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input input-bordered pl-10 w-full", placeholder: "ユーザー名" %>
+      </div>
+    </div>
+
+    <div class="form-control animate-fade-in" style="animation-delay: 0.4s;">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-envelope text-gray-400"></i>
+        </span>
+        <%= f.email_field :email, autocomplete: "email", class: "input input-bordered pl-10 w-full", placeholder: "Email" %>
+      </div>
+    </div>
+
+    <div class="form-control animate-fade-in" style="animation-delay: 0.6s;">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-lock text-gray-400"></i>
+        </span>
+        <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered pl-10 w-full", placeholder: "パスワード (英数4字以上)" %>
+      </div>
+    </div>
+
+    <div class="form-control animate-fade-in" style="animation-delay: 0.8s;">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-lock text-gray-400"></i>
+        </span>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered pl-10 w-full", placeholder: "パスワード (確認用)" %>
+      </div>
+    </div>
+
+    <div class="form-control mt-10 animate-fade-in" style="animation-delay: 1s;">
+      <%= f.submit "ユーザー登録", class: "btn btn-outline btn-primary w-full" %>
+    </div>
+  <% end %>
+
+  <div class="my-10 animate-slide-in" style="animation-delay: 1.2s;">
+    <hr class="border-gray-500">
+  </div>
+
+  <div class="text-center animate-fade-in" style="margin-top: -20px; animation-delay: 1.4s;">
+    <%= link_to "アカウントをお持ちの方", new_session_path(resource_name) %>
+  </div>
+</div>

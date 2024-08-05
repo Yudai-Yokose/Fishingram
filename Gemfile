@@ -68,3 +68,12 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "devise"
+
+gem 'dotenv-rails'
+gem 'omniauth', '1.9.1'
+gem 'omniauth-google-oauth2'
+
+gem 'devise-i18n'
+gem 'devise-i18n-views'

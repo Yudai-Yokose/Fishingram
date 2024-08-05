@@ -3,21 +3,49 @@
 @tailwind utilities;
 
 body {
-    padding-top: 4rem;
-    padding-bottom: 6rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
+  padding-top: 4rem;
+  padding-bottom: 6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
 
-  .back-ground {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: auto;
-    min-height: 100%;
-    background-color: #494f4f;
-    background-repeat: no-repeat;
-    background-position: center 50%;
-    background-size: cover;
-    background-image: url("/blue-ocean.jpeg");
+.back-ground {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: auto;
+  min-height: 100%;
+  background-color: #494f4f;
+  background-repeat: no-repeat;
+  background-position: center 50%;
+  background-size: cover;
+  background-image: url("/blue-ocean.jpeg");
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.animate-fade-in {
+  opacity: 0;
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-slide-in {
+  width: 0;
+  animation: slide-in 0.5s ease-out forwards;
+}

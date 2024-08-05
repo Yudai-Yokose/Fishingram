@@ -1,0 +1,30 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-base-100 rounded-lg shadow-lg bg-opacity-70">
+  <div class="form-control mt-6 animate-fade-in" style="animation-delay: 0s;">
+    パスワードを忘れた方は、入力されたメールアドレス宛にパスワードリセット用のメールを送信します。
+  </div>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: "space-y-6" }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="form-control animate-fade-in" style="animation-delay: 0.2s;">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-envelope text-gray-400"></i>
+        </span>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered pl-10 w-full", placeholder: "Email" %>
+      </div>
+    </div>
+
+    <div class="form-control mt-6 animate-fade-in" style="animation-delay: 0.4s;">
+      <%= f.submit "パスワードリセット用のメールを送信", class: "btn btn-outline btn-primary w-full" %>
+    </div>
+  <% end %>
+
+  <div class="my-10 animate-slide-in" style="animation-delay: 0.6s;">
+    <hr class="border-gray-500">
+  </div>
+
+  <div class="text-center animate-fade-in" style="margin-top: -20px; animation-delay: 0.8s;">
+    <%= link_to "ログインページに戻る", new_session_path(resource_name) %>
+  </div>
+</div>
