@@ -86,4 +86,5 @@ Rails.application.configure do
    enable_starttls_auto: true
   }
 
+  config.active_storage.service = :google
 end

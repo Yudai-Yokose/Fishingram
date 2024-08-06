@@ -77,3 +77,5 @@ gem 'omniauth-google-oauth2'
 
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+gem "google-cloud-storage"
