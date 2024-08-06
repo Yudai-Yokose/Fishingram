@@ -1,6 +1,16 @@
 <header class="bg-neutral bg-opacity-70 text-neutral-content fixed top-0 left-0 w-full shadow-md z-50">
   <div class="container mx-auto px-4 flex justify-between items-center py-2">
     <a href="/" class="text-2xl font-bold" onclick="navigateToRoot(); return false;">Fishingram</a>
+    
+    <% if user_signed_in? %>
+      <div class="flex items-center justify-center">
+        <%= image_tag current_user.image.attached? ? url_for(current_user.image) : asset_path('default_profile_image.png'), class: "w-8 h-8 rounded-full mr-2" %>
+        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+    <% end %>
+    
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -8,8 +18,32 @@
         </svg>
       </label>
       <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52 mt-2">
-        <li><a href="/terms">利用規約</a></li>
-        <li><a href="/contact">問い合わせ</a></li>
+        <li>
+          <a href="/terms">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            利用規約
+          </a>
+        </li>
+        <li>
+          <a href="/contact">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2 0h1a2 2 0 002-2v-5a2 2 0 00-2-2h-1a2 2 0 00-2-2h-4a2 2 0 00-2 2H7a2 2 0 00-2 2v5a2 2 0 002 2h1z"></path>
+            </svg>
+            問い合わせ
+          </a>
+        </li>
+        <% if user_signed_in? %>
+          <li>
+            <a href="<%= edit_user_registration_path %>">
+              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5a2.5 2.5 0 012.5 2.5 2.5 2.5 0 01-5 0 2.5 2.5 0 012.5-2.5zM12 14a8.1 8.1 0 00-5 1.5V20h10v-4.5a8.1 8.1 0 00-5-1.5z"></path>
+              </svg>
+              プロフィール編集
+            </a>
+          </li>
+        <% end %>
       </ul>
     </div>
   </div>
