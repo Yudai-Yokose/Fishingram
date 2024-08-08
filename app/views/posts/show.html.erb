@@ -1,0 +1,89 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-base-100 rounded-lg shadow-lg bg-opacity-70 text-base relative z-10">
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center">
+      <% if @post.user.image.attached? %>
+        <%= image_tag @post.user.image, class: "w-10 h-10 rounded-full mr-4" %>
+      <% else %>
+        <%= image_tag "no_image.jpg", class: "w-10 h-10 rounded-full mr-4" %>
+      <% end %>
+      <span class="font-bold"><%= @post.user.name %></span>
+    </div>
+    <% if @post.user == current_user %> <!-- ユーザー本人のみ表示 -->
+      <div class="dropdown dropdown-end relative z-20">
+        <label tabindex="0" class="btn btn-sm btn-ghost">
+          <i class="fas fa-ellipsis-v"></i>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 bg-opacity-70 rounded-box w-52 z-30">
+          <li><%= link_to 'Edit', edit_post_path(@post), class: "text-base" %></li>
+          <li><%= link_to 'Delete', @post, data: { turbo_method: :delete, confirm: 'Are you sure?' }, class: "text-base" %></li>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- 画像の表示 -->
+  <div class="mb-4 relative z-10">
+    <% if @post.images.attached? %>
+      <div class="carousel w-full">
+        <% @post.images.each_with_index do |image, index| %>
+          <div id="slide<%= index + 1 %>" class="carousel-item relative w-full">
+            <label for="modal-<%= index + 1 %>" class="cursor-pointer block w-full h-48">
+              <%= image_tag url_for(image), class: "w-full h-full object-cover rounded" %>
+            </label>
+            <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+              <a href="#slide<%= (index - 1) % @post.images.length + 1 %>" class="btn btn-circle">❮</a>
+              <a href="#slide<%= (index + 1) % @post.images.length + 1 %>" class="btn btn-circle">❯</a>
+            </div>
+          </div>
+
+          <!-- モーダル -->
+          <input type="checkbox" id="modal-<%= index + 1 %>" class="modal-toggle" />
+          <div class="modal">
+            <div class="modal-box relative">
+              <label for="modal-<%= index + 1 %>" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+              <%= image_tag url_for(image), class: "w-full object-cover" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="flex justify-center w-full py-2 gap-2">
+        <% @post.images.each_with_index do |_, index| %>
+          <a href="#slide<%= index + 1 %>" class="btn btn-xs"><%= index + 1 %></a>
+        <% end %>
+      </div>
+    <% else %>
+      <%= image_tag 'no_image.jpg', class: "w-full h-48 object-cover rounded" %>
+    <% end %>
+  </div>
+
+  <!-- 投稿の詳細情報 -->
+  <div class="grid grid-cols-2 gap-4 mb-4">
+    <div class="flex items-center p-2 bg-gray-900 bg-opacity-50 rounded">
+      <i class="fas fa-water text-gray-400 mr-2"></i>
+      <span class="text-white"><%= @post.tide %></span>
+    </div>
+    <div class="flex items-center p-2 bg-gray-900 bg-opacity-50 rounded">
+      <i class="fas fa-tachometer-alt text-gray-400 mr-2"></i>
+      <span class="text-white"><%= @post.tide_level %></span>
+    </div>
+    <div class="flex items-center p-2 bg-gray-900 bg-opacity-50 rounded">
+      <i class="fas fa-ruler text-gray-400 mr-2"></i>
+      <span class="text-white"><%= @post.range %></span>
+    </div>
+    <div class="flex items-center p-2 bg-gray-900 bg-opacity-50 rounded">
+      <i class="fas fa-fish text-gray-400 mr-2"></i>
+      <span class="text-white"><%= @post.size %></span>
+    </div>
+  </div>
+
+  <div class="p-2 bg-gray-900 bg-opacity-50 rounded mb-4">
+    <div class="flex items-center">
+      <i class="fas fa-pen text-gray-400 mr-2"></i>
+      <span class="text-white"><%= @post.memo %></span>
+    </div>
+  </div>
+
+  <div class="flex justify-between mt-4">
+    <%= link_to 'Back', posts_path, class: "btn btn-outline w-full text-base text-white border-white" %>
+  </div>
+</div>

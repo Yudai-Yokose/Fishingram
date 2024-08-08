@@ -4,7 +4,7 @@
 
 /*======================================================= all ========================================================*/
 body {
-  padding-top: 4rem;
+  padding-top: 2rem;
   padding-bottom: 6rem;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -22,7 +22,24 @@ body {
   background-size: cover;
   background-image: url("/blue-ocean.jpeg");
 }
-
+/*============================================== flash message ===========================================*/
+.flash-message {
+  transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+  border-image: linear-gradient(to right, #ec4899, #ef4444) 1;
+  z-index: 1000; /* フラッシュメッセージを最前面に表示 */
+}
+.translate-y-0 {
+  transform: translateY(0);
+}
+.translate-y-full {
+  transform: translateY(-100%);
+}
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-100 {
+  opacity: 1;
+}
 /*============================================== top_page_animation ===========================================*/
   @keyframes fadeOut {
     0% {
@@ -212,4 +229,17 @@ body {
 .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
   background-color: #303030;
   opacity: 8%;
+}
+
+/*======================================= Position of record modal ================================================*/
+
+dialog.modal::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+dialog#postModal {
+  position: fixed;
+  top: 0;
+  margin: 0 auto;
+  transform: translateY(-5%);
 }

@@ -3,6 +3,14 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def after_sign_up_path_for(resource)
+    osts_path
+  end
+
+  def after_update_path_for(resource)
+    posts_path
+  end
+
   def create
     build_resource(sign_up_params)
 

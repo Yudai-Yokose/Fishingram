@@ -1,47 +1,52 @@
-<footer class="bg-neutral bg-opacity-70 text-neutral-content fixed bottom-0 left-0 w-full shadow-lg z-50">
+<footer class="text-neutral-content fixed bottom-0 left-0 w-full z-50">
   <div class="container mx-auto px-4">
-    <nav class="flex justify-between items-center py-2">
+    <nav class="flex justify-between items-end py-2">
       <% if user_signed_in? %>
-        <a href="/all_records" class="flex flex-col items-center text-center">
-          <i class="fas fa-users fa-lg mb-1"></i>
-          <span class="text-sm leading-tight">All</span>
-        </a>
-        <a href="/your_records" class="flex flex-col items-center text-center">
-          <i class="fas fa-user fa-lg mb-1"></i>
-          <span class="text-sm leading-tight">Yours</span>
-        </a>
-        <a href="/record" class="relative flex flex-col items-center text-primary">
-          <div class="relative bg-primary text-white rounded-full p-3 shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-12 flex items-center justify-center">
-            <i class="fas fa-edit fa-2x mb-1"></i>
-            <span class="ml-2 font-bold">Record</span>
+        <%= link_to posts_path, class: "flex flex-col items-center text-center h-full justify-end" do %>
+          <i class="fas fa-users fa-lg"></i>
+          <span class="text-sm leading-none">All</span>
+        <% end %>
+        <%= link_to user_posts_path, class: "flex flex-col items-center text-center h-full justify-end" do %>
+          <i class="fas fa-user fa-lg"></i>
+          <span class="text-sm leading-none">Yours</span>
+        <% end %>
+        <!-- Record ボタン -->
+        <button class="relative flex flex-col items-center text-primary h-full justify-end" onclick="document.getElementById('record-modal').showModal()">
+          <div class="relative bg-primary text-white rounded-full p-3 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-12 flex flex-col items-center justify-end">
+            <i class="fas fa-edit fa-2x"></i>
+            <span class="font-bold leading-tight mt-0.5">Record</span>
             <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-50 animate-pulse"></div>
           </div>
+        </button>
+        <a href="/diary" class="flex flex-col items-center text-center h-full justify-end">
+          <i class="fas fa-book fa-lg"></i>
+          <span class="text-sm leading-none">Diary</span>
         </a>
-        <a href="/diary" class="flex flex-col items-center text-center">
-          <i class="fas fa-book fa-lg mb-1"></i>
-          <span class="text-sm leading-tight">Diary</span>
-        </a>
-        <a class="nav-link flex flex-col items-center text-center" href="<%= destroy_user_session_path %>" data-turbo-method="delete">
-          <i class="fas fa-sign-out-alt fa-lg mb-1"></i>
-          <span class="text-sm leading-tight">Logout</span>
+        <a class="nav-link flex flex-col items-center text-center h-full justify-end" href="<%= destroy_user_session_path %>" data-turbo-method="delete">
+          <i class="fas fa-sign-out-alt fa-lg"></i>
+          <span class="text-sm leading-none">Logout</span>
         </a>
       <% else %>
-        <a href="<%= new_user_session_path %>" class="flex flex-col items-center text-center">
-          <i class="fas fa-sign-in-alt fa-lg mb-1"></i>
-          <span class="text-sm leading-tight">Login</span>
-        </a>
-        <a href="/all_records" class="relative flex flex-col items-center text-primary">
-          <div class="relative bg-primary text-white rounded-full p-3 shadow-lg transform transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-12 flex items-center justify-center">
-            <i class="fas fa-eye fa-2x mb-1"></i>
-            <span class="ml-2 font-bold">Records</span>
-            <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-50 animate-pulse"></div>
-          </div>
-        </a>
-        <a href="<%= new_user_registration_path %>" class="flex flex-col items-center text-center">
-          <i class="fas fa-user-plus fa-lg mb-1"></i>
-          <span class="text-sm leading-tight">Sign Up</span>
-        </a>
+        <div class="flex space-x-8 justify-center w-full h-full items-end">
+          <a href="<%= new_user_session_path %>" class="flex flex-col items-center text-center h-full justify-end">
+            <i class="fas fa-sign-in-alt fa-2x"></i>
+            <span class="text-base leading-none">Login</span>
+          </a>
+          <%= link_to posts_path, class: "relative flex flex-col items-center text-primary h-full justify-end" do %>
+            <div class="relative bg-primary text-white rounded-full p-3 transform transition-transform duration-300 ease-in-out hover:scale-110 hover:rotate-12 flex flex-col items-center justify-end">
+              <i class="fas fa-search fa-2x"></i>
+              <span class="font-bold leading-tight mt-0.5">Record</span>
+              <div class="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 opacity-50 animate-pulse"></div>
+            </div>
+          <% end %>
+          <a href="<%= new_user_registration_path %>" class="flex flex-col items-center text-center h-full justify-end">
+            <i class="fas fa-user-plus fa-2x"></i>
+            <span class="text-base leading-none">Sign Up</span>
+          </a>
+        </div>
       <% end %>
     </nav>
   </div>
+
+  <%= render 'shared/record_form' %>
 </footer>
