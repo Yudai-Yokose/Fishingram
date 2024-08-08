@@ -1,0 +1,90 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-base-100 rounded-lg shadow-lg bg-opacity-70 text-base">
+  <h2 class="text-3xl font-bold mb-6 text-center">釣果の編集</h2>
+  
+  <%= form_with(model: @post, local: true, html: { multipart: true }, class: "space-y-6") do |form| %>
+    <div class="form-control">
+      <div class="relative">
+        <label class="block text-gray-700 text-base font-bold mb-2">
+          画像
+        </label>
+        <% if @post.images.attached? %>
+          <div class="carousel w-full mb-4">
+            <% @post.images.each_with_index do |image, index| %>
+              <div id="slide<%= index + 1 %>" class="carousel-item relative w-full">
+                <%= image_tag url_for(image), class: "w-full h-48 object-cover rounded" %>
+                <%= link_to purge_image_post_path(@post, image_id: image.id), method: :delete, data: { turbo_method: :delete, confirm: '本当にこの画像を削除しますか？' }, class: "absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center" do %>
+                  <i class="fas fa-times"></i>
+                <% end %>
+                <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                  <a href="#slide<%= (index - 1) % @post.images.length + 1 %>" class="btn btn-circle">❮</a>
+                  <a href="#slide<%= (index + 1) % @post.images.length + 1 %>" class="btn btn-circle">❯</a>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="flex justify-center w-full py-2 gap-2">
+            <% @post.images.each_with_index do |_, index| %>
+              <a href="#slide<%= index + 1 %>" class="btn btn-xs"><%= index + 1 %></a>
+            <% end %>
+          </div>
+        <% end %>
+        <%= form.file_field :images, class: "file-input file-input-bordered w-full mt-4", multiple: true, placeholder: "追加画像" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-water text-gray-400"></i>
+        </span>
+        <%= form.select :tide, options_for_select([['潮名を選択してください', ''], '大潮', '中潮', '小潮', '若潮', '長潮'], selected: @post.tide), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-tachometer-alt text-gray-400"></i>
+        </span>
+        <%= form.select :tide_level, options_for_select([['潮位を選択してください', ''], '満潮前後', '上げ1~2部', '上げ3~4部', '上げ5~6部', '上げ7~8部', '干潮前後', '下げ1~2部', '下げ3~4部', '下げ5~6部', '下げ7~8部'], selected: @post.tide_level), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-ruler text-gray-400"></i>
+        </span>
+        <%= form.select :range, options_for_select([['レンジを選択してください', ''], 'トップ', '表層', '中層', 'ボトム付近'], selected: @post.range), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-fish text-gray-400"></i>
+        </span>
+        <%= form.select :size, options_for_select([['サイズを選択してください', ''], '20cm以下', '20~30cm', '30~40cm', '40~50cm', '50~60cm', '70~80cm', '80~90cm', '90cm以上'], selected: @post.size), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-pen text-gray-400"></i>
+        </span>
+        <%= form.text_field :memo, class: "input input-bordered pl-10 w-full text-base", placeholder: "メモ" %>
+      </div>
+    </div>
+
+    <div class="form-control mt-6">
+      <%= form.submit '更新する', class: "btn btn-outline btn-primary w-full text-base" %>
+    </div>
+
+    <div class="divider">または</div>
+
+    <div class="form-control">
+      <%= link_to 'Back', post_path(@post), class: "btn btn-outline w-full text-base" %>
+    </div>
+  <% end %>
+</div>

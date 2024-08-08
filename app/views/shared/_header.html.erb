@@ -1,23 +1,25 @@
-<header class="bg-neutral bg-opacity-70 text-neutral-content fixed top-0 left-0 w-full shadow-md z-50">
+<header class="text-neutral-content fixed top-0 left-0 w-full z-50">
   <div class="container mx-auto px-4 flex justify-between items-center py-2">
-    <a href="/" class="text-2xl font-bold" onclick="navigateToRoot(); return false;">Fishingram</a>
-    
-    <% if user_signed_in? %>
-      <div class="flex items-center justify-center">
-        <%= image_tag current_user.image.attached? ? url_for(current_user.image) : asset_path('default_profile_image.png'), class: "w-8 h-8 rounded-full mr-2" %>
-        <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-        </svg>
-      </div>
-    <% end %>
-    
+    <div class="flex items-center">
+      <a href="/" class="text-2xl font-bold mr-4 flex items-center" onclick="navigateToRoot(); return false;">
+        Fishingram
+        <% if user_signed_in? %>
+          <span class="ml-2 inline-flex items-center justify-center w-6 h-6 rounded-full border border-green-500 text-green-500">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+          </span>
+        <% end %>
+      </a>
+    </div>
+
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
         </svg>
       </label>
-      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52 mt-2">
+      <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral bg-opacity-80 rounded-box w-52 mt-2">
         <li>
           <a href="/terms">
             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tide: MyString
+  tide_level: MyString
+  range: MyString
+  size: MyString
+
+two:
+  tide: MyString
+  tide_level: MyString
+  range: MyString
+  size: MyString

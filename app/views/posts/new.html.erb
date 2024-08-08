@@ -1,0 +1,63 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-base-100 rounded-lg shadow-lg bg-opacity-70">
+  <h2 class="text-3xl font-bold mb-6 text-center">Nice Catch!</h2>
+  
+  <%= form_with(model: @post, local: true, class: "space-y-6") do |form| %>
+    <div class="form-control">
+      <div class="relative">
+        <label class="block text-gray-700 text-base font-bold mb-2">
+          画像
+        </label>
+        <%= form.file_field :images, class: "file-input file-input-bordered w-full", multiple: true, placeholder: "画像" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-water text-gray-400"></i>
+        </span>
+        <%= form.select :tide, options_for_select([['潮名を選択してください', ''], '大潮', '中潮', '小潮', '若潮', '長潮']), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-tachometer-alt text-gray-400"></i>
+        </span>
+        <%= form.select :tide_level, options_for_select([['潮位を選択してください', ''], '満潮前後', '上げ1~2部', '上げ3~4部', '上げ5~6部', '上げ7~8部', '干潮前後', '下げ1~2部', '下げ3~4部', '下げ5~6部', '下げ7~8部']), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-ruler text-gray-400"></i>
+        </span>
+        <%= form.select :range, options_for_select([['レンジを選択してください', ''], 'トップ', '表層', '中層', 'ボトム付近']), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-fish text-gray-400"></i>
+        </span>
+        <%= form.select :size, options_for_select([['サイズを選択してください', ''], '20cm以下', '20~30cm', '30~40cm', '40~50cm', '50~60cm', '70~80cm', '80~90cm', '90cm以上']), {}, class: "select select-bordered pl-10 w-full text-base" %>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+          <i class="fas fa-pen text-gray-400"></i>
+        </span>
+        <%= form.text_field :memo, class: "input input-bordered pl-10 w-full text-base", placeholder: "メモ" %>
+      </div>
+    </div>
+
+    <div class="form-control mt-6">
+      <%= form.submit '記録する', class: "btn btn-outline btn-primary w-full text-base" %>
+    </div>
+  <% end %>
+</div>

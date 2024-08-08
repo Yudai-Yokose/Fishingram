@@ -1,0 +1,21 @@
+<div class="join">
+  <% if @posts.prev_page %>
+    <%= link_to raw("&laquo;"), url_for(page: @posts.prev_page), class: "join-item btn" %>
+  <% else %>
+    <span class="join-item btn disabled">&laquo;</span>
+  <% end %>
+
+  <% @posts.each_page do |page| %>
+    <% if page == @posts.current_page %>
+      <span class="join-item btn btn-active"><%= page %></span>
+    <% else %>
+      <%= link_to page, url_for(page: page), class: "join-item btn" %>
+    <% end %>
+  <% end %>
+
+  <% if @posts.next_page %>
+    <%= link_to raw("&raquo;"), url_for(page: @posts.next_page), class: "join-item btn" %>
+  <% else %>
+    <span class="join-item btn disabled">&raquo;</span>
+  <% end %>
+</div>

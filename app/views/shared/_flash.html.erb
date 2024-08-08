@@ -1,5 +1,5 @@
 <% flash.each do |type, message| %>
-  <div class="alert shadow-lg max-w-md mx-auto my-4 bg-base-100 bg-opacity-70 border border-gradient-to-r from-pink-500 to-red-500 text-gray-200 p-4 rounded-lg flash-message fixed inset-x-0 mt-4 mx-auto transition-transform transform -translate-y-full opacity-0" role="alert">
+  <div class="alert shadow-lg max-w-md mx-auto my-4 bg-base-100 bg-opacity-70 border border-gradient-to-r from-pink-500 to-red-500 text-gray-200 p-4 rounded-lg flash-message fixed inset-x-0 mt-4 mx-auto transition-transform transform -translate-y-full opacity-0" role="alert" style="z-index: 1000;">
     <div class="flex items-center">
       <span class="flex-grow"><%= message %></span>
     </div>
@@ -25,22 +25,3 @@
     }, 100); // 短い遅延を追加して、DOMが完全に読み込まれるのを待つ
   });
 </script>
-
-<style>
-  .flash-message {
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
-    border-image: linear-gradient(to right, #ec4899, #ef4444) 1;
-  }
-  .translate-y-0 {
-    transform: translateY(0);
-  }
-  .translate-y-full {
-    transform: translateY(-100%);
-  }
-  .opacity-0 {
-    opacity: 0;
-  }
-  .opacity-100 {
-    opacity: 1;
-  }
-</style>
