@@ -44,8 +44,8 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: password  # MySQLのルートユーザーのパスワードを設定
-          MYSQL_DATABASE: test_database  # 作成するテスト用データベース名を指定
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: test_database
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
@@ -63,10 +63,18 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Set environment variables
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: mysql2://root:password@127.0.0.1:3306/test_database
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}  # ここでRAILS_MASTER_KEYを設定
+        run: |
+          echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
+
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: mysql2://root:password@127.0.0.1:3306/test_database  # MySQLの接続情報を設定
+          DATABASE_URL: mysql2://root:password@127.0.0.1:3306/test_database
         run: bin/rails db:test:prepare test test:system
 
       - name: Keep screenshots from failed system tests
