@@ -4,6 +4,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
   setup do
     User.delete_all
     @user = User.create!(
+      username: "testuser",
       email: "user_#{SecureRandom.hex(10)}@example.com",
       password: "password"
     )
