@@ -75,6 +75,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.4)
@@ -100,6 +101,13 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    devise (4.9.4)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
+    devise-i18n-views (0.3.7)
     drb (2.2.1)
     erubi (1.13.0)
     globalid (1.2.1)
@@ -154,6 +162,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
+    orm_adapter (0.5.0)
     parallel (1.26.3)
     parser (3.3.4.2)
       ast (~> 2.4.1)
@@ -193,6 +202,9 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails-i18n (7.0.9)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (7.2.1)
       actionpack (= 7.2.1)
       activesupport (= 7.2.1)
@@ -208,6 +220,9 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.3.6)
       strscan
     rubocop (1.65.1)
@@ -269,6 +284,8 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
     useragent (0.16.10)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -297,11 +314,14 @@ DEPENDENCIES
   capybara
   cssbundling-rails
   debug
+  devise
+  devise-i18n-views
   jbuilder
   jsbundling-rails
   mysql2 (~> 0.5)
   puma (>= 5.0)
   rails (~> 7.2.1)
+  rails-i18n
   rubocop-rails-omakase
   selenium-webdriver
   sprockets-rails

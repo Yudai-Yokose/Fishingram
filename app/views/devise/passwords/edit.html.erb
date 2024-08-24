@@ -1,0 +1,28 @@
+<div class="card-box mx-auto">
+  <div class="card-body">
+    <div class="w-full max-w-xs mx-auto text-center">
+      <h2 class="text-neutral-content font-bold"><%= t('.change_your_password') %></h2>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "flex flex-col items-center justify-center space-y-3 mb-3 text-neutral-content font-bold" }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="form-control w-full max-w-xs relative">
+        <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <%= f.password_field :password, placeholder: t('.new_password'), autocomplete: "new-password", class: "input input-bordered w-full max-w-xs pl-10 text-neutral-content font-bold" %>
+      </div>
+
+      <div class="form-control w-full max-w-xs relative">
+        <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+        <%= f.password_field :password_confirmation, placeholder: t('.confirm_new_password'), autocomplete: "new-password", class: "input input-bordered w-full max-w-xs pl-10 text-neutral-content font-bold" %>
+      </div>
+
+      <div class="divider divider-neutral w-full max-w-xs mx-auto"></div>
+
+      <div class="actions w-full max-w-xs">
+        <%= f.submit t('.change_my_password'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold" %>
+      </div>
+    <% end %>
+  </div>
+</div>

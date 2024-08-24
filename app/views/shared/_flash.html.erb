@@ -1,0 +1,15 @@
+<% if flash[:notice] %>
+  <div class="flash-message-container">
+    <div class="flash-message notice text-neutral-content" data-controller="flash">
+      <%= flash[:notice] %>
+    </div>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="flash-message-container">
+    <div class="flash-message alert text-neutral-content" data-controller="flash">
+      <%= flash[:alert] %>
+    </div>
+  </div>
+<% end %>

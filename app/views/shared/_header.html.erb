@@ -1,0 +1,17 @@
+<header class="text-neutral-content font-bold text-2xl fixed top-0 left-0 w-full flex justify-between items-center p-2 z-50">
+  <a href="/" class="ml-2">Fishingram</a>
+  <div class="dropdown dropdown-end">
+    <div tabindex="0" role="button" class="m-1" style="background-color: transparent; border: none; box-shadow: none;">
+      <i class="fas fa-bars"></i>
+    </div>
+    <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow">
+      <li><a href="/terms">利用規約</a></li>
+      <li><a href="/contact">問い合わせ</a></li>
+      <% if user_signed_in? %>
+        <li>
+          <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</header>

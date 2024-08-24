@@ -1,0 +1,36 @@
+<div id="login_errors"></div>
+
+<div class="w-full max-w-xs mx-auto text-center">
+  <h2 class="text-neutral-content font-bold text-lg"><%= t('.sign_in') %></h2>
+</div>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { id: "user_session", class: "flex flex-col items-center justify-center space-y-3 mb-3 text-neutral-content font-bold" }) do |f| %>
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= f.email_field :email, placeholder: t('activerecord.attributes.user.email'), id: "user_session_email", autocomplete: "email", class: "input input-bordered w-full max-w-xs pl-10 text-neutral-content font-bold" %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= f.password_field :password, placeholder: t('activerecord.attributes.user.password'), id: "user_session_password", autocomplete: "current-password", class: "input input-bordered w-full max-w-xs pl-10 text-neutral-content font-bold" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="form-control w-full max-w-xs text-right">
+      <label class="label cursor-pointer text-neutral-content font-bold text-base justify-end">
+        <span class="label-text text-neutral-content text-base"><%= t('devise.sessions.new.remember_me') %></span>
+        <%= f.check_box :remember_me, class: "checkbox checkbox-primary ml-2" %>
+      </label>
+    </div>
+  <% end %>
+
+  <div class="divider divider-neutral w-full max-w-xs mx-auto"></div>
+
+  <div class="actions w-full max-w-xs">
+    <%= f.submit t('.sign_in'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-lg" %>
+  </div>
+
+  <div class="w-full max-w-xs mx-auto text-center">
+    <%= link_to t('.forgot_your_password'), new_password_path(resource_name), class: "text-neutral-content font-bold text-base" %>
+  </div>
+<% end %>
