@@ -16,7 +16,7 @@ class Users::SessionsController < Devise::SessionsController
       sign_in(resource_name, resource)
       respond_with resource, location: after_sign_in_path_for(resource)
     else
-      @sessions_error_message = I18n.t('devise.sessions.invalid')
+      @sessions_error_message = I18n.t("devise.sessions.invalid")
       respond_to do |format|
         format.turbo_stream { render :login_failure }
       end
