@@ -15,11 +15,24 @@ local:
 #   bucket: your_own_bucket-<%= Rails.env %>
 
 # Remember not to checkin your GCS keyfile to a repository
-# google:
-#   service: GCS
-#   project: your_project
-#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
-#   bucket: your_own_bucket-<%= Rails.env %>
+google:
+  service: GCS
+  project: Fishingram
+  credentials:
+    {
+      "type": "service_account",
+      "project_id": "<%= Rails.application.credentials.dig(:google_cloud_storage, :project_id) %>",
+      "private_key_id": "<%= Rails.application.credentials.dig(:google_cloud_storage, :private_key_id) %>",
+      "private_key": "<%= Rails.application.credentials.dig(:google_cloud_storage, :private_key) %>",
+      "client_email": "<%= Rails.application.credentials.dig(:google_cloud_storage, :client_email) %>",
+      "client_id": "<%= Rails.application.credentials.dig(:google_cloud_storage, :client_id) %>",
+      "auth_uri": "<%= Rails.application.credentials.dig(:google_cloud_storage, :auth_uri) %>",
+      "token_uri": "<%= Rails.application.credentials.dig(:google_cloud_storage, :token_uri) %>",
+      "auth_provider_x509_cert_url": "<%= Rails.application.credentials.dig(:google_cloud_storage, :auth_provider_x509_cert_url) %>",
+      "client_x509_cert_url": "<%= Rails.application.credentials.dig(:google_cloud_storage, :client_x509_cert_url) %>",
+      "universe_domain": "googleapis.com"
+    }
+  bucket: fishingram
 
 # Use bin/rails credentials:edit to set the Azure Storage secret (as azure_storage:storage_access_key)
 # microsoft:

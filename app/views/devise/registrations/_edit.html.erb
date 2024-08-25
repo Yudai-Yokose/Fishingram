@@ -3,7 +3,11 @@
 </div>
 
 <div class="w-full max-w-xs mx-auto text-center mt-4 mb-4">
-  <%= image_tag resource.profile_image.variant(resize_to_limit: [100, 100]), alt: "profile_image", class: "w-24 h-24 rounded-full mx-auto" %>
+  <% if resource.profile_image.attached? %>
+    <%= image_tag resource.profile_image.variant(resize_to_limit: [100, 100]), alt: "profile_image", class: "w-24 h-24 rounded-full mx-auto" %>
+  <% else %>
+    <%= image_tag "default_profile_image.png", alt: "default_profile_image", class: "w-24 h-24 rounded-full mx-auto" %>
+  <% end %>
 </div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "flex flex-col items-center justify-center space-y-3 mb-3 text-neutral-content font-bold" }) do |f| %>
