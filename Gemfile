@@ -66,3 +66,6 @@ gem "devise-i18n-views"
 gem "dotenv-rails"
 gem "omniauth", "1.9.1"
 gem "omniauth-google-oauth2"
+
+gem "image_processing", "~> 1.2"
+gem "google-cloud-storage"

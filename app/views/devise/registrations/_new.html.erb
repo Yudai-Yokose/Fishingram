@@ -28,13 +28,17 @@
   </div>
 
   <div class="actions w-full max-w-xs">
-    <%= f.submit t('.sign_up'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-lg" %>
+    <%= f.submit t('.sign_up'), class: "btn btn-outline w-full max-w-xs text-neutral-content font-bold text-lg" %>
   </div>
 
-  <div class="divider w-full max-w-xs mx-auto">または</div>
+  <div class="w-full max-w-xs mx-auto flex items-center text-neutral-content">
+    <hr class="flex-grow border-t border-neutral-content">
+      <span class="mx-4 font-bold">または</span>
+    <hr class="flex-grow border-t border-neutral-content">
+  </div>
 
   <div class="flex justify-center">
-    <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: "gsi-material-button" do %>
+    <%= link_to user_google_oauth2_omniauth_authorize_path, class: "gsi-material-button", data: { turbo: false } do %>
       <div class="gsi-material-button-state"></div>
       <div class="gsi-material-button-content-wrapper">
         <div class="gsi-material-button-icon">
