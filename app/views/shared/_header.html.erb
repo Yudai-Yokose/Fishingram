@@ -2,15 +2,6 @@
   <a href="/" class="ml-2">Fishingram</a>
 
   <div class="flex items-center space-x-4">
-    <% if user_signed_in? %>
-      <div class="avatar">
-        <div class="w-10 h-10 rounded-full">
-          <%= image_tag current_user.profile_image.variant(resize_to_limit: [40, 40]), alt: "profile_image", class: "rounded-full" %>
-        </div>
-      </div>
-      <span class="text-lg"><%= current_user.username %></span>
-    <% end %>
-
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="m-1" style="background-color: transparent; border: none; box-shadow: none;">
         <i class="fas fa-bars"></i>
