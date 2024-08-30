@@ -1,6 +1,6 @@
 # test/fixtures/catches.yml
 
-catch_one:
+one:
   tide: "大潮"
   tide_level: "上げ3~4部"
   range: "中層"
@@ -10,7 +10,7 @@ catch_one:
   longitude: 135.5023
   user: john
 
-catch_two:
+two:
   tide: "中潮"
   tide_level: "満潮前後"
   range: "ボトム付近"
@@ -20,7 +20,7 @@ catch_two:
   longitude: 139.6917
   user: jane
 
-catch_three:
+three:
   tide: "小潮"
   tide_level: "下げ5~6部"
   range: "表層"

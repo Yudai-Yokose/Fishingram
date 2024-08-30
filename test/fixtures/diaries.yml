@@ -1,6 +1,6 @@
 # test/fixtures/diaries.yml
 
-diary_one:
+one:
   diary_date: <%= Date.today - 2.days %>
   weather: "晴れ"
   catch_count: "3匹"
@@ -9,7 +9,7 @@ diary_one:
   content: "朝まづめの釣りで3匹釣れました。"
   user: john
 
-diary_two:
+two:
   diary_date: <%= Date.today - 1.day %>
   weather: "曇り"
   catch_count: "1匹"
@@ -18,7 +18,7 @@ diary_two:
   content: "ナイトゲームで1匹釣れました。"
   user: jane
 
-diary_three:
+three:
   diary_date: <%= Date.today %>
   weather: "雨"
   catch_count: "5匹"
