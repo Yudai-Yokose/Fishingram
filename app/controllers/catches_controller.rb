@@ -22,9 +22,9 @@ class CatchesController < ApplicationController
   def create
     @catch = current_user.catches.build(catch_params)
     if @catch.save
-      redirect_to catches_path, notice: I18n.t('activerecord.attributes.catch.create.success')
+      redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.create.success")
     else
-      render :new, notice: I18n.t('activerecord.attributes.catch.create.failure')
+      render :new, notice: I18n.t("activerecord.attributes.catch.create.failure")
     end
   end
 
@@ -34,21 +34,21 @@ class CatchesController < ApplicationController
   def update
     if @catch.update(catch_params.except(:images))
       attach_images if params[:catch][:images]
-      redirect_to @catch, notice: I18n.t('activerecord.attributes.catch.update.success')
+      redirect_to @catch, notice: I18n.t("activerecord.attributes.catch.update.success")
     else
-      render :edit, notice: I18n.t('activerecord.attributes.catch.update.failure')
+      render :edit, notice: I18n.t("activerecord.attributes.catch.update.failure")
     end
   end
 
   def destroy
     @catch.destroy
-    redirect_to catches_path, notice: I18n.t('activerecord.attributes.catch.destroy.success')
+    redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.destroy.success")
   end
 
   def purge_image
     image = @catch.images.find(params[:image_id])
     image.purge
-    redirect_to edit_catch_path(@catch), notice: I18n.t('activerecord.attributes.catch.purge_image.success')
+    redirect_to edit_catch_path(@catch), notice: I18n.t("activerecord.attributes.catch.purge_image.success")
   end
 
   private
@@ -74,7 +74,7 @@ class CatchesController < ApplicationController
 
   def correct_user
     unless @catch.user == current_user
-      redirect_to catches_path, notice: I18n.t('activerecord.attributes.catch.correct_user')
+      redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.correct_user")
     end
   end
 end

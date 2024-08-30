@@ -2,37 +2,41 @@ require "test_helper"
 
 class CatchesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get catches_index_url
-    assert_response :success
-  end
-
-  test "should get show" do
-    get catches_show_url
+    get catches_path
     assert_response :success
   end
 
   test "should get new" do
-    get catches_new_url
+    get new_catch_path
     assert_response :success
   end
 
-  test "should get create" do
-    get catches_create_url
+  test "should create catch" do
+    post catches_path, params: { catch: { name: 'Test Catch' } }
+    assert_response :redirect
+  end
+
+  test "should show catch" do
+    catch = catches(:one)
+    get catch_path(catch)
     assert_response :success
   end
 
   test "should get edit" do
-    get catches_edit_url
+    catch = catches(:one)
+    get edit_catch_path(catch)
     assert_response :success
   end
 
-  test "should get update" do
-    get catches_update_url
-    assert_response :success
+  test "should update catch" do
+    catch = catches(:one)
+    patch catch_path(catch), params: { catch: { name: 'Updated Catch' } }
+    assert_response :redirect
   end
 
-  test "should get destroy" do
-    get catches_destroy_url
-    assert_response :success
+  test "should destroy catch" do
+    catch = catches(:one)
+    delete catch_path(catch)
+    assert_response :redirect
   end
 end
