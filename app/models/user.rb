@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2]
 
+  has_many :catches, dependent: :destroy
   validates :username, presence: true, uniqueness: true
   has_one_attached :profile_image
   after_create :set_default_profile_image

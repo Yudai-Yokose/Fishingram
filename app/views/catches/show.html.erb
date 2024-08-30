@@ -1,0 +1,99 @@
+<% if @catch.images.attached? %>
+  <!-- サムネイルのカルーセル -->
+  <div class="carousel w-full">
+    <% @catch.images.each_with_index do |image, index| %>
+      <div id="item<%= index + 1 %>" class="carousel-item w-full" style="border-radius: 10px;">
+        <%= image_tag url_for(image), alt: "Catch Image", class: "w-full h-48 object-cover catch-image cursor-pointer", style: "border-radius: 10px;", onclick: "document.getElementById('image_modal').showModal(); document.getElementById('modal_image_#{index + 1}').scrollIntoView();" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="flex w-full justify-center gap-2 py-2">
+    <% @catch.images.each_with_index do |image, index| %>
+      <a href="#item<%= index + 1 %>" class="btn btn-xs" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
+    <% end %>
+  </div>
+<% else %>
+  <%= image_tag '/no_image.png', alt: "No Image", class: "w-full h-48 object-cover", style: "border-radius: 10px;" %>
+<% end %>
+
+<!-- モーダル内のカルーセル -->
+<dialog id="image_modal" class="modal" style="outline: none;" onclick="if (event.target === this) { this.close(); }">
+  <div class="modal-box p-0 relative" style="border-radius: 10px;">
+    <div class="carousel w-full">
+      <% @catch.images.each_with_index do |image, index| %>
+        <div id="modal_image_<%= index + 1 %>" class="carousel-item w-full" style="border-radius: 10px;">
+          <%= image_tag url_for(image), alt: "Catch Image", class: "w-full object-cover", style: "border-radius: 10px;" %>
+        </div>
+      <% end %>
+    </div>
+    <!-- スライド番号を画像の下部に配置 -->
+    <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-2">
+      <% @catch.images.each_with_index do |image, index| %>
+        <a href="#modal_image_<%= index + 1 %>" class="btn btn-xs bg-opacity-50 bg-gray-900 text-white" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
+      <% end %>
+    </div>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button class>close</button>
+  </form>
+</dialog>
+
+<div class="card-body text-xl text-neutral-content font-bold" style="border-radius: 10px;">
+  <div class="grid grid-cols-2 gap-1">
+    <!-- Date and Time -->
+    <div class="col-span-2 p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
+      <div class="flex items-center">
+        <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>
+        <p class="leading-tight">
+          <%= @catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %>
+        </p>
+      </div>
+    </div>
+    <!-- Tide -->
+    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-water text-gray-400"></i>
+        <p class="leading-tight"><%= @catch.tide %></p>
+      </div>
+    </div>
+    <!-- Tide Level -->
+    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-tint text-gray-400"></i>
+        <p class="leading-tight"><%= @catch.tide_level %></p>
+      </div>
+    </div>
+    <!-- Range -->
+    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-layer-group text-gray-400"></i>
+        <p class="leading-tight"><%= @catch.range %></p>
+      </div>
+    </div>
+    <!-- Size -->
+    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
+      <div class="flex items-center gap-2">
+        <i class="fas fa-ruler-combined text-gray-400"></i>
+        <p class="leading-tight"><%= @catch.size %></p>
+      </div>
+    </div>
+    <!-- Memo -->
+    <% if @catch.memo.present? %>
+      <div class="col-span-2 p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-pencil-alt text-gray-400"></i>
+          <p class="leading-tight"><%= @catch.memo %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
+  <!-- アクションボタン -->
+  <div class="grid grid-cols-1 gap-2 mt-1 w-full">
+    <% if current_user == @catch.user %>
+      <%= link_to t('activerecord.attributes.catch.show.edit'), edit_catch_path(@catch), class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
+      <%= link_to t('activerecord.attributes.catch.show.delete'), catch_path(@catch), method: :delete, data: { turbo_confirm: t('activerecord.attributes.catch.show.confirm'), turbo_method: :delete }, class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
+    <% end %>
+   <%= link_to t('activerecord.attributes.catch.show.back'), catches_path, class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
+  </div>
+</div>
