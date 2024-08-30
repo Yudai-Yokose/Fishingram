@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :diaries do
+    member do
+      delete :purge_image
+    end
+  end
+
   get "user_catches", to: "catches#user_catches"
 
   resources :catches do

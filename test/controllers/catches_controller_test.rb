@@ -4,6 +4,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = users(:one)
     sign_in @user
+    @catch = catches(:one)
   end
 
   test "should get index" do
@@ -17,31 +18,27 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create catch" do
-    post catches_path, params: { catch: { name: "Test Catch" } }
+    post catches_path, params: { catch: { tide: Catch.tides[:大潮], tide_level: Catch.tide_levels[:満潮前後], range: Catch.ranges[:トップ], size: Catch.sizes[:'20~30cm'], memo: "Test Memo", latitude: 35.6586, longitude: 139.7454 } }
     assert_response :redirect
   end
 
   test "should show catch" do
-    catch = catches(:one)
-    get catch_path(catch)
+    get catch_path(@catch)
     assert_response :success
   end
 
   test "should get edit" do
-    catch = catches(:one)
-    get edit_catch_path(catch)
+    get edit_catch_path(@catch)
     assert_response :success
   end
 
   test "should update catch" do
-    catch = catches(:one)
-    patch catch_path(catch), params: { catch: { name: "Updated Catch" } }
+    patch catch_path(@catch), params: { catch: { memo: "Updated Memo" } }
     assert_response :redirect
   end
 
   test "should destroy catch" do
-    catch = catches(:one)
-    delete catch_path(catch)
+    delete catch_path(@catch)
     assert_response :redirect
   end
 end

@@ -1,9 +1,22 @@
-one:
+# test/fixtures/users.yml
+
+john:
   username: JohnDoe
   email: johndoe@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 2.days.ago %>
 
-two:
+jane:
   username: JaneDoe
   email: janedoe@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  created_at: <%= 2.days.ago %>
+  updated_at: <%= 2.days.ago %>
+
+bob:
+  username: BobSmith
+  email: bobsmith@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+  created_at: <%= 1.day.ago %>
+  updated_at: <%= 1.day.ago %>

@@ -70,3 +70,34 @@ ja:
         purge_image:
           success: "画像を削除しました"
         correct_user: "権限がありません"
+      diary:
+        index:
+          user_diaries: "%{user_name}'s Diaries"
+        show:
+          back: "一覧に戻る"
+          edit: "編集"
+          delete: "削除"
+          confirm: "本当に削除しますか？"
+        new:
+          title: "日記記録"
+          submit: "日記を作成する"
+          weather_prompt: "天気を選択"
+          catch_count_prompt: "釣果数を選択"
+          time_of_day_prompt: "時間帯を選択"
+          temperature_prompt: "気温を選択"
+          content: "今日の釣行を振り返りましょう"
+        create:
+          success: "日記を作成しました"
+          failure: "日記を作成できません"
+        edit:
+          title: "日記編集"
+          submit: "日記を更新する"
+          back: "日記詳細に戻る"
+        update:
+          success: "日記を更新しました"
+          failure: "日記を更新できません"
+        destroy:
+          success: "日記を削除しました"
+        purge_image:
+          success: "画像を削除しました"
+        correct_user: "権限がありません"
