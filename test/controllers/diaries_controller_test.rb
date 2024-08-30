@@ -2,127 +2,141 @@ require "test_helper"
 
 class DiariesControllerTest < ActionDispatch::IntegrationTest
   # ユーザー one のテストケース
-  setup do
+  def setup
     @user_one = users(:one)
-    sign_in @user_one
     @diary_one = diaries(:one)
+
+    @user_two = users(:two)
+    @diary_two = diaries(:two)
+
+    @user_three = users(:three)
+    @diary_three = diaries(:three)
   end
 
   test "should get index for user one" do
+    sign_in @user_one
     get diaries_path
     assert_response :success
   end
 
   test "should get new for user one" do
+    sign_in @user_one
     get new_diary_path
     assert_response :success
   end
 
   test "should create diary for user one" do
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:晴れ], catch_count: Diary.catch_counts[:'1匹'], time_of_day: Diary.time_of_days[:朝まづめ], temperature: Diary.temperatures[:'10~20℃'], content: "Test Content" } }
+    sign_in @user_one
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: "晴れ", catch_count: "1匹", time_of_day: "朝まづめ", temperature: "10~20℃", content: "Test Content" } }
     assert_response :redirect
   end
 
   test "should show diary for user one" do
+    sign_in @user_one
     get diary_path(@diary_one)
     assert_response :success
   end
 
   test "should get edit for user one" do
+    sign_in @user_one
     get edit_diary_path(@diary_one)
     assert_response :success
   end
 
   test "should update diary for user one" do
+    sign_in @user_one
     patch diary_path(@diary_one), params: { diary: { content: "Updated Content" } }
     assert_response :redirect
   end
 
   test "should destroy diary for user one" do
+    sign_in @user_one
     delete diary_path(@diary_one)
     assert_response :redirect
   end
 
   # ユーザー two のテストケース
-  setup do
-    @user_two = users(:two)
-    sign_in @user_two
-    @diary_two = diaries(:two)
-  end
-
   test "should get index for user two" do
+    sign_in @user_two
     get diaries_path
     assert_response :success
   end
 
   test "should get new for user two" do
+    sign_in @user_two
     get new_diary_path
     assert_response :success
   end
 
   test "should create diary for user two" do
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:曇り], catch_count: Diary.catch_counts[:'2匹'], time_of_day: Diary.time_of_days[:夕まづめ], temperature: Diary.temperatures[:'10~20℃'], content: "Another Test Content" } }
+    sign_in @user_two
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: "曇り", catch_count: "2匹", time_of_day: "夕まづめ", temperature: "10~20℃", content: "Another Test Content" } }
     assert_response :redirect
   end
 
   test "should show diary for user two" do
+    sign_in @user_two
     get diary_path(@diary_two)
     assert_response :success
   end
 
   test "should get edit for user two" do
+    sign_in @user_two
     get edit_diary_path(@diary_two)
     assert_response :success
   end
 
   test "should update diary for user two" do
+    sign_in @user_two
     patch diary_path(@diary_two), params: { diary: { content: "Another Updated Content" } }
     assert_response :redirect
   end
 
   test "should destroy diary for user two" do
+    sign_in @user_two
     delete diary_path(@diary_two)
     assert_response :redirect
   end
 
   # ユーザー three のテストケース
-  setup do
-    @user_three = users(:three)
-    sign_in @user_three
-    @diary_three = diaries(:three)
-  end
-
   test "should get index for user three" do
+    sign_in @user_three
     get diaries_path
     assert_response :success
   end
 
   test "should get new for user three" do
+    sign_in @user_three
     get new_diary_path
     assert_response :success
   end
 
   test "should create diary for user three" do
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:雨], catch_count: Diary.catch_counts[:'3匹'], time_of_day: Diary.time_of_days[:デイゲーム], temperature: Diary.temperatures[:'20~30℃'], content: "Third Test Content" } }
+    sign_in @user_three
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: "雨", catch_count: "3匹", time_of_day: "デイゲーム", temperature: "20~30℃", content: "Third Test Content" } }
     assert_response :redirect
   end
 
   test "should show diary for user three" do
+    sign_in @user_three
     get diary_path(@diary_three)
     assert_response :success
   end
 
   test "should get edit for user three" do
+    sign_in @user_three
     get edit_diary_path(@diary_three)
     assert_response :success
   end
 
   test "should update diary for user three" do
+    sign_in @user_three
     patch diary_path(@diary_three), params: { diary: { content: "Third Updated Content" } }
     assert_response :redirect
   end
 
   test "should destroy diary for user three" do
+    sign_in @user_three
     delete diary_path(@diary_three)
     assert_response :redirect
   end
