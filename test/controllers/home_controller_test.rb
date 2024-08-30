@@ -12,7 +12,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     end
     sign_in @user
   end
-  
+
   setup do
     User.destroy_all  # ここで delete_all ではなく destroy_all を使用する
     @user = User.create!(
