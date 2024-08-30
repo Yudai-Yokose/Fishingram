@@ -38,3 +38,35 @@ ja:
         password: "パスワード(英数4字以上)"
         password_confirmation: "パスワード(確認用)"
         password_requirements: "英数4字以上"
+      catch:
+        index:
+          all: "All Catches"
+          user_catches: "%{user_name}'s Catches"
+        show:
+          back: "一覧に戻る"
+          edit: "編集"
+          delete: "削除"
+          confirm: "本当に削除しますか？"
+        new:
+          title: "釣果記録"
+          submit: "釣果を記録する"
+          tide_prompt: "潮名を選択"
+          tide_level_prompt: "潮位を選択"
+          range_prompt: "レンジを選択"
+          size_prompt: "サイズを選択"
+          memo: "一言メモ"
+        create:
+          success: "釣果を記録しました"
+          failure: "釣果を記録できません"
+        edit:
+          title: "釣果編集"
+          submit: "釣果を更新する"
+          back: "釣果詳細に戻る"
+        update:
+          success: "釣果を更新しました"
+          failure: "釣果を更新できません"
+        destroy:
+          success: "釣果を削除しました"
+        purge_image:
+          success: "画像を削除しました"
+        correct_user: "権限がありません"

@@ -1,0 +1,23 @@
+<div class="grid grid-cols-1 gap-2">
+  <% @catches.each do |catch| %>
+    <% background_image_url = catch.images.attached? && catch.images.first.present? ? url_for(catch.images.first) : '/no_image.png' %>
+    <%= link_to catch_path(catch), class: "block" do %>
+      <div class="card shadow-md compact bg-base-100 overflow-hidden catch-item" style="background-image: url('<%= background_image_url %>'); background-size: cover; background-position: center; border-radius: 15px;">
+        <div class="card-body bg-opacity-50 bg-black text-neutral-content font-bold p-1.5" style="border-radius: 15px;">
+          <div class="flex items-center mb-0">
+            <% if catch.user&.profile_image&.attached? %>
+              <%= image_tag catch.user.profile_image.variant(resize_to_fill: [35, 35]), class: "w-10 h-10 rounded-full mr-2" %>
+            <% else %>
+              <%= image_tag '/default_profile_image.png', class: "w-10 h-10 rounded-full mr-2" %>
+            <% end %>
+            <div class="flex flex-col justify-center">
+              <p class="text-lg text-neutral-content leading-tight"><%= catch.user&.username || 'Unknown User' %></p>
+              <p class="text-sm text-neutral-content leading-tight"><%= catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %></p>
+            </div>
+          </div>
+          <p class="text-2xl text-neutral-content text-right mt-0 mb-0"><%= catch.size %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

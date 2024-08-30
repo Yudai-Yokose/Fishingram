@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tide: 1
+  tide_level: 1
+  range: 1
+  size: 1
+  memo: MyText
+  latitude: 1.5
+  longitude: 1.5
+  user: one
+
+two:
+  tide: 1
+  tide_level: 1
+  range: 1
+  size: 1
+  memo: MyText
+  latitude: 1.5
+  longitude: 1.5
+  user: two

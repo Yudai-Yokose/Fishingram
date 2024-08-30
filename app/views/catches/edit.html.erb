@@ -1,0 +1,62 @@
+<%= form_with model: @catch, html: { class: "flex flex-col items-center justify-center space-y-2 mb-3 text-neutral-content font-bold", id: "new_catch_form" } do |form| %>
+
+  <% if @catch.images.attached? %>
+    <!-- サムネイルのカルーセル -->
+    <div class="carousel w-full mb-2 relative">
+      <% @catch.images.each_with_index do |image, index| %>
+        <div id="slide<%= index + 1 %>" class="carousel-item relative w-full">
+          <%= image_tag url_for(image), class: "w-full h-40 object-cover rounded", style: "border-radius: 10px;" %>
+          <%= link_to purge_image_catch_path(@catch, image_id: image.id), data: { turbo_method: :delete }, class: "absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center" do %>
+            <i class="fas fa-times text-sm"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="flex justify-center w-full py-1 gap-1">
+      <% @catch.images.each_with_index do |_, index| %>
+        <a href="#slide<%= index + 1 %>" class="btn btn-xs" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-control w-full max-w-xs relative">
+    <%= form.file_field :images, multiple: true, class: "file-input file-input-bordered w-full max-w-xs" %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-water absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :tide, Catch.tides.keys.map { |key| [key, Catch.tides[key]] }, { prompt: t('activerecord.attributes.catch.new.tide_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-tint absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :tide_level, Catch.tide_levels.keys.map { |key| [key, Catch.tide_levels[key]] }, { prompt: t('activerecord.attributes.catch.new.tide_level_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-layer-group absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :range, Catch.ranges.keys.map { |key| [key, Catch.ranges[key]] }, { prompt: t('activerecord.attributes.catch.new.range_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-ruler-combined absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :size, Catch.sizes.keys.map { |key| [key, Catch.sizes[key]] }, { prompt: t('activerecord.attributes.catch.new.size_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-pencil-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.text_field :memo, placeholder: t('activerecord.attributes.catch.new.memo'), class: "textarea textarea-bordered w-full max-w-xs pl-10" %>
+  </div>
+
+  <%= form.hidden_field :latitude %>
+  <%= form.hidden_field :longitude %>
+
+  <div class="actions w-full max-w-xs">
+    <%= form.submit t('activerecord.attributes.catch.edit.submit'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-xl" %>
+  </div>
+
+  <div class="actions w-full max-w-xs mt-3">
+    <%= link_to t('activerecord.attributes.catch.edit.back'), catch_path(@catch), class: "btn btn-outline w-full max-w-xs text-neutral-content font-bold text-xl" %>
+  </div>
+
+<% end %>
