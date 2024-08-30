@@ -1,6 +1,11 @@
 require "test_helper"
 
 class CatchesControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @user = users(:one)
+    sign_in @user
+  end
+
   test "should get index" do
     get catches_path
     assert_response :success
@@ -12,7 +17,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create catch" do
-    post catches_path, params: { catch: { name: 'Test Catch' } }
+    post catches_path, params: { catch: { name: "Test Catch" } }
     assert_response :redirect
   end
 
@@ -30,7 +35,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should update catch" do
     catch = catches(:one)
-    patch catch_path(catch), params: { catch: { name: 'Updated Catch' } }
+    patch catch_path(catch), params: { catch: { name: "Updated Catch" } }
     assert_response :redirect
   end
 
