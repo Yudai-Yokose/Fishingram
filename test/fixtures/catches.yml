@@ -8,7 +8,7 @@ one:
   memo: "良い釣果でした。"
   latitude: 34.6937
   longitude: 135.5023
-  user: john
+  user: one
 
 two:
   tide: "中潮"
@@ -18,7 +18,7 @@ two:
   memo: "満足のいくサイズ。"
   latitude: 35.6895
   longitude: 139.6917
-  user: jane
+  user: two
 
 three:
   tide: "小潮"
@@ -28,4 +28,4 @@ three:
   memo: "難しい条件でも釣れた。"
   latitude: 34.0522
   longitude: -118.2437
-  user: bob
+  user: three

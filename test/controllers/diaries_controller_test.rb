@@ -29,7 +29,7 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diary for user one" do
     sign_in @user_one
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:晴れ], catch_count: "1匹", time_of_day: Diary.time_of_days[:朝まづめ], temperature: "10~20℃", content: "Test Content" } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: 0, catch_count: 1, time_of_day: 0, temperature: 0, content: "Test Content" } }
     assert_response :redirect
   end
 
@@ -72,7 +72,7 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diary for user two" do
     sign_in @user_two
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:曇り], catch_count: "2匹", time_of_day: Diary.time_of_days[:夕まづめ], temperature: "10~20℃", content: "Another Test Content" } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: 1, catch_count: 2, time_of_day: 1, temperature: 1, content: "Another Test Content" } }
     assert_response :redirect
   end
 
@@ -115,7 +115,7 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diary for user three" do
     sign_in @user_three
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:雨], catch_count: "3匹", time_of_day: Diary.time_of_days[:デイゲーム], temperature: "20~30℃", content: "Third Test Content" } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: 2, catch_count: 3, time_of_day: 2, temperature: 2, content: "Third Test Content" } }
     assert_response :redirect
   end
 

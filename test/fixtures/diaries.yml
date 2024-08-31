@@ -7,7 +7,7 @@ one:
   time_of_day: "朝まづめ"
   temperature: "20~30℃"
   content: "朝まづめの釣りで3匹釣れました。"
-  user: john
+  user: one
 
 two:
   diary_date: <%= Date.today - 1.day %>
@@ -16,7 +16,7 @@ two:
   time_of_day: "ナイトゲーム"
   temperature: "10~20℃"
   content: "ナイトゲームで1匹釣れました。"
-  user: jane
+  user: two
 
 three:
   diary_date: <%= Date.today %>
@@ -25,4 +25,4 @@ three:
   time_of_day: "デイゲーム"
   temperature: "10~20℃"
   content: "雨の中でも5匹釣れました。"
-  user: bob
+  user: three
