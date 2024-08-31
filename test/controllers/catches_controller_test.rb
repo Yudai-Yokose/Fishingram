@@ -13,12 +13,6 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
     @user_three = users(:three)
     @catch_three = catches(:three)
-
-    [ @user_one, @user_two, @user_three ].each do |user|
-      unless user.profile_image.attached?
-        user.profile_image.attach(io: File.open(Rails.root.join("public/default_profile_image.png")), filename: "default_profile_image.png", content_type: "image/png")
-      end
-    end
   end
 
   # ユーザー one のテストケース
@@ -36,7 +30,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create catch for user one" do
     sign_in @user_one
-    post catches_path, params: { catch: { tide: "大潮", tide_level: "満潮前後", range: "トップ", size: "20〜30cm", memo: "Test Memo", latitude: 35.6586, longitude: 139.7454 } }
+    post catches_path, params: { catch: { tide: Catch.tides[:大潮], tide_level: Catch.tide_levels[:"満潮前後"], range: Catch.ranges[:トップ], size: Catch.sizes[:"20〜30cm"], memo: "Test Memo", latitude: 35.6586, longitude: 139.7454 } }
     assert_response :redirect
   end
 
@@ -79,7 +73,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create catch for user two" do
     sign_in @user_two
-    post catches_path, params: { catch: { tide: "中潮", tide_level: "上げ3〜4部", range: "中層", size: "30〜40cm", memo: "Another Test Memo", latitude: 34.0522, longitude: -118.2437 } }
+    post catches_path, params: { catch: { tide: Catch.tides[:中潮], tide_level: Catch.tide_levels[:"上げ3〜4部"], range: Catch.ranges[:中層], size: Catch.sizes[:"30〜40cm"], memo: "Another Test Memo", latitude: 34.0522, longitude: -118.2437 } }
     assert_response :redirect
   end
 
@@ -122,7 +116,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create catch for user three" do
     sign_in @user_three
-    post catches_path, params: { catch: { tide: "小潮", tide_level: "下げ7〜8部", range: "ボトム付近", size: "40〜50cm", memo: "Third Test Memo", latitude: 51.5074, longitude: -0.1278 } }
+    post catches_path, params: { catch: { tide: Catch.tides[:小潮], tide_level: Catch.tide_levels[:"下げ7〜8部"], range: Catch.ranges[:ボトム付近], size: Catch.sizes[:"40〜50cm"], memo: "Third Test Memo", latitude: 51.5074, longitude: -0.1278 } }
     assert_response :redirect
   end
 

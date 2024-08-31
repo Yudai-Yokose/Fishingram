@@ -13,12 +13,6 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
     @user_three = users(:three)
     @diary_three = diaries(:three)
-
-    [ @user_one, @user_two, @user_three ].each do |user|
-      unless user.profile_image.attached?
-        user.profile_image.attach(io: File.open(Rails.root.join("public/default_profile_image.png")), filename: "default_profile_image.png", content_type: "image/png")
-      end
-    end
   end
 
   test "should get index for user one" do
@@ -35,7 +29,7 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diary for user one" do
     sign_in @user_one
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: "晴れ", catch_count: "1匹", time_of_day: "朝まづめ", temperature: "10~20℃", content: "Test Content" } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:晴れ], catch_count: "1匹", time_of_day: Diary.time_of_days[:朝まづめ], temperature: "10~20℃", content: "Test Content" } }
     assert_response :redirect
   end
 
@@ -78,7 +72,7 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diary for user two" do
     sign_in @user_two
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: "曇り", catch_count: "2匹", time_of_day: "夕まづめ", temperature: "10~20℃", content: "Another Test Content" } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:曇り], catch_count: "2匹", time_of_day: Diary.time_of_days[:夕まづめ], temperature: "10~20℃", content: "Another Test Content" } }
     assert_response :redirect
   end
 
@@ -121,7 +115,7 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diary for user three" do
     sign_in @user_three
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: "雨", catch_count: "3匹", time_of_day: "デイゲーム", temperature: "20~30℃", content: "Third Test Content" } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: Diary.weathers[:雨], catch_count: "3匹", time_of_day: Diary.time_of_days[:デイゲーム], temperature: "20~30℃", content: "Third Test Content" } }
     assert_response :redirect
   end
 

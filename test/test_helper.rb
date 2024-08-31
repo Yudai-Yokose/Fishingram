@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
+require "open-uri"
 
 module ActiveSupport
   class TestCase
@@ -11,6 +12,17 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+    def attach_default_profile_images
+      User.all.each do |user|
+        unless user.profile_image.attached?
+          user.profile_image.attach(io: File.open(Rails.root.join("public/default_profile_image.png")), filename: "default_profile_image.png", content_type: "image/png")
+        end
+      end
+    end
+
+    setup do
+      attach_default_profile_images
+    end
   end
 end
 
