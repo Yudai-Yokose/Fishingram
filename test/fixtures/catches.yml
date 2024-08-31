@@ -1,21 +1,31 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# test/fixtures/catches.yml
 
 one:
-  tide: 1
-  tide_level: 1
-  range: 1
-  size: 1
-  memo: MyText
-  latitude: 1.5
-  longitude: 1.5
+  tide: "大潮"
+  tide_level: "上げ3~4部"
+  range: "中層"
+  size: "30~40cm"
+  memo: "良い釣果でした。"
+  latitude: 34.6937
+  longitude: 135.5023
   user: one
 
 two:
-  tide: 1
-  tide_level: 1
-  range: 1
-  size: 1
-  memo: MyText
-  latitude: 1.5
-  longitude: 1.5
+  tide: "中潮"
+  tide_level: "満潮前後"
+  range: "ボトム付近"
+  size: "50~60cm"
+  memo: "満足のいくサイズ。"
+  latitude: 35.6895
+  longitude: 139.6917
   user: two
+
+three:
+  tide: "小潮"
+  tide_level: "下げ5~6部"
+  range: "表層"
+  size: "40~50cm"
+  memo: "難しい条件でも釣れた。"
+  latitude: 34.0522
+  longitude: -118.2437
+  user: three

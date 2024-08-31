@@ -1,25 +1,22 @@
 require "test_helper"
+require "open-uri"
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @user = User.create!(
-      username: "testuser",
-      email: "user_#{SecureRandom.hex(10)}@example.com",
-      password: "password"
-    )
-    unless @user.profile_image.attached?
-      @user.profile_image.attach(io: File.open(Rails.root.join("public/default_profile_image.png")), filename: "default_profile_image.png", content_type: "image/png")
-    end
-    sign_in @user
-  end
+  def setup
+    @user_one = users(:one)
+    @diary_one = diaries(:one)
 
-  setup do
-    User.destroy_all  # ここで delete_all ではなく destroy_all を使用する
-    @user = User.create!(
-      username: "testuser",
-      email: "user_#{SecureRandom.hex(10)}@example.com",
-      password: "password"
-    )
+    @user_two = users(:two)
+    @diary_two = diaries(:two)
+
+    @user_three = users(:three)
+    @diary_three = diaries(:three)
+
+    [ @user_one, @user_two, @user_three ].each do |user|
+      unless user.profile_image.attached?
+        user.profile_image.attach(io: File.open(Rails.root.join("public/default_profile_image.png")), filename: "default_profile_image.png", content_type: "image/png")
+      end
+    end
   end
 
   test "should get index" do

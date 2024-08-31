@@ -1,146 +1,145 @@
 require "test_helper"
 require "open-uri"
 
-class CatchesControllerTest < ActionDispatch::IntegrationTest
+class DiariesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers # Deviseのテストヘルパーをインクルード
 
   def setup
     @user_one = users(:one)
-    @catch_one = catches(:one)
+    @diary_one = diaries(:one)
 
     @user_two = users(:two)
-    @catch_two = catches(:two)
+    @diary_two = diaries(:two)
 
     @user_three = users(:three)
-    @catch_three = catches(:three)
+    @diary_three = diaries(:three)
   end
 
-  # ユーザー one のテストケース
   test "should get index for user one" do
     sign_in @user_one
-    get catches_path
+    get diaries_path
     assert_response :success
   end
 
   test "should get new for user one" do
     sign_in @user_one
-    get new_catch_path
+    get new_diary_path
     assert_response :success
   end
 
-  test "should create catch for user one" do
+  test "should create diary for user one" do
     sign_in @user_one
-    post catches_path, params: { catch: { tide: 0, tide_level: 0, range: 0, size: 1, memo: "Test Memo", latitude: 35.6586, longitude: 139.7454 } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: 0, catch_count: 1, time_of_day: 0, temperature: 0, content: "Test Content" } }
     assert_response :redirect
   end
 
-  test "should show catch for user one" do
+  test "should show diary for user one" do
     sign_in @user_one
-    get catch_path(@catch_one)
+    get diary_path(@diary_one)
     assert_response :success
   end
 
   test "should get edit for user one" do
     sign_in @user_one
-    get edit_catch_path(@catch_one)
+    get edit_diary_path(@diary_one)
     assert_response :success
   end
 
-  test "should update catch for user one" do
+  test "should update diary for user one" do
     sign_in @user_one
-    patch catch_path(@catch_one), params: { catch: { memo: "Updated Memo" } }
+    patch diary_path(@diary_one), params: { diary: { content: "Updated Content" } }
     assert_response :redirect
   end
 
-  test "should destroy catch for user one" do
+  test "should destroy diary for user one" do
     sign_in @user_one
-    delete catch_path(@catch_one)
+    delete diary_path(@diary_one)
     assert_response :redirect
   end
 
   # ユーザー two のテストケース
   test "should get index for user two" do
     sign_in @user_two
-    get catches_path
+    get diaries_path
     assert_response :success
   end
 
   test "should get new for user two" do
     sign_in @user_two
-    get new_catch_path
+    get new_diary_path
     assert_response :success
   end
 
-  test "should create catch for user two" do
+  test "should create diary for user two" do
     sign_in @user_two
-    post catches_path, params: { catch: { tide: 1, tide_level: 2, range: 2, size: 2, memo: "Another Test Memo", latitude: 34.0522, longitude: -118.2437 } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: 1, catch_count: 2, time_of_day: 1, temperature: 1, content: "Another Test Content" } }
     assert_response :redirect
   end
 
-  test "should show catch for user two" do
+  test "should show diary for user two" do
     sign_in @user_two
-    get catch_path(@catch_two)
+    get diary_path(@diary_two)
     assert_response :success
   end
 
   test "should get edit for user two" do
     sign_in @user_two
-    get edit_catch_path(@catch_two)
+    get edit_diary_path(@diary_two)
     assert_response :success
   end
 
-  test "should update catch for user two" do
+  test "should update diary for user two" do
     sign_in @user_two
-    patch catch_path(@catch_two), params: { catch: { memo: "Another Updated Memo" } }
+    patch diary_path(@diary_two), params: { diary: { content: "Another Updated Content" } }
     assert_response :redirect
   end
 
-  test "should destroy catch for user two" do
+  test "should destroy diary for user two" do
     sign_in @user_two
-    delete catch_path(@catch_two)
+    delete diary_path(@diary_two)
     assert_response :redirect
   end
 
   # ユーザー three のテストケース
   test "should get index for user three" do
     sign_in @user_three
-    get catches_path
+    get diaries_path
     assert_response :success
   end
 
   test "should get new for user three" do
     sign_in @user_three
-    get new_catch_path
+    get new_diary_path
     assert_response :success
   end
 
-  test "should create catch for user three" do
+  test "should create diary for user three" do
     sign_in @user_three
-    post catches_path, params: { catch: { tide: 2, tide_level: 9, range: 3, size: 3, memo: "Third Test Memo", latitude: 51.5074, longitude: -0.1278 } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: 2, catch_count: 3, time_of_day: 2, temperature: 2, content: "Third Test Content" } }
     assert_response :redirect
   end
 
-  test "should show catch for user three" do
+  test "should show diary for user three" do
     sign_in @user_three
-    get catch_path(@catch_three)
+    get diary_path(@diary_three)
     assert_response :success
   end
 
   test "should get edit for user three" do
     sign_in @user_three
-    get edit_catch_path(@catch_three)
+    get edit_diary_path(@diary_three)
     assert_response :success
   end
 
-  test "should update catch for user three" do
+  test "should update diary for user three" do
     sign_in @user_three
-    patch catch_path(@catch_three), params: { catch: { memo: "Third Updated Memo" } }
+    patch diary_path(@diary_three), params: { diary: { content: "Third Updated Content" } }
     assert_response :redirect
   end
 
-  test "should destroy catch for user three" do
+  test "should destroy diary for user three" do
     sign_in @user_three
-    delete catch_path(@catch_three)
+    delete diary_path(@diary_three)
     assert_response :redirect
   end
 end
