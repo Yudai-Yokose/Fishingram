@@ -12,3 +12,6 @@ application.register("hello", HelloController)
 
 import IntroController from "./intro_controller"
 application.register("intro", IntroController)
+
+import RecordController from "./record_controller"
+application.register("record", RecordController)

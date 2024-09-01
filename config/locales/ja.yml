@@ -48,7 +48,7 @@ ja:
           delete: "削除"
           confirm: "本当に削除しますか？"
         new:
-          title: "釣果記録"
+          title: "釣果を記録"
           submit: "釣果を記録する"
           tide_prompt: "潮名を選択"
           tide_level_prompt: "潮位を選択"
@@ -72,14 +72,14 @@ ja:
         correct_user: "権限がありません"
       diary:
         index:
-          user_diaries: "%{user_name}'s Diaries"
+          all: "%{user_name}'s Diaries"
         show:
           back: "一覧に戻る"
           edit: "編集"
           delete: "削除"
           confirm: "本当に削除しますか？"
         new:
-          title: "日記記録"
+          title: "日記を作成"
           submit: "日記を作成する"
           weather_prompt: "天気を選択"
           catch_count_prompt: "釣果数を選択"

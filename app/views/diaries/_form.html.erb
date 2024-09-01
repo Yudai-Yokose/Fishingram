@@ -1,0 +1,45 @@
+<%= form_with model: diary, html: { class: "flex flex-col items-center justify-center space-y-2 mb-3 text-neutral-content font-bold text-lg", id: "new_diary_form" } do |form| %>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-calendar-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.date_field :diary_date, value: Date.today, class: "select select-bordered w-full max-w-xs pl-10 text-lg" %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-cloud-sun absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :weather, Diary.weathers.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.diary.new.weather_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-fish absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :catch_count, Diary.catch_counts.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.diary.new.catch_count_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-clock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :time_of_day, Diary.time_of_days.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.diary.new.time_of_day_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <i class="fas fa-thermometer-half absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+    <%= form.select :temperature, Diary.temperatures.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.diary.new.temperature_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  </div>
+
+  <div class="form-control w-full max-w-xs relative">
+    <%= form.text_area :content, placeholder: t('activerecord.attributes.diary.new.content'), class: "textarea textarea-bordered w-full max-w-xs text-lg", style: "height: 200px;" %>
+  </div>
+
+  <div class="w-full max-w-xs mx-auto text-center">
+    <details class="text-neutral-content text-lg">
+      <summary class="cursor-pointer font-bold text-right text-lg">画像を添付する</summary>
+      <div class="form-control w-full max-w-xs relative">
+        <%= form.file_field :images, multiple: true, class: "file-input file-input-bordered w-full max-w-xs text-lg" %>
+      </div>
+    </details>
+  </div>
+
+  <div class="actions w-full max-w-xs">
+    <%= form.submit t('activerecord.attributes.diary.new.submit'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-xl text-lg" %>
+  </div>
+
+<% end %>

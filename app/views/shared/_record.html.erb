@@ -1,0 +1,16 @@
+  <div class="tabs mb-0">
+    <button data-action="record#showCatchForm" data-record-target="catchTab" class="tab tab-lg active text-lg"><%= t('activerecord.attributes.catch.new.title') %></button>
+    <button data-action="record#showDiaryForm" data-record-target="diaryTab" class="tab tab-lg text-lg"><%= t('activerecord.attributes.diary.new.title') %></button>
+  </div>
+
+  <div data-record-target="catchForm">
+    <turbo-frame id="new_catch_form_frame" src="<%= new_catch_path %>">
+      <!-- load new catch form -->
+    </turbo-frame>
+  </div>
+
+  <div data-record-target="diaryForm" class="hidden">
+    <turbo-frame id="new_diary_form_frame" src="<%= new_diary_path %>">
+      <!-- load new form diary -->
+    </turbo-frame>
+  </div>

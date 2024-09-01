@@ -1,0 +1,16 @@
+<% background_image_url = diary.images.attached? && diary.images.first.present? ? url_for(diary.images.first) : '/no_image.png' %>
+<%= link_to diary_path(diary), class: "block" do %>
+  <div class="card shadow-md compact bg-base-100 overflow-hidden catch-item" style="background-image: url('<%= background_image_url %>'); background-size: cover; background-position: center; border-radius: 15px;">
+    <div class="card-body bg-opacity-50 bg-black text-neutral-content font-bold p-1" style="border-radius: 15px;">
+      <div class="flex items-center mb-0 justify-between">
+        <div>
+          <p class="text-sm text-neutral-content leading-tight"><%= diary.diary_date.strftime("%Y年%-m月%-d日") %></p>
+          <p class="text-lg text-neutral-content leading-tight">
+            <%= diary.catch_count %> 
+          </p>
+        </div>
+        <%= image_tag diary.user.profile_image.variant(resize_to_fill: [35, 35]).processed, class: "w-10 h-10 rounded-full" %>
+      </div>
+    </div>
+  </div>
+<% end %>
