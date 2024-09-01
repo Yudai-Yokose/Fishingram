@@ -11,15 +11,34 @@ class DiariesController < ApplicationController
   end
 
   def new
-    @diary = current_user.diaries.build
+    @diary = current_user ? current_user.diaries.build : Diary.new
   end
 
   def create
     @diary = current_user.diaries.build(diary_params)
     if @diary.save
-      redirect_to diaries_path, notice: I18n.t("activerecord.attributes.diary.create.success")
+      respond_to do |format|
+        format.html { redirect_to diaries_path, notice: I18n.t("activerecord.attributes.diary.create.success") }
+        format.turbo_stream {
+          flash.now[:notice] = I18n.t("activerecord.attributes.diary.create.success")
+          render turbo_stream: [
+            turbo_stream.prepend("diaries", partial: "diaries/diary", locals: { diary: @diary }),
+            turbo_stream.replace("new_diary_form_frame", partial: "diaries/form", locals: { diary: Diary.new }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     else
-      render :new, notice: I18n.t("activerecord.attributes.diary.create.failure")
+      respond_to do |format|
+        format.html { render :new, notice: I18n.t("activerecord.attributes.diary.create.failure") }
+        format.turbo_stream {
+          flash.now[:alert] = I18n.t("activerecord.attributes.diary.create.failure")
+          render turbo_stream: [
+            turbo_stream.replace("new_diary_form_frame", partial: "diaries/form", locals: { diary: @diary }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     end
   end
 
@@ -49,12 +68,7 @@ class DiariesController < ApplicationController
   private
 
   def diary_params
-    params.require(:diary).permit(:diary_date, :weather, :catch_count, :time_of_day, :temperature, :content, images: []).tap do |p|
-      p[:weather] = p[:weather].to_i if p[:weather].present?
-      p[:catch_count] = p[:catch_count].to_i if p[:catch_count].present?
-      p[:time_of_day] = p[:time_of_day].to_i if p[:time_of_day].present?
-      p[:temperature] = p[:temperature].to_i if p[:temperature].present?
-    end
+    params.require(:diary).permit(:diary_date, :weather, :catch_count, :time_of_day, :temperature, :content, images: [])
   end
 
   def set_diary

@@ -6,10 +6,12 @@ class CatchesController < ApplicationController
 
   def index
     @catches = Catch.includes(:user, images_attachments: :blob).order(created_at: :desc)
+    session[:source] = "all"
   end
 
-  def user_catches
+  def user_index
     @catches = current_user.catches.includes(:user, images_attachments: :blob).order(created_at: :desc)
+    session[:source] = "user"
   end
 
   def show
@@ -22,9 +24,29 @@ class CatchesController < ApplicationController
   def create
     @catch = current_user.catches.build(catch_params)
     if @catch.save
-      redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.create.success")
+      respond_to do |format|
+        format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.create.success") }
+        format.turbo_stream {
+          flash.now[:notice] = I18n.t("activerecord.attributes.catch.create.success")
+          render turbo_stream: [
+            turbo_stream.prepend("catches", partial: "catches/catch", locals: { catch: @catch }),
+            turbo_stream.prepend("user_catches", partial: "catches/user_catch", locals: { catch: @catch }),
+            turbo_stream.replace("new_catch_form_frame", partial: "catches/form", locals: { catch: Catch.new }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     else
-      render :new, notice: I18n.t("activerecord.attributes.catch.create.failure")
+      respond_to do |format|
+        format.html { render :new, I18n.t("activerecord.attributes.catch.create.failure") }
+        format.turbo_stream {
+          flash.now[:alert] = I18n.t("activerecord.attributes.catch.create.failure")
+          render turbo_stream: [
+            turbo_stream.replace("new_catch_form_frame", partial: "catches/form", locals: { catch: @catch }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     end
   end
 
@@ -54,16 +76,12 @@ class CatchesController < ApplicationController
   private
 
   def catch_params
-    params.require(:catch).permit(:tide, :tide_level, :range, :size, :memo, :latitude, :longitude, images: []).tap do |p|
-      p[:tide] = p[:tide].to_i if p[:tide].present?
-      p[:tide_level] = p[:tide_level].to_i if p[:tide_level].present?
-      p[:range] = p[:range].to_i if p[:range].present?
-      p[:size] = p[:size].to_i if p[:size].present?
-    end
+    params.require(:catch).permit(:tide, :tide_level, :range, :size, :memo, :latitude, :longitude, images: [])
   end
 
   def set_catch
     @catch = Catch.includes(:user, images_attachments: :blob).find(params[:id])
+    Rails.logger.debug "Catch set to: #{@catch.inspect}"
   end
 
   def attach_images

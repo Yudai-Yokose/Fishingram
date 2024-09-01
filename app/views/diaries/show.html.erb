@@ -1,3 +1,8 @@
+<div class="feature p-2 text-neutral-content font-bold rounded-lg flex flex-col transform transition duration-500 mt-0" style="margin-top: 0;">
+  <p class="text-xl tracking-wide text-left mb-0"><%= t('activerecord.attributes.diary.index.all', user_name: current_user.username) %></p>
+  <div class="line mt-0 mb-0 w-full bg-gray-100" style="height: 1px;"></div>
+</div>
+
 <% if @diary.images.attached? %>
   <!-- サムネイルのカルーセル -->
   <div class="carousel w-full mb-4">

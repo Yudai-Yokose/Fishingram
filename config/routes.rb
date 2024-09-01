@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "user_catches", to: "catches#user_catches"
+  get "user_index", to: "catches#user_index"
 
   resources :catches do
     member do

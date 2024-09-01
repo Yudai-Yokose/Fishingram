@@ -18,9 +18,10 @@
   </head>
 
   <body class="back-ground">
-    <%= render 'shared/flash' %>
-    <%= render 'shared/header' %>
+    <div id="flash"><%= render "shared/flash" %></div>
+    <%= render "shared/flash" %>
+    <%= render "shared/header" %>
     <%= yield %>
-    <%= render 'shared/footer' %>
+    <%= render "shared/footer" %>
   </body>
 </html>

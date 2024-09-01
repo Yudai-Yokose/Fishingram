@@ -1,19 +1,11 @@
-<div class="grid grid-cols-1 gap-2">
+<div class="feature p-2 text-neutral-content font-bold rounded-lg flex flex-col transform transition duration-500 mt-0" style="margin-top: 0;">
+  <p class="text-xl tracking-wide text-left mb-0"><%= t('activerecord.attributes.diary.index.all', user_name: current_user.username) %></p>
+  <div class="line mt-0 mb-0 w-full bg-gray-100" style="height: 1px;"></div>
+</div>
+
+<div id=diaries class="grid grid-cols-1 gap-2">
   <% @diaries.each do |diary| %>
     <% background_image_url = diary.images.attached? && diary.images.first.present? ? url_for(diary.images.first) : '/no_image.png' %>
-    <%= link_to diary_path(diary), class: "block" do %>
-      <div class="card shadow-md compact bg-base-100 overflow-hidden catch-item" style="background-image: url('<%= background_image_url %>'); background-size: cover; background-position: center; border-radius: 15px;">
-        <div class="card-body bg-opacity-50 bg-black text-neutral-content font-bold p-1.5" style="border-radius: 15px;">
-          <div class="flex items-center mb-0">
-            <%= image_tag diary.user.profile_image.variant(resize_to_fill: [35, 35]).processed, class: "w-10 h-10 rounded-full mr-2" %>
-            <div class="flex flex-col justify-center">
-              <p class="text-lg text-neutral-content leading-tight"><%= diary.user.username %></p>
-              <p class="text-sm text-neutral-content leading-tight"><%= diary.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %></p>
-            </div>
-          </div>
-          <p class="text-2xl text-neutral-content text-right mt-0 mb-0"><%= diary.catch_count %></p>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: "diary", locals: { diary: diary, background_image_url: background_image_url } %>
   <% end %>
 </div>

@@ -18,7 +18,7 @@
 }
 
 body {
-    padding-top: 5rem;
+    padding-top: 4rem;
     padding-bottom: 8rem;
     padding-left: 1rem;
     padding-right: 1rem;
@@ -159,6 +159,7 @@ body {
   padding: 1rem;
   border-radius: 10px;
   padding: 10px 10px;
+  z-index: 500;
 }
 
 /*=================================== card-box setting  =======================================*/
@@ -280,4 +281,12 @@ body {
 .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
   background-color: #303030;
   opacity: 8%;
+}
+
+/*========================================= record tab =======================================*/
+
+.tab.active {
+  border: 2px solid #ddd; /* アクティブタブの下線 */
+  border-radius: 10px;
+  background-color: transparent; /* 背景色を透明に */
 }
