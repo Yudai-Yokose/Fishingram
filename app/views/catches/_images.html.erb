@@ -1,0 +1,37 @@
+<% if catch.images.attached? %>
+  <!-- サムネイルのカルーセル -->
+  <div class="carousel w-full mt-0">
+    <% catch.images.each_with_index do |image, index| %>
+      <div id="item<%= index + 1 %>" class="carousel-item w-full" style="border-radius: 10px;">
+        <%= image_tag url_for(image), alt: "Catch Image", class: "w-full h-48 object-cover catch-image cursor-pointer", style: "border-radius: 10px;", onclick: "document.getElementById('image_modal').showModal(); document.getElementById('modal_image_#{index + 1}').scrollIntoView();" %>
+      </div>
+    <% end %>
+  </div>
+  <div class="flex w-full justify-center gap-2 py-2">
+    <% catch.images.each_with_index do |image, index| %>
+      <a href="#item<%= index + 1 %>" class="btn btn-xs" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
+    <% end %>
+  </div>
+
+  <!-- モーダル内のカルーセル -->
+  <dialog id="image_modal" class="modal" style="outline: none;" onclick="if (event.target === this) { this.close(); }">
+    <div class="modal-box p-0 relative" style="border-radius: 10px;">
+      <div class="carousel w-full">
+        <% catch.images.each_with_index do |image, index| %>
+          <div id="modal_image_<%= index + 1 %>" class="carousel-item w-full" style="border-radius: 10px;">
+            <%= image_tag url_for(image), alt: "Catch Image", class: "w-full object-cover", style: "border-radius: 10px;" %>
+          </div>
+        <% end %>
+      </div>
+      <!-- スライド番号を画像の下部に配置 -->
+      <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-2">
+        <% catch.images.each_with_index do |image, index| %>
+          <a href="#modal_image_<%= index + 1 %>" class="btn btn-xs bg-opacity-50 bg-gray-900 text-white" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
+        <% end %>
+      </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button class>close</button>
+    </form>
+  </dialog>
+<% end %>

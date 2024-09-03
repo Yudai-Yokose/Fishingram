@@ -19,6 +19,12 @@ class CatchesController < ApplicationController
 
   def new
     @catch = current_user ? current_user.catches.build : Catch.new
+    respond_to do |format|
+      format.html
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("new_catch_form_frame", partial: "catches/form", locals: { catch: @catch })
+      }
+    end
   end
 
   def create
@@ -51,26 +57,71 @@ class CatchesController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("edit_catch_form", partial: "catches/form", locals: { catch: @catch })
+      }
+    end
   end
 
   def update
     if @catch.update(catch_params.except(:images))
       attach_images if params[:catch][:images]
-      redirect_to @catch, notice: I18n.t("activerecord.attributes.catch.update.success")
+      respond_to do |format|
+        format.html { redirect_to @catch, notice: I18n.t("activerecord.attributes.catch.update.success") }
+        format.turbo_stream {
+          flash.now[:notice] = I18n.t("activerecord.attributes.catch.update.success")
+          render turbo_stream: [
+            turbo_stream.replace("catch_#{@catch.id}_details", partial: "catches/details", locals: { catch: @catch }),
+            turbo_stream.replace("catch_#{@catch.id}_images", partial: "catches/images", locals: { catch: @catch }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     else
-      render :edit, notice: I18n.t("activerecord.attributes.catch.update.failure")
+      respond_to do |format|
+        format.html { render :edit, notice: I18n.t("activerecord.attributes.catch.update.failure") }
+        format.turbo_stream {
+          flash.now[:alert] = I18n.t("activerecord.attributes.catch.update.failure")
+          render turbo_stream: [
+            turbo_stream.replace("edit_catch_form", partial: "catches/form", locals: { catch: @catch }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     end
   end
 
   def destroy
     @catch.destroy
-    redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.destroy.success")
+    respond_to do |format|
+      format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.destroy.success") }
+      format.turbo_stream {
+        flash.now[:notice] = I18n.t("activerecord.attributes.catch.destroy.success")
+        render turbo_stream: [
+          turbo_stream.remove("destroy_catch_#{@catch.id}"),
+          turbo_stream.update("flash", partial: "shared/flash")
+        ]
+      }
+    end
   end
 
   def purge_image
     image = @catch.images.find(params[:image_id])
+    image_id = image.id
     image.purge
-    redirect_to edit_catch_path(@catch), notice: I18n.t("activerecord.attributes.catch.purge_image.success")
+    respond_to do |format|
+      format.html { redirect_to edit_catch_path(@catch), notice: I18n.t("activerecord.attributes.catch.purge_image.success") }
+      format.turbo_stream {
+        flash.now[:notice] = I18n.t("activerecord.attributes.catch.purge_image.success")
+        render turbo_stream: [
+          turbo_stream.remove("slide_#{image_id}"),
+          turbo_stream.remove("carousel_link_#{image_id}"),
+          turbo_stream.update("flash", partial: "shared/flash")
+        ]
+      }
+    end
   end
 
   private
@@ -81,7 +132,6 @@ class CatchesController < ApplicationController
 
   def set_catch
     @catch = Catch.includes(:user, images_attachments: :blob).find(params[:id])
-    Rails.logger.debug "Catch set to: #{@catch.inspect}"
   end
 
   def attach_images

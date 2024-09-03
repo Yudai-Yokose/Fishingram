@@ -1,11 +1,14 @@
-<div class="feature p-2 text-neutral-content font-bold rounded-lg flex flex-col transform transition duration-500 mt-0" style="margin-top: 0;">
-  <p class="text-xl tracking-wide text-left mb-0"><%= t('activerecord.attributes.catch.index.all') %></p>
-  <div class="line mt-0 mb-0 w-full bg-gray-100" style="height: 1px;"></div>
+<div class="feature p-2 text-xl text-neutral-content font-bold rounded-lg flex items-baseline justify-end transform transition duration-500 mt-0" style="margin-top: 0;">
+  <span class="leading-tight">
+    <%= t('activerecord.attributes.catch.index.all') %>
+  </span>
 </div>
 
 <div id="catches" class="grid grid-cols-1 gap-2">
   <% @catches.each do |catch| %>
     <% background_image_url = catch.images.attached? && catch.images.first.present? ? url_for(catch.images.first) : '/no_image.png' %>
-    <%= render partial: "catch", locals: { catch: catch, background_image_url: background_image_url } %>
+    <div id="destroy_catch_<%= catch.id %>">
+      <%= render partial: "catch", locals: { catch: catch, background_image_url: background_image_url } %>
+    </div>
   <% end %>
 </div>
