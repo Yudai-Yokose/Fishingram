@@ -33,7 +33,11 @@
   <%= form.hidden_field :longitude %>
 
   <div class="actions w-full max-w-xs">
-    <%= form.submit t('activerecord.attributes.catch.new.submit'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-xl" %>
+    <% if catch.persisted? %>
+      <%= form.submit t('activerecord.attributes.catch.edit.submit'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-xl" %>
+    <% else %>
+      <%= form.submit t('activerecord.attributes.catch.new.submit'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-xl" %>
+    <% end %>
   </div>
 
 <% end %>

@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import EditmodalController from "./editmodal_controller"
+application.register("editmodal", EditmodalController)
+
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)
 

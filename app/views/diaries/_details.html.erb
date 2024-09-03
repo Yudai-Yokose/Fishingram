@@ -1,0 +1,30 @@
+<div class="card-body text-xl text-neutral-content font-bold" style="border-radius: 10px;">
+  <div class="grid grid-cols-2 gap-1">
+    <!-- Weather -->
+    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
+      <i class="fas fa-cloud-sun text-gray-400 mr-2" style="width: 20px;"></i>
+      <p class="leading-tight m-0"><%= diary.weather %></p>
+    </div>
+    <!-- Catch Count -->
+    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
+      <i class="fas fa-fish text-gray-400 mr-2" style="width: 20px;"></i>
+      <p class="leading-tight m-0"><%= diary.catch_count %></p>
+    </div>
+    <!-- Time of Day -->
+    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
+      <i class="fas fa-clock text-gray-400 mr-2" style="width: 20px;"></i>
+      <p class="leading-tight m-0"><%= diary.time_of_day %></p>
+    </div>
+    <!-- Temperature -->
+    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
+      <i class="fas fa-thermometer-half text-gray-400 mr-2" style="width: 20px;"></i>
+      <p class="leading-tight m-0"><%= diary.temperature %></p>
+    </div>
+    <!-- Memo -->
+    <% if diary.content.present? %>
+      <div class="col-span-2 p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
+        <p class="leading-tight m-0"><%= diary.content %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

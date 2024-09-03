@@ -1,16 +1,19 @@
 <% background_image_url = catch.images.attached? && catch.images.first.present? ? url_for(catch.images.first) : '/no_image.png' %>
 <%= link_to catch_path(catch), class: "block" do %>
-  <div class="card shadow-md compact bg-base-100 overflow-hidden catch-item" style="background-image: url('<%= background_image_url %>'); background-size: cover; background-position: center; border-radius: 15px; height: 70px;"> 
-    <div class="card-body bg-opacity-50 bg-black text-neutral-content font-bold p-1" style="border-radius: 15px; height: 100%;">
-      <div class="flex items-center mb-0 justify-between">
-        <div>
-          <p class="text-sm text-neutral-content leading-tight"><%= catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %></p>
-          <p class="text-lg text-neutral-content leading-tight">
-            <%= catch.size %>
-            <span class="ml-2"><%= catch.range %></span>
+  <div class="card shadow-md compact bg-base-100 overflow-hidden catch-item" style="background-image: url('<%= background_image_url %>'); background-size: cover; background-position: center; border-radius: 15px; height: 70px;">
+    <div class="card-body bg-opacity-50 bg-black text-neutral-content font-bold flex items-center" style="border-radius: 15px; height: 100%; padding: 0.5rem 1rem; display: flex; align-items: center; justify-content: center;">
+      <div class="flex items-center justify-between w-full" style="padding: 0; margin: 0;">
+        <div class="flex flex-col justify-center" style="margin: 0;">
+          <p class="text-base text-neutral-content leading-tight m-0 flex items-center" style="margin: 0;">
+            <%= catch.user.username %>
+            <span class="ml-2 text-base text-neutral-content"><%= catch.tide %></span>
+            <span class="ml-2 text-base text-neutral-content"><%= catch.tide_level %></span>
+          </p>
+          <p class="text-xl text-neutral-content leading-tight m-0" style="margin: 0;">
+            <%= catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %>
           </p>
         </div>
-        <%= image_tag catch.user.profile_image.variant(resize_to_fill: [35, 35]), class: "w-10 h-10 rounded-full" %>
+        <%= image_tag catch.user.profile_image.variant(resize_to_fill: [35, 35]), class: "w-10 h-10 rounded-full", style: "margin: 0;" %>
       </div>
     </div>
   </div>

@@ -4,6 +4,13 @@
 
 /*=================================== general setting ==========================================*/
 
+@media (min-width: 768px) {
+  .container {
+    width: 425px;
+    margin: 0 auto;
+  }
+}
+
 .back-ground {
     position: absolute;
     top: 0;

@@ -12,6 +12,12 @@ class DiariesController < ApplicationController
 
   def new
     @diary = current_user ? current_user.diaries.build : Diary.new
+    respond_to do |format|
+      format.html
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("new_diary_form_frame", partial: "diaries/form", locals: { diary: @diary })
+      }
+    end
   end
 
   def create
@@ -43,26 +49,71 @@ class DiariesController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.html
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace("edit_diary_form", partial: "diaries/form", locals: { diary: @diary })
+      }
+    end
   end
 
   def update
     if @diary.update(diary_params.except(:images))
       attach_images if params[:diary][:images]
-      redirect_to @diary, notice: I18n.t("activerecord.attributes.diary.update.success")
+      respond_to do |format|
+        format.html { redirect_to @diary, notice: I18n.t("activerecord.attributes.diary.update.success") }
+        format.turbo_stream {
+          flash.now[:notice] = I18n.t("activerecord.attributes.diary.update.success")
+          render turbo_stream: [
+            turbo_stream.replace("diary_#{@diary.id}_details", partial: "diaries/details", locals: { diary: @diary }),
+            turbo_stream.replace("diary_#{@diary.id}_images", partial: "diaries/images", locals: { diary: @diary }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     else
-      render :edit, notice: I18n.t("activerecord.attributes.diary.update.failure")
+      respond_to do |format|
+        format.html { render :edit, notice: I18n.t("activerecord.attributes.diary.update.failure") }
+        format.turbo_stream {
+          flash.now[:alert] = I18n.t("activerecord.attributes.diary.update.failure")
+          render turbo_stream: [
+            turbo_stream.replace("edit_diary_form", partial: "dairy/form", locals: { diary: @diary }),
+            turbo_stream.update("flash", partial: "shared/flash")
+          ]
+        }
+      end
     end
   end
 
   def destroy
     @diary.destroy
-    redirect_to diaries_path, notice: I18n.t("activerecord.attributes.diary.destroy.success")
+    respond_to do |format|
+      format.html { redirect_to diaries_path, notice: I18n.t("activerecord.attributes.diary.destroy.success") }
+      format.turbo_stream {
+        flash.now[:notice] = I18n.t("activerecord.attributes.diary.destroy.success")
+        render turbo_stream: [
+          turbo_stream.remove("destroy_diary_#{@diary.id}"),
+          turbo_stream.update("flash", partial: "shared/flash")
+        ]
+      }
+    end
   end
 
   def purge_image
     image = @diary.images.find(params[:image_id])
+    image_id = image.id
     image.purge
-    redirect_to edit_diary_path(@diary), notice: I18n.t("activerecord.attributes.diary.purge_image.success")
+    respond_to do |format|
+      format.html { redirect_to edit_diary_path(@diary), notice: I18n.t("activerecord.attributes.diary.purge_image.success") }
+      format.turbo_stream {
+        flash.now[:notice] = I18n.t("activerecord.attributes.diary.purge_image.success")
+        render turbo_stream: [
+          turbo_stream.remove("slide_#{image_id}"),
+          turbo_stream.remove("carousel_link_#{image_id}"),
+          turbo_stream.update("flash", partial: "shared/flash")
+        ]
+      }
+    end
   end
 
   private

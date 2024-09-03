@@ -17,11 +17,13 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body class="back-ground">
+<body class="back-ground">
+  <div class="container">
     <div id="flash"><%= render "shared/flash" %></div>
     <%= render "shared/flash" %>
     <%= render "shared/header" %>
     <%= yield %>
     <%= render "shared/footer" %>
-  </body>
+  </div>
+</body>
 </html>

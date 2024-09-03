@@ -1,91 +1,38 @@
-<div class="feature p-2 text-neutral-content font-bold rounded-lg flex flex-col transform transition duration-500 mt-0" style="margin-top: 0;">
-  <p class="text-xl tracking-wide text-left mb-0"><%= t('activerecord.attributes.diary.index.all', user_name: current_user.username) %></p>
-  <div class="line mt-0 mb-0 w-full bg-gray-100" style="height: 1px;"></div>
+<div class="feature p-2 text-xl text-neutral-content font-bold rounded-lg flex justify-between items-baseline transform transition duration-500 mt-0" style="margin-top: 0;">
+  <% if current_user == @diary.user %>
+    <button class="p-0 text-neutral-content font-bold flex items-center" style="background-color: transparent; border: none; margin: 0;" onclick="editModal.showModal()">
+      <%= t('activerecord.attributes.diary.show.edit') %>
+      <i class="fas fa-edit ml-0.5"></i>
+    </button>
+  <% end %>
+  <div class="flex items-center">
+    <span class="leading-tight text-xl">
+      <%= @diary.diary_date.strftime("%Y年%-m月%-d日") %>
+    </span>
+  </div>
 </div>
 
-<% if @diary.images.attached? %>
-  <!-- サムネイルのカルーセル -->
-  <div class="carousel w-full mb-4">
-    <% @diary.images.each_with_index do |image, index| %>
-      <div id="item<%= index + 1 %>" class="carousel-item w-full" style="border-radius: 10px;">
-        <%= image_tag url_for(image), alt: "Diary Image", class: "w-full h-48 object-cover diary-image cursor-pointer", style: "border-radius: 10px;", onclick: "document.getElementById('image_modal').showModal(); document.getElementById('modal_image_#{index + 1}').scrollIntoView();" %>
-      </div>
-    <% end %>
-  </div>
-  <div class="flex w-full justify-center gap-2 py-2">
-    <% @diary.images.each_with_index do |image, index| %>
-      <a href="#item<%= index + 1 %>" class="btn btn-xs" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
-    <% end %>
-  </div>
+<div id="diary_<%= @diary.id %>_images">
+  <%= render 'images', diary: @diary %>
+</div>
 
-  <!-- モーダル内のカルーセル -->
-  <dialog id="image_modal" class="modal" style="outline: none;" onclick="if (event.target === this) { this.close(); }">
-    <div class="modal-box p-0 relative" style="border-radius: 10px;">
-      <div class="carousel w-full">
-        <% @diary.images.each_with_index do |image, index| %>
-          <div id="modal_image_<%= index + 1 %>" class="carousel-item w-full" style="border-radius: 10px;">
-            <%= image_tag url_for(image), alt: "Diary Image", class: "w-full object-cover", style: "border-radius: 10px;" %>
-          </div>
-        <% end %>
-      </div>
-      <!-- スライド番号を画像の下部に配置 -->
-      <div class="absolute bottom-0 left-0 right-0 flex justify-center gap-2 pb-2">
-        <% @diary.images.each_with_index do |image, index| %>
-          <a href="#modal_image_<%= index + 1 %>" class="btn btn-xs bg-opacity-50 bg-gray-900 text-white" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
-        <% end %>
-      </div>
-    </div>
-    <form method="dialog" class="modal-backdrop">
-      <button class>close</button>
-    </form>
-  </dialog>
-<% end %>
-
-<div class="card-body text-xl text-neutral-content font-bold" style="border-radius: 10px;">
-  <div class="grid grid-cols-2 gap-1">
-    <!-- Date and Time -->
-    <div class="col-span-2 p-2 bg-gray-900 bg-opacity-50 flex justify-center items-center" style="border-radius: 10px;">
-      <div class="flex items-center justify-center">
-        <i class="fas fa-calendar-alt text-gray-400 mr-2"></i>
-        <p class="leading-tight">
-          <%= @diary.diary_date.strftime("%Y年%-m月%-d日") %>
-        </p>
-      </div>
-    </div>
-    <!-- Weather -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-cloud-sun text-gray-400 mr-2"></i>
-      <p class="leading-tight"><%= @diary.weather %></p>
-    </div>
-    <!-- Catch Count -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-fish text-gray-400 mr-2"></i>
-      <p class="leading-tight"><%= @diary.catch_count %></p>
-    </div>
-    <!-- Time of Day -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-clock text-gray-400 mr-2"></i>
-      <p class="leading-tight"><%= @diary.time_of_day %></p>
-    </div>
-    <!-- Temperature -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-thermometer-half text-gray-400 mr-2"></i>
-      <p class="leading-tight"><%= @diary.temperature %></p>
-    </div>
-    <!-- Memo -->
-    <% if @diary.content.present? %>
-      <div class="col-span-2 p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-        <p class="leading-tight"><%= @diary.content %></p>
-      </div>
-    <% end %>
-  </div>
+<div id="diary_<%= @diary.id %>_details">
+  <%= render 'details', diary: @diary %>
+</div>
   
   <!-- アクションボタン -->
-  <div class="grid grid-cols-1 gap-2 mt-1 w-full">
-    <% if current_user == @diary.user %>
-      <%= link_to t('activerecord.attributes.diary.show.edit'), edit_diary_path(@diary), class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
-      <%= link_to t('activerecord.attributes.diary.show.delete'), diary_path(@diary), method: :delete, data: { turbo_confirm: t('activerecord.attributes.diary.show.confirm'), turbo_method: :delete }, class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
-    <% end %>
+<div class="grid grid-cols-1 gap-2 mt-1 w-full">
    <%= link_to t('activerecord.attributes.diary.show.back'), diaries_path, class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
-  </div>
+</div>
+
+<!-- edit Modal -->
+<div data-controller="editmodal">
+  <dialog id="editModal" class="modal" data-editmodal-target="editModal">
+    <div class="modal-box text-neutral-content font-bold">
+      <turbo-frame id="edit_diary_form" src="<%= edit_diary_path(@diary) %>"></turbo-frame>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+      <button class>Close</button>
+    </form>
+  </dialog>
 </div>
