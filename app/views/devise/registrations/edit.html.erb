@@ -1,44 +1,57 @@
-<div class="w-full max-w-xs mx-auto text-center">
-  <h2 class="text-neutral-content font-bold text-lg"><%= t('.edit') %></h2>
-</div>
+<section class="bg-gray-50 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-6 mx-auto">
+    <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
+      <div class="p-1 space-y-3 md:space-y-6 sm:p-8">
+        <div class="flex justify-end px-4 pt-4">
+          <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+            <span class="sr-only">Open dropdown</span>
+            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+              <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+            </svg>
+          </button>
 
-<div class="w-full max-w-xs mx-auto text-center mt-4 mb-4">
-  <%= image_tag resource.profile_image.variant(resize_to_limit: [100, 100]), alt: "profile_image", class: "w-24 h-24 rounded-full mx-auto" %>
-</div>
+          <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-28 dark:bg-gray-700">
+            <ul class="py-2" aria-labelledby="dropdownButton">
+              <li>
+                <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "block px-1 py-1 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-600 dark:hover:text-red" %>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "flex flex-col items-center justify-center space-y-3 mb-3 text-neutral-content font-bold" }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="form-control w-full max-w-xs relative">
-    <%= f.file_field :profile_image, class: "file-input file-input-bordered w-full max-w-xs text-neutral-content font-bold" %>
-  </div>
-
-  <div class="form-control w-full max-w-xs relative">
-    <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-    <%= f.text_field :username, placeholder: t('activerecord.attributes.user.username'), autocomplete: "username", class: "input input-bordered w-full max-w-xs pl-10 text-neutral-content font-bold" %>
-  </div>
-
-  <div class="form-control w-full max-w-xs relative">
-    <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-    <%= f.email_field :email, placeholder: t('activerecord.attributes.user.email'), autocomplete: "email", class: "input input-bordered w-full max-w-xs pl-10 text-neutral-content font-bold" %>
-  </div>
-
-  <div class="actions w-full max-w-xs">
-    <%= f.submit t('.update'), class: "btn btn-outline w-full max-w-xs text-neutral-content font-bold text-lg" %>
-  </div>
-
-  <div class="w-full max-w-xs mx-auto flex items-center text-neutral-content">
-    <hr class="flex-grow border-t border-neutral-content">
-    <span class="mx-4 font-bold">または</span>
-    <hr class="flex-grow border-t border-neutral-content">
-  </div>
-
-  <div class="w-full max-w-xs mx-auto text-center">
-    <details class="text-neutral-content">
-      <summary class="cursor-pointer font-bold text-center">アカウントの削除はこちら</summary>
-      <div class="actions w-full max-w-xs mx-auto mt-4">
-        <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-lg" %>
+        <div id="edit_content" class="flex flex-col items-center pb-10">
+          <%= image_tag resource.profile_image, class: 'w-24 h-24 mb-3 rounded-full shadow-lg' %>
+          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%= resource.username %></h5>
+          <span class="text-sm text-gray-500 dark:text-gray-400"><%= resource.email %></span>
+          <div class="flex mt-4 md:mt-6">
+            <button data-modal-target="edit-modal" data-modal-toggle="edit-modal" type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">編集</button>
+            <a href="<%= catches_path %>" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">戻る</a>
+          </div>
+        </div>
       </div>
-    </details>
+    </div>
   </div>
-<% end %>
+</section>
+
+<!-- editModal -->
+<div id="edit-modal" data-editmodal-target="editModal" data-controller="editmodal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 max-h-full">
+    <div class="relative p-8 w-full max-w-2xl max-h-full">
+        <div class="relative bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-900 dark:border-gray-700">
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    <%= image_tag "/icon.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"><%= t('.edit') %></h1>
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="edit-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <div class="pt-0 pb-10 px-10">
+                <%= render partial: 'edit_form', locals: { resource: resource } %>
+            </div>
+        </div>
+    </div>
+</div>

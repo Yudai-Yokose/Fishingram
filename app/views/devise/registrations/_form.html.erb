@@ -1,0 +1,98 @@
+<section class="bg-gray-50 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-6 mx-auto">
+      <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
+          <div class="p-6 space-y-3 md:space-y-6 sm:p-8">
+              <!-- title -->
+              <a href="#" class="flex items-center mb-3 text-lg text-gray-500 dark:text-gray-300">
+                  <%= image_tag "/icon.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
+                  <%= t('devise.registrations.new.sign_up') %>
+              </a>
+
+              <!-- varidation error messages -->
+              <% if resource.errors.any? %>
+                <div class="flash-message-container">
+                  <div id="error_explanation" class="flash-message text-gray-500 dark:text-gray-400 text-base notice" data-controller="flash">
+                    <ul>
+                      <% resource.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+              <% end %>
+
+              <!-- form -->  
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }, html: { class: "space-y-3 md:space-y-8" }) do |f| %>
+                <div class="relative z-0 w-full mb-5 group">
+                  <%= f.text_field :username, id:"user_registration_username", autocomplete: "username", class: "block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: " " %>
+                  <label for="user_registration_username" class="peer-focus:font-medium absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    <%= t('activerecord.attributes.user.username') %>
+                  </label>
+                </div>
+
+                <div class="relative z-0 w-full mb-5 group">
+                  <%= f.email_field :email, id:"user_registration_email", autocomplete: "email", class: "block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: " " %>
+                  <label for="user_registration_email" class="peer-focus:font-medium absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    <%= t('activerecord.attributes.user.email') %>
+                  </label>
+                </div>
+
+                <div class="relative z-0 w-full mb-5 group">
+                  <%= f.password_field :password, id:"user_registration_password", autocomplete: "new-password", class: "block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: " " %>
+                  <label for="user_registration_password" class="peer-focus:font-medium absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    <%= t('activerecord.attributes.user.password') %>
+                  </label>
+                </div>
+
+                <div class="relative z-0 w-full mb-5 group">
+                  <%= f.password_field :password_confirmation, id:"user_registration_password_confirmation", autocomplete: "new-password", class: "block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: " " %>
+                  <label for="user_registration_password_confirmation" class="peer-focus:font-medium absolute text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
+                    <%= t('activerecord.attributes.user.password_confirmation') %>
+                  </label>
+                </div>
+
+                <div class="flex items-start mt-6">
+                  <div class="flex items-center h-5">
+                    <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+                  </div>
+                  <div class="ml-3 text-base">
+                    <label for="terms" class="text-base font-light text-gray-500 dark:text-gray-300"><a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">利用規約</a>に同意します</label>
+                  </div>
+                </div>
+
+                <div class="mt-6">
+                  <%= f.submit t('.sign_up'), class: "w-full text-base text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
+                </div>
+              <% end %>
+
+              <!-- Divider -->
+              <div class="flex items-center" style="margin-top: 20px; margin-bottom: 20px;">
+                <hr class="flex-grow border-t-2 border-gray-300 dark:border-gray-600">
+                <span class="px-4 text-base text-gray-500 dark:text-gray-400">or</span>
+                <hr class="flex-grow border-t-2 border-gray-300 dark:border-gray-600">
+              </div>
+
+              <!-- Google login button -->
+              <div class="flex justify-center">
+                <%= link_to user_google_oauth2_omniauth_authorize_path, class: "w-full inline-flex items-center justify-center px-5 py-2.5 text-base text-gray-700 border border-gray-300 rounded-lg bg-transparent hover:bg-gray-50 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600", data: { turbo: false } do %>
+                  <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                    <path fill="none" d="M0 0h48v48H0z"></path>
+                  </svg>
+                  <span>Sign up with Google</span>
+                <% end %>
+              </div>
+
+              <!-- To sign_in -->
+              <div class="flex items-center justify-center mt-6">
+                <p class="text-base font-light text-gray-500 dark:text-gray-300 text-center">
+                    アカウントがある方は <a href="#" class="font-medium text-primary-600 hover:underline dark:text-primary-500">こちら</a>
+                </p>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>

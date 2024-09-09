@@ -1,42 +1,53 @@
-<%= form_with model: catch, html: { class: "flex flex-col items-center justify-center space-y-2 mb-3 text-neutral-content font-bold", id: "new_catch_form" } do |form| %>
+<%= form_with model: catch, html: { class: "space-y-2 md:space-y-6" } do |f| %>
 
-  <div class="form-control w-full max-w-xs relative">
-    <%= form.file_field :images, multiple: true, class: "file-input file-input-bordered w-full max-w-xs text-lg" %>
+  <div class="form-control relative z-0 w-full group">
+    <label for="tide_select" class="sr-only"><%= t('activerecord.attributes.catch.new.tide_prompt') %></label>
+    <%= f.select :tide, Catch.tides.keys.map { |key| [key, key] }, 
+      { prompt: t('activerecord.attributes.catch.new.tide_prompt') }, 
+      { id: "tide_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
   </div>
 
-  <div class="form-control w-full max-w-xs relative">
-    <i class="fas fa-water absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
-    <%= form.select :tide, Catch.tides.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.catch.new.tide_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  <div class="form-control relative z-0 w-full group">
+    <label for="tide_level_select" class="sr-only"><%= t('activerecord.attributes.catch.new.tide_level_prompt') %></label>
+    <%= f.select :tide_level, Catch.tide_levels.keys.map { |key| [key, key] }, 
+      { prompt: t('activerecord.attributes.catch.new.tide_level_prompt') }, 
+      { id: "tide_level_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
   </div>
 
-  <div class="form-control w-full max-w-xs relative">
-    <i class="fas fa-tint absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
-    <%= form.select :tide_level, Catch.tide_levels.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.catch.new.tide_level_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  <div class="form-control relative z-0 w-full group">
+    <label for="range_select" class="sr-only"><%= t('activerecord.attributes.catch.new.range_prompt') %></label>
+    <%= f.select :range, Catch.ranges.keys.map { |key| [key, key] }, 
+      { prompt: t('activerecord.attributes.catch.new.range_prompt') }, 
+      { id: "range_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
   </div>
 
-  <div class="form-control w-full max-w-xs relative">
-    <i class="fas fa-layer-group absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
-    <%= form.select :range, Catch.ranges.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.catch.new.range_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  <div class="form-control relative z-0 w-full group">
+    <label for="size_select" class="sr-only"><%= t('activerecord.attributes.catch.new.size_prompt') %></label>
+    <%= f.select :size, Catch.sizes.keys.map { |key| [key, key] }, 
+      { prompt: t('activerecord.attributes.catch.new.size_prompt') }, 
+      { id: "size_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
   </div>
 
-  <div class="form-control w-full max-w-xs relative">
-    <i class="fas fa-ruler-combined absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
-    <%= form.select :size, Catch.sizes.keys.map { |key| [key, key] }, { prompt: t('activerecord.attributes.catch.new.size_prompt') }, { class: "select select-bordered w-full max-w-xs pl-10 text-lg" } %>
+  <div class="relative z-0 w-full group">
+    <label class="block text-base py-2 font-medium text-gray-500 dark:text-gray-400" for="file_input"></label>
+    <%= f.file_field :images, multiple: true, id: "file_input", 
+      class: "file-input file-input-bordered file-input-md w-full max-w-xs text-gray-500 bg-gray-100 border-gray-300 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" %>
   </div>
 
-  <div class="form-control w-full max-w-xs relative">
-    <i class="fas fa-pencil-alt absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl"></i>
-    <%= form.text_field :memo, placeholder: t('activerecord.attributes.catch.new.memo'), class: "textarea textarea-bordered w-full max-w-xs pl-10 text-lg" %>
+  <div class="form-control relative z-0 w-full group">
+    <label for="memo" class="block text-sm text-gray-900 dark:text-white"></label>
+    <%= f.text_field :memo, placeholder: t('activerecord.attributes.catch.new.memo'), id: "memo", class: "block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
   </div>
 
-  <%= form.hidden_field :latitude %>
-  <%= form.hidden_field :longitude %>
+  <%= f.hidden_field :latitude %>
+  <%= f.hidden_field :longitude %>
 
-  <div class="actions w-full max-w-xs">
+
+  <div class="mt-6">
     <% if catch.persisted? %>
-      <%= form.submit t('activerecord.attributes.catch.edit.submit'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-xl" %>
+      <%= f.submit t('activerecord.attributes.catch.edit.submit'), class: "w-full text-base text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
     <% else %>
-      <%= form.submit t('activerecord.attributes.catch.new.submit'), class: "btn btn-outline btn-primary w-full max-w-xs text-neutral-content font-bold text-xl" %>
+      <%= f.submit t('activerecord.attributes.catch.new.submit'), class: "w-full text-base text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
     <% end %>
   </div>
 

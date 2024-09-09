@@ -15,7 +15,7 @@ class DiariesController < ApplicationController
     respond_to do |format|
       format.html
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("new_diary_form_frame", partial: "diaries/form", locals: { diary: @diary })
+        render turbo_stream: turbo_stream.replace("new_diary_form", partial: "diaries/form", locals: { diary: @diary })
       }
     end
   end

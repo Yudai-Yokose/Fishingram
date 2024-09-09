@@ -1,30 +1,36 @@
-<div class="card-body text-xl text-neutral-content font-bold" style="border-radius: 10px;">
-  <div class="grid grid-cols-2 gap-1">
-    <!-- Weather -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-cloud-sun text-gray-400 mr-2" style="width: 20px;"></i>
-      <p class="leading-tight m-0"><%= diary.weather %></p>
-    </div>
-    <!-- Catch Count -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-fish text-gray-400 mr-2" style="width: 20px;"></i>
-      <p class="leading-tight m-0"><%= diary.catch_count %></p>
-    </div>
-    <!-- Time of Day -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-clock text-gray-400 mr-2" style="width: 20px;"></i>
-      <p class="leading-tight m-0"><%= diary.time_of_day %></p>
-    </div>
-    <!-- Temperature -->
-    <div class="p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-      <i class="fas fa-thermometer-half text-gray-400 mr-2" style="width: 20px;"></i>
-      <p class="leading-tight m-0"><%= diary.temperature %></p>
-    </div>
-    <!-- Memo -->
-    <% if diary.content.present? %>
-      <div class="col-span-2 p-2 bg-gray-900 bg-opacity-50 flex items-center" style="border-radius: 10px;">
-        <p class="leading-tight m-0"><%= diary.content %></p>
-      </div>
-    <% end %>
+<ul role="list" class="my-4">
+  <div class="grid grid-cols-2 gap-2">
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= diary.weather %></span>
+    </li>
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= diary.catch_count %></span>
+    </li>
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= diary.time_of_day %></span>
+    </li>
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= diary.temperature %></span>
+    </li>
   </div>
-</div>
+  <% if diary.content.present? %>
+    <li class="flex mt-2">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= diary.content %></span>
+    </li>
+  <% end %>
+</ul>

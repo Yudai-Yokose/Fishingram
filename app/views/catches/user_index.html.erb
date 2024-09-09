@@ -1,12 +1,19 @@
-<div class="feature p-2 text-xl text-neutral-content font-bold rounded-lg flex items-baseline justify-end transform transition duration-500 mt-0" style="margin-top: 0;">
-  <span class="leading-tight">
-    <%= t('activerecord.attributes.catch.index.user_catches', user_name: current_user.username) %>
-  </span>
-</div>
-
-<div id="user_catches" class="grid grid-cols-1 gap-2">
-  <% @catches.each do |catch| %>
-    <% background_image_url = catch.images.attached? && catch.images.first.present? ? url_for(catch.images.first) : '/no_image.png' %>
-    <%= render partial: "user_catch", locals: { catch: catch, background_image_url: background_image_url } %>
-  <% end %>
-</div>
+<section class="bg-gray-50 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-6 mx-auto">
+    <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
+      <div class="p-6 space-y-3 md:space-y-6 sm:p-8">
+        <!-- title -->
+        <span class="text-2xl font-extrabold tracking-tight">Your</span>
+        <span class="ms-1 text-base font-normal text-gray-500 dark:text-gray-400">catches</span>
+        <!-- list of user catches -->
+        <div class="flow-root">
+          <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" id="catches">
+            <% @catches.each do |catch| %>
+              <%= render partial: 'user_catch', locals: { catch: catch } %>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

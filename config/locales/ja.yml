@@ -1,4 +1,10 @@
 ja:
+  date:
+    formats:
+      default: "%Y年%-m月%-d日"
+      long: "%Y年%-m月%-d日 %A"
+  day_names: [日曜日, 月曜日, 火曜日, 火曜日, 木曜日, 金曜日, 土曜日]
+  abbr_day_names: [日, 月, 火, 水, 木, 金, 土]
   activerecord:
     errors:
       messages:
@@ -9,13 +15,14 @@ ja:
   errors:
     format: "%{attribute} %{message}"
     messages:
+      taken: "はすでに登録されています。"
       inclusion: "は一覧にありません"
       exclusion: "は予約されています"
       invalid: "は無効な値です"
       confirmation: "と一致しません"
       accepted: "を受諾してください"
-      empty: "を入力してください"
-      blank: "を入力してください"
+      empty: "を入力してください。"
+      blank: "を入力してください。"
       present: "は存在しないことが期待されています"
       too_long: "は%{count}文字以内で入力してください"
       too_short: "は%{count}文字以上で入力してください"
@@ -35,18 +42,23 @@ ja:
       user:
         username: "ユーザー名"
         email: "Email"
-        password: "パスワード(英数4字以上)"
+        password: "パスワード"
         password_confirmation: "パスワード(確認用)"
         password_requirements: "英数4字以上"
+        profile_image: "プロフィール画像"
       catch:
         index:
           all: "All Catches"
-          user_catches: "%{user_name}'s Catches"
+          user_catches: "Your Catches"
         show:
           back: "一覧に戻る"
           edit: "編集"
           delete: "削除"
           confirm: "本当に削除しますか？"
+          tide: "潮名: "
+          tide_level: "潮位: "
+          range: "レンジ: "
+          size:  "サイズ: "
         new:
           title: "釣果を記録"
           submit: "釣果を記録する"
@@ -72,7 +84,7 @@ ja:
         correct_user: "権限がありません"
       diary:
         index:
-          all: "%{user_name}'s Diaries"
+          all: "Your Diaries"
         show:
           back: "一覧に戻る"
           edit: "編集"
