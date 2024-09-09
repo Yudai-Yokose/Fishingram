@@ -1,40 +1,36 @@
-<div class="card-body text-xl text-neutral-content font-bold" style="border-radius: 10px;">
-  <div class="grid grid-cols-2 gap-1">
-    <!-- Tide -->
-    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
-      <div class="flex items-center">
-        <i class="fas fa-water text-gray-400 mr-2" style="width: 20px;"></i>
-        <p class="leading-tight m-0"><%= catch.tide %></p>
-      </div>
-    </div>
-    <!-- Tide Level -->
-    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
-      <div class="flex items-center">
-        <i class="fas fa-tint text-gray-400 mr-2" style="width: 20px;"></i>
-        <p class="leading-tight m-0"><%= catch.tide_level %></p>
-      </div>
-    </div>
-    <!-- Range -->
-    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
-      <div class="flex items-center">
-        <i class="fas fa-layer-group text-gray-400 mr-2" style="width: 20px;"></i>
-        <p class="leading-tight m-0"><%= catch.range %></p>
-      </div>
-    </div>
-    <!-- Size -->
-    <div class="p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
-      <div class="flex items-center">
-        <i class="fas fa-ruler-combined text-gray-400 mr-2" style="width: 20px;"></i>
-        <p class="leading-tight m-0"><%= catch.size %></p>
-      </div>
-    </div>
-    <!-- Memo -->
-    <% if catch.memo.present? %>
-      <div class="col-span-2 p-2 bg-gray-900 bg-opacity-50" style="border-radius: 10px;">
-        <div class="flex items-center">
-          <p class="leading-tight m-0"><%= catch.memo %></p>
-        </div>
-      </div>
-    <% end %>
+<ul role="list" class="my-4">
+  <div class="grid grid-cols-2 gap-2">
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= catch.tide %></span>
+    </li>
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= catch.range %></span>
+    </li>
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= catch.tide_level %></span>
+    </li>
+    <li class="flex">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= catch.size %></span>
+    </li>
   </div>
-</div>
+  <% if catch.memo.present? %>
+    <li class="flex mt-2">
+      <svg class="flex-shrink-0 w-4 h-4 text-blue-700 dark:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 20 20">
+        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
+      </svg>
+      <span class="text-base leading-tight text-gray-500 dark:text-gray-400 ms-2"><%= catch.memo %></span>
+    </li>
+  <% end %>
+</ul>

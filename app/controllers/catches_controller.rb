@@ -6,12 +6,10 @@ class CatchesController < ApplicationController
 
   def index
     @catches = Catch.includes(:user, images_attachments: :blob).order(created_at: :desc)
-    session[:source] = "all"
   end
 
   def user_index
     @catches = current_user.catches.includes(:user, images_attachments: :blob).order(created_at: :desc)
-    session[:source] = "user"
   end
 
   def show
@@ -22,7 +20,7 @@ class CatchesController < ApplicationController
     respond_to do |format|
       format.html
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("new_catch_form_frame", partial: "catches/form", locals: { catch: @catch })
+        render turbo_stream: turbo_stream.replace("new_catch_form", partial: "catches/form", locals: { catch: @catch })
       }
     end
   end
@@ -37,7 +35,7 @@ class CatchesController < ApplicationController
           render turbo_stream: [
             turbo_stream.prepend("catches", partial: "catches/catch", locals: { catch: @catch }),
             turbo_stream.prepend("user_catches", partial: "catches/user_catch", locals: { catch: @catch }),
-            turbo_stream.replace("new_catch_form_frame", partial: "catches/form", locals: { catch: Catch.new }),
+            turbo_stream.replace("new_catch_form", partial: "catches/form", locals: { catch: Catch.new }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }

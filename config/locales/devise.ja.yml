@@ -9,12 +9,12 @@ ja:
     failure:
       already_authenticated: すでにログインしています。
       inactive: アカウントが有効化されていません。メールに記載された手順にしたがって、アカウントを有効化してください。
-      invalid: "メールアドレスまたはパスワードが違います。"
+      invalid: "Emailまたはパスワードが違います。"
       last_attempt: もう一回誤るとアカウントがロックされます。
       locked: アカウントはロックされています。
       not_found_in_database: "メールアドレスまたはパスワードが違います。"
       timeout: セッションがタイムアウトしました。もう一度ログインしてください。
-      unauthenticated: ログインもしくはアカウント登録してください。
+      unauthenticated: ログインまたはユーザー登録してください。
       unconfirmed: メールアドレスの本人確認が必要です。
     mailer:
       confirmation_instructions:
@@ -34,9 +34,9 @@ ja:
       reset_password_instructions:
         action: パスワード変更
         greeting: "%{recipient}様"
-        instruction: パスワード再設定の依頼を受けたため、メールを送信しています。下のリンクからパスワードの再設定ができます。
-        instruction_2: パスワード再設定の依頼をしていない場合、このメールを無視してください。
-        instruction_3: パスワードの再設定は、上のリンクから新しいパスワードを登録するまで完了しません。
+        instruction: パスワードの再設定のため、メールを送信しています。下記のリンクからパスワードの再設定手続きを行ってください。
+        instruction_2: パスワード再設定のメールを送信していない場合、このメールは無視してください。
+        instruction_3: パスワードの再設定は、上記のリンクから新しいパスワードを登録するまで完了しません。
         subject: パスワードの再設定について
       unlock_instructions:
         action: アカウントのロック解除
@@ -46,7 +46,7 @@ ja:
         subject: アカウントのロック解除について
     omniauth_callbacks:
       failure: "%{kind} アカウントによる認証に失敗しました。理由：（%{reason}）"
-      success: "%{kind} アカウントによる認証に成功しました。"
+      success: "%{kind} アカウントでログインしました。"
     passwords:
       edit:
         change_my_password: パスワードを変更する
@@ -54,38 +54,45 @@ ja:
         confirm_new_password: 新しいパスワード(確認用)
         new_password: 新しいパスワード(英数4字以上)
       new:
+        title: パスワード再設定
         forgot_your_password: パスワードを忘れた場合
-        send_me_reset_password_instructions: パスワード再設定メールを送信
+      form:
+        send_me_reset_password_instructions: パスワード変更メールを送信
       no_token: このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。
-      send_instructions: パスワードの再設定について数分以内にメールでご連絡いたします。
+      send_instructions: パスワードの再設定メールを送信しました。
       send_paranoid_instructions: メールアドレスが登録済みの場合、パスワード再設定用のメールが数分以内に送信されます。
       updated: パスワードを変更しました。
       updated_not_active: パスワードが正しく変更されましたが、アカウントはまだアクティブではありません。
     registrations:
-      destroyed: 'アカウントを削除しました。またのご利用をお待ちしております。'
+      destroyed: |
+        アカウントを削除しました。
+        またご利用ください。
+      edit_form:
+        update: 編集を保存
       edit:
-        edit: ユーザー編集
-        are_you_sure: 本当によろしいですか？
+        edit: 編集
+        back: 戻る
+        are_you_sure: 本当にアカウントを削除しますか？
         cancel_my_account: アカウント削除
         currently_waiting_confirmation_for_email: "%{email} の確認待ち"
         leave_blank_if_you_don_t_want_to_change_it: 空欄のままなら変更しません
         title: "%{resource}編集"
         unhappy: 気に入りません
-        update: 編集を保存
         we_need_your_current_password_to_confirm_your_changes: 変更を反映するには現在のパスワードを入力してください
-      new:
+      form:
         sign_up: アカウント登録
       signed_up: アカウント登録が完了しました。
       signed_up_but_inactive: ログインするためには、アカウントを有効化してください。
       signed_up_but_locked: アカウントがロックされているためログインできません。
       signed_up_but_unconfirmed: 本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。
       update_needs_confirmation: アカウント情報を変更しました。変更されたメールアドレスの本人確認のため、本人確認用メールより確認処理をおこなってください。
-      updated: アカウント情報を変更しました。
+      updated: ユーザー情報を変更しました。
       updated_but_not_signed_in: あなたのアカウントは正常に更新されましたが、パスワードが変更されたため、再度ログインしてください。
     sessions:
+      success: ログインしました。
       already_signed_out: 既にログアウト済みです。
       invalid: メールアドレスまたはパスワードが違います。
-      new:
+      form:
         sign_in: ログイン
         forgot_your_password: パスワードを忘れた場合
         remember_me: ログイン状態を保持

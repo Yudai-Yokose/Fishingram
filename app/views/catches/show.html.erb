@@ -1,42 +1,69 @@
-<div class="feature p-2 text-xl text-neutral-content font-bold rounded-lg flex justify-between items-baseline transform transition duration-500 mt-0" style="margin-top: 0;">
-  <% if current_user == @catch.user %>
-    <button class="p-0 text-neutral-content font-bold flex items-center" style="background-color: transparent; border: none; margin: 0;" onclick="editModal.showModal()">
-      <%= t('activerecord.attributes.catch.show.edit') %>
-      <i class="fas fa-edit ml-0.5"></i>
-    </button>
-  <% end %>
-  <div class="flex items-center">
-    <span class="leading-tight text-xl">
-      <%= @catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %>
-    </span>
+<div class="flex items-center justify-center">
+  <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-900 dark:border-gray-700">
+    <div class="flex justify-between items-center mb-1">
+      <% if current_user == @catch.user %>
+        <!-- モーダルを開くボタン -->
+        <button data-modal-target="edit-modal" data-modal-toggle="edit-modal" type="button" class="inline-block">
+          <svg class="w-[18px] h-[18px] text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M20 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6h-2m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4m16 6H10m0 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m0 0H4"/>
+          </svg>
+        </button>
+      <% end %>
+      <h5 class="text-sm text-gray-500 dark:text-gray-400 text-right">
+        <%= @catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %>
+      </h5>
+    </div>
+
+    <div id="catch_<%= @catch.id %>_images">
+      <%= render 'images', catch: @catch %>
+    </div>
+
+    <div id="catch_<%= @catch.id %>_details">
+      <%= render 'details', catch: @catch %>
+    </div>
   </div>
 </div>
 
-<div id="catch_<%= @catch.id %>_images">
-  <%= render 'images', catch: @catch %>
-</div>
-
-<div id="catch_<%= @catch.id %>_details">
-  <%= render 'details', catch: @catch %>
-</div>
-  
-<!-- アクションボタン -->
-<div class="grid grid-cols-1 gap-2 mt-1 w-full">
-  <% if session[:source] == 'user' %>
-    <%= link_to t('activerecord.attributes.catch.show.back'), user_index_path(current_user), class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
-  <% else %>
-    <%= link_to t('activerecord.attributes.catch.show.back'), catches_path, class: 'btn btn-outline p-2 text-xl text-neutral-content font-bold' %>
-  <% end %>
-</div>
-
-<!-- edit Modal -->
-<div data-controller="editmodal">
-  <dialog id="editModal" class="modal" data-editmodal-target="editModal">
-    <div class="modal-box text-neutral-content font-bold">
-      <turbo-frame id="edit_catch_form" src="<%= edit_catch_path(@catch) %>"></turbo-frame>
+<!-- 編集用のモーダル -->
+<div id="edit-modal" data-editmodal-target="editModal" data-controller="editmodal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-10 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 max-h-full">
+  <div class="relative p-8 w-full max-w-2xl max-h-full">
+    <div class="relative bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-900 dark:border-gray-700">
+      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+          <%= image_tag "/icon.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
+          <h1 class="flex items-center text-lg text-gray-500 dark:text-gray-300">
+            <%= t('activerecord.attributes.catch.edit.title') %>
+          </h1>
+        </h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="edit-modal">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+          <span class="sr-only">Close modal</span>
+        </button>
+      </div>  
+      <div class="pt-4 pb-6 px-10">
+        <% if @catch.images.attached? %>
+          <div id="carousel_wrapper_<%= @catch.id %>">
+            <div class="carousel w-full mb-2 relative">
+              <% @catch.images.each_with_index do |image, index| %>
+                <div id="slide_<%= image.id %>" class="carousel-item relative w-full">
+                  <%= image_tag url_for(image), class: "w-full h-40 object-cover rounded", style: "border-radius: 10px;" %>
+                  <%= link_to purge_image_catch_path(@catch, image_id: image.id), data: { turbo_method: :delete }, class: "absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center" do %>
+                    <i class="fas fa-times text-sm"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+            <div class="flex justify-center w-full py-1 gap-1">
+              <% @catch.images.each_with_index do |image, index| %>
+                <a id="carousel_link_<%= image.id %>" href="#slide_<%= image.id %>" class="btn btn-xs" style="outline: none; box-shadow: none;"><%= index + 1 %></a>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <%= turbo_frame_tag "edit_catch_form", src: edit_catch_path(@catch, format: :turbo_stream), loading: "lazy" %>
+      </div>
     </div>
-    <form method="dialog" class="modal-backdrop">
-      <button class>Close</button>
-    </form>
-  </dialog>
+  </div>
 </div>

@@ -1,15 +1,15 @@
 <% if flash[:notice] %>
   <div class="flash-message-container">
-    <div class="flash-message notice text-neutral-content" data-controller="flash">
-      <%= flash[:notice] %>
+    <div class="flash-message text-gray-500 dark:text-gray-400 text-base notice" data-controller="flash">
+      <%= flash[:notice].html_safe %>
     </div>
   </div>
 <% end %>
 
 <% if flash[:alert] %>
   <div class="flash-message-container">
-    <div class="flash-message alert text-neutral-content" data-controller="flash">
-      <%= flash[:alert] %>
+    <div class="flash-message text-gray-500 dark:text-gray-400 text-base alert" data-controller="flash">
+      <%= flash[:alert].html_safe %>
     </div>
   </div>
 <% end %>

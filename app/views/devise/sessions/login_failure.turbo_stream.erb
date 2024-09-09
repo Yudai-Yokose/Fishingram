@@ -1,9 +1,0 @@
-<%= turbo_stream.replace "login_errors" do %>
-  <div id="login_errors" class="flash-message-container" data-controller="flash">
-    <% if @sessions_error_message.present? %>
-      <div class="flash-message text-neutral-content">
-        <%= simple_format(@sessions_error_message) %>
-      </div>
-    <% end %>
-  </div>
-<% end %>
