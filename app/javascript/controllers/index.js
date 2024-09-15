@@ -4,8 +4,14 @@
 
 import { application } from "./application"
 
+import DateController from "./date_controller"
+application.register("date", DateController)
+
 import EditmodalController from "./editmodal_controller"
 application.register("editmodal", EditmodalController)
+
+import FileUploadController from "./file_upload_controller"
+application.register("file-upload", FileUploadController)
 
 import FlashController from "./flash_controller"
 application.register("flash", FlashController)

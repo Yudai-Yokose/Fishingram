@@ -9,7 +9,9 @@
         <div class="flow-root">
           <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700" id="catches">
             <% @catches.each do |catch| %>
-              <%= render partial: 'catch', locals: { catch: catch } %>
+              <div id="destroy_catch_<%= catch.id %>">
+                <%= render partial: 'catch', locals: { catch: catch } %>
+              </div>
             <% end %>
           </ul>
         </div>
@@ -17,3 +19,4 @@
     </div>
   </div>
 </section>
+

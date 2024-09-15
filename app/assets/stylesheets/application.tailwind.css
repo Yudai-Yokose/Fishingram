@@ -4,19 +4,12 @@
 
 /*=================================== general setting ==========================================*/
 
-@media (min-width: 768px) {
-  .container {
-    width: 425px;
-    margin: 0 auto;
-  }
-}
-
 body {
-    padding-top: 5rem;
-    padding-bottom: 4rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    min-height: 100vh; 
+  padding-top: 5rem;
+  padding-bottom: 4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  min-height: 100vh; 
 }
 
 /*=================================== Top page setting ==========================================*/

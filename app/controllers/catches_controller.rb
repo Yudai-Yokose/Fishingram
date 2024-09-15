@@ -1,27 +1,15 @@
 class CatchesController < ApplicationController
-  before_action :set_catch, only: %i[show edit update destroy purge_image]
   before_action :authenticate_user!, except: %i[index show new]
+  before_action :set_catch, only: %i[show edit update destroy purge_image]
   before_action :correct_user, only: %i[edit update destroy purge_image]
-
-
-  def index
-    @catches = Catch.includes(:user, images_attachments: :blob).order(created_at: :desc)
-  end
-
-  def user_index
-    @catches = current_user.catches.includes(:user, images_attachments: :blob).order(created_at: :desc)
-  end
-
-  def show
-  end
 
   def new
     @catch = current_user ? current_user.catches.build : Catch.new
     respond_to do |format|
-      format.html
       format.turbo_stream {
         render turbo_stream: turbo_stream.replace("new_catch_form", partial: "catches/form", locals: { catch: @catch })
       }
+      format.html
     end
   end
 
@@ -29,7 +17,6 @@ class CatchesController < ApplicationController
     @catch = current_user.catches.build(catch_params)
     if @catch.save
       respond_to do |format|
-        format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.create.success") }
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.catch.create.success")
           render turbo_stream: [
@@ -39,10 +26,10 @@ class CatchesController < ApplicationController
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
+        format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.create.success") }
       end
     else
       respond_to do |format|
-        format.html { render :new, I18n.t("activerecord.attributes.catch.create.failure") }
         format.turbo_stream {
           flash.now[:alert] = I18n.t("activerecord.attributes.catch.create.failure")
           render turbo_stream: [
@@ -50,16 +37,42 @@ class CatchesController < ApplicationController
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
+        format.html { render :new, I18n.t("activerecord.attributes.catch.create.failure") }
       end
+    end
+  end
+
+  def index
+    @catches = Catch.includes(:user, images_attachments: :blob).order(created_at: :desc)
+    respond_to do |format|
+      format.turbo_stream {
+        render turbo_stream: [
+          turbo_stream.append("catches", partial: "catches/catch")
+        ]
+      }
+      format.html
+    end
+  end
+
+  def user_index
+    @catches = current_user.catches.includes(:user, images_attachments: :blob).order(created_at: :desc)
+  end
+
+  def show
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace("catch_#{@catch.id}_show", partial: "catches/show", locals: { catch: @catch })
+      end
+      format.html
     end
   end
 
   def edit
     respond_to do |format|
-      format.html
       format.turbo_stream {
         render turbo_stream: turbo_stream.replace("edit_catch_form", partial: "catches/form", locals: { catch: @catch })
       }
+      format.html
     end
   end
 
@@ -67,19 +80,19 @@ class CatchesController < ApplicationController
     if @catch.update(catch_params.except(:images))
       attach_images if params[:catch][:images]
       respond_to do |format|
-        format.html { redirect_to @catch, notice: I18n.t("activerecord.attributes.catch.update.success") }
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.catch.update.success")
           render turbo_stream: [
             turbo_stream.replace("catch_#{@catch.id}_details", partial: "catches/details", locals: { catch: @catch }),
             turbo_stream.replace("catch_#{@catch.id}_images", partial: "catches/images", locals: { catch: @catch }),
+            turbo_stream.replace("catch_#{@catch.id}_top_image", partial: "catches/top_image", locals: { catch: @catch }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
+        format.html { redirect_to @catch, notice: I18n.t("activerecord.attributes.catch.update.success") }
       end
     else
       respond_to do |format|
-        format.html { render :edit, notice: I18n.t("activerecord.attributes.catch.update.failure") }
         format.turbo_stream {
           flash.now[:alert] = I18n.t("activerecord.attributes.catch.update.failure")
           render turbo_stream: [
@@ -87,6 +100,7 @@ class CatchesController < ApplicationController
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
+        format.html { render :edit, notice: I18n.t("activerecord.attributes.catch.update.failure") }
       end
     end
   end
@@ -94,7 +108,6 @@ class CatchesController < ApplicationController
   def destroy
     @catch.destroy
     respond_to do |format|
-      format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.destroy.success") }
       format.turbo_stream {
         flash.now[:notice] = I18n.t("activerecord.attributes.catch.destroy.success")
         render turbo_stream: [
@@ -102,6 +115,7 @@ class CatchesController < ApplicationController
           turbo_stream.update("flash", partial: "shared/flash")
         ]
       }
+      format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.destroy.success") }
     end
   end
 
@@ -110,7 +124,6 @@ class CatchesController < ApplicationController
     image_id = image.id
     image.purge
     respond_to do |format|
-      format.html { redirect_to edit_catch_path(@catch), notice: I18n.t("activerecord.attributes.catch.purge_image.success") }
       format.turbo_stream {
         flash.now[:notice] = I18n.t("activerecord.attributes.catch.purge_image.success")
         render turbo_stream: [
@@ -119,6 +132,7 @@ class CatchesController < ApplicationController
           turbo_stream.update("flash", partial: "shared/flash")
         ]
       }
+      format.html { redirect_to edit_catch_path(@catch), notice: I18n.t("activerecord.attributes.catch.purge_image.success") }
     end
   end
 
