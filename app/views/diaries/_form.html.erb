@@ -1,54 +1,82 @@
-<%= form_with model: diary, html: { class: "space-y-2 md:space-y-6" } do |f| %>
+<section id="new_diary_form" class="bg-gray-50 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-3 py-3 mx-auto lg:py-3">
+    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
-  <div class="form-control relative z-0 w-full group">
-    <label for="diary_date" class="sr-only"><%= t('activerecord.attributes.diary.new.diary_date') %></label>
-    <%= f.date_field :diary_date, value: Date.today, id: "diary_date", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" %>
+        <!-- Title -->
+        <h1 class="text-base font-bold leading-tight tracking-tight text-gray-900 md:text-base dark:text-white text-center">
+            <% if diary.persisted? %>
+              <%= t('activerecord.attributes.diary.edit.title') %>
+              <%= render 'diaries/edit', diary: diary %>
+            <% else %>
+              <%= t('activerecord.attributes.diary.new.title') %>
+            <% end %>
+        </h1>
+
+        <!-- Form -->
+        <%= form_with model: diary, html: { class: "space-y-4 md:space-y-6" } do |f| %>
+          <!-- File to upload -->
+          <div data-controller="file-upload">
+            <label for="dropzone-file" class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+              <%= t('activerecord.attributes.diary.new.upload_prompt') %>
+            </label>
+            <div class="flex items-center justify-center w-full">
+              <label for="dropzone-file" 
+                    class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    data-file-upload-target="label">
+                <div class="flex items-center w-full space-x-2">
+                  <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
+                  </svg>
+                  <span class="text-base text-gray-500 dark:text-gray-400 max-w-xs text-center" data-file-upload-target="fileName">Tap to upload</span>
+                </div>
+                <%= f.file_field :images, multiple: true, id: "dropzone-file", class: "hidden", data: { action: "change->file-upload#displayFileName", file_upload_target: "fileInput" } %>
+              </label>
+            </div>
+          </div>
+
+          <!-- Date -->
+          <div data-controller="date" class="relative max-w-sm">
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 10h16M8 14h8m-4-7V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/>
+                </svg>
+              </div>
+              <input id="default-datepicker" data-date-target="datepicker" data-action="change->date#updateDate" type="text" class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+              <%= f.hidden_field :diary_date, id: "diary_date", data: { date_target: "hiddenField" } %>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-4">
+            <!-- Weather -->
+              <%= f.select :weather, Diary.weathers.keys.map { |key| [key, key] }, 
+                { prompt: t('activerecord.attributes.diary.new.weather_prompt') }, 
+                { id: "weather_select", class: "bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+            <!-- Catch_count -->
+              <%= f.select :catch_count, Diary.catch_counts.keys.map { |key| [key, key] }, 
+                { prompt: t('activerecord.attributes.diary.new.catch_count_prompt') }, 
+                { id: "catch_count_select", class: "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+            <!-- Time_of_day -->
+              <%= f.select :time_of_day, Diary.time_of_days.keys.map { |key| [key, key] }, 
+                { prompt: t('activerecord.attributes.diary.new.time_of_day_prompt') }, 
+                { id: "time_of_day_select", class: "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+            <!-- temperature -->
+              <%= f.select :temperature, Diary.temperatures.keys.map { |key| [key, key] }, 
+                { prompt: t('activerecord.attributes.diary.new.temperature_prompt') }, 
+                { id: "temperature_select", class: "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+          </div>
+            <!-- Content -->
+              <%= f.text_area :content, id: "content", placeholder: t('activerecord.attributes.diary.new.content'), rows: 5, class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+
+          <!-- Submit button -->
+          <% if diary.persisted? %>
+            <%= f.submit t('activerecord.attributes.diary.edit.submit'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
+          <% else %>
+            <%= f.submit t('activerecord.attributes.diary.new.submit'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-control relative z-0 w-full group">
-    <label for="weather_select" class="sr-only"><%= t('activerecord.attributes.diary.new.weather_prompt') %></label>
-    <%= f.select :weather, Diary.weathers.keys.map { |key| [key, key] }, 
-      { prompt: t('activerecord.attributes.diary.new.weather_prompt') }, 
-      { id: "weather_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
-  </div>
-
-  <div class="form-control relative z-0 w-full group">
-    <label for="catch_count_select" class="sr-only"><%= t('activerecord.attributes.diary.new.catch_count_prompt') %></label>
-    <%= f.select :catch_count, Diary.catch_counts.keys.map { |key| [key, key] }, 
-      { prompt: t('activerecord.attributes.diary.new.catch_count_prompt') }, 
-      { id: "catch_count_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
-  </div>
-
-  <div class="form-control relative z-0 w-full group">
-    <label for="time_of_day_select" class="sr-only"><%= t('activerecord.attributes.diary.new.time_of_day_prompt') %></label>
-    <%= f.select :time_of_day, Diary.time_of_days.keys.map { |key| [key, key] }, 
-    { prompt: t('activerecord.attributes.diary.new.time_of_day_prompt') }, 
-    { id: "time_of_day_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
-  </div>
-
-  <div class="form-control relative z-0 w-full group">
-    <label for="temperature_select" class="sr-only"><%= t('activerecord.attributes.diary.new.temperature_prompt') %></label>
-    <%= f.select :temperature, Diary.temperatures.keys.map { |key| [key, key] }, 
-    { prompt: t('activerecord.attributes.diary.new.temperature_prompt') }, 
-    { id: "temperature_select", class: "block py-2.5 px-0 w-full text-base text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer" } %>
-  </div>
-
-  <div class="relative z-0 w-full group">
-    <label class="block text-base py-2 font-medium text-gray-500 dark:text-gray-400" for="file_input"></label>
-    <%= f.file_field :images, multiple: true, id: "file_input", 
-      class: "file-input file-input-bordered file-input-md w-full max-w-xs text-gray-500 bg-gray-100 border-gray-300 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" %>
-  </div>
-
-  <div class="form-control relative z-0 w-full group">
-    <%= f.text_area :content, placeholder: t('activerecord.attributes.diary.new.content'), class: "block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", style: "height: 200px;" %>
-  </div>
-
-  <div class="mt-6">
-    <% if diary.persisted? %>
-      <%= f.submit t('activerecord.attributes.diary.edit.submit'), class: "w-full text-base text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
-    <% else %>
-      <%= f.submit t('activerecord.attributes.diary.new.submit'), class: "w-full text-base text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-3 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
-    <% end %>
-  </div>
-
-<% end %>
+</section>

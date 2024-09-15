@@ -6,7 +6,6 @@ export default class extends Controller {
   connect() {
     this.startFadeOut();
 
-    // Turbo Streamsのレンダリング時にもフェードアウト処理を適用
     document.addEventListener("turbo:frame-load", () => {
       this.startFadeOut();
     });
@@ -19,9 +18,9 @@ export default class extends Controller {
   }
 
   fadeOut() {
-    this.element.classList.add("fade-out"); // 既存のfadeOutアニメーションを適用
+    this.element.classList.add("fade-out");
     setTimeout(() => {
       this.element.style.visibility = "hidden";
-    }, 500); // フェードアウトの時間に合わせて設定
+    }, 500); 
   }
 }
