@@ -15,7 +15,8 @@ module ActiveSupport
     def attach_default_profile_images
       User.all.each do |user|
         unless user.profile_image.attached?
-          user.profile_image.attach(io: File.open(default_image_path), filename: "profile_image.png", content_type: "image/png")
+          default_image_path = Rails.root.join("public/u1.png")
+          profile_image.attach(io: File.open(default_image_path), filename: "profile_image.png", content_type: "image/png")
         end
       end
     end
