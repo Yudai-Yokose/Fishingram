@@ -20,8 +20,8 @@ class CatchesController < ApplicationController
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.catch.create.success")
           render turbo_stream: [
-            turbo_stream.prepend("catches", partial: "catches/catch", locals: { catch: @catch }),
-            turbo_stream.prepend("user_catches", partial: "catches/user_catch", locals: { catch: @catch }),
+            turbo_stream.prepend("catches", partial: "catches/catch_list", locals: { catch: @catch }),
+            turbo_stream.prepend("user_catches", partial: "catches/catch_list", locals: { catch: @catch }),
             turbo_stream.replace("new_catch_form", partial: "catches/form", locals: { catch: Catch.new }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
@@ -43,19 +43,23 @@ class CatchesController < ApplicationController
   end
 
   def index
-    @catches = Catch.includes(:user, images_attachments: :blob).order(created_at: :desc)
+    @catches = Catch.includes(:user, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(5)
     respond_to do |format|
-      format.turbo_stream {
-        render turbo_stream: [
-          turbo_stream.append("catches", partial: "catches/catch")
-        ]
-      }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.append("catches_pagination", partial: "catches/catch")
+      end
       format.html
     end
   end
 
   def user_index
-    @catches = current_user.catches.includes(:user, images_attachments: :blob).order(created_at: :desc)
+    @catches = current_user.catches.includes(:user, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(5)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.append("user_catches_pagination", partial: "catches/user_catch")
+      end
+      format.html
+    end
   end
 
   def show

@@ -1,9 +1,12 @@
 <section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-6 mx-auto">
+  <div class="flex flex-col items-center justify-center px-3 mx-auto">
     <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
-      <div class="p-1 space-y-3 md:space-y-6 sm:p-8">
-        <div class="flex justify-end px-4 pt-4">
-          <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5" type="button">
+      <div class="p-6 space-y-3 md:space-y-6 sm:p-8">
+        <!-- title -->
+        <span class="text-2xl font-extrabold tracking-tight">Profile</span>
+        <!-- Dropdown -->
+        <div class="flex justify-start px-4 pt-4">
+          <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-base p-1.5" type="button">
             <span class="sr-only">Open dropdown</span>
             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
               <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
@@ -13,7 +16,7 @@
           <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-28 dark:bg-gray-700">
             <ul class="py-2" aria-labelledby="dropdownButton">
               <li>
-                <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "block px-1 py-1 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-600 dark:hover:text-red" %>
+                <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "block px-1 py-1 text-base text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-600 dark:hover:text-red" %>
               </li>
             </ul>
           </div>
@@ -22,10 +25,10 @@
         <div id="edit_content" class="flex flex-col items-center pb-10">
           <%= image_tag resource.profile_image, class: 'w-24 h-24 mb-3 rounded-full shadow-lg' %>
           <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%= resource.username %></h5>
-          <span class="text-sm text-gray-500 dark:text-gray-400"><%= resource.email %></span>
+          <span class="text-base text-gray-500 dark:text-gray-400"><%= resource.email %></span>
           <div class="flex mt-4 md:mt-6">
-            <button data-modal-target="edit-modal" data-modal-toggle="edit-modal" type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">編集</button>
-            <a href="<%= catches_path %>" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">戻る</a>
+            <button data-modal-target="edit-modal" data-modal-toggle="edit-modal" type="button" class="inline-flex items-center px-4 py-2 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">編集</button>
+            <a href="<%= catches_path %>" class="py-2 px-4 ms-2 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">戻る</a>
           </div>
         </div>
       </div>
@@ -39,8 +42,8 @@
         <div class="relative bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-900 dark:border-gray-700">
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                    <%= image_tag "/icon.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"><%= t('.edit') %></h1>
+                    <%= image_tag "/2.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
+                    <h1 class="text-lg leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"><%= t('.edit') %></h1>
                 </h3>
                 <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="edit-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">

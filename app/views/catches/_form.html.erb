@@ -4,54 +4,60 @@
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
         <!-- Title -->
-        <h1 class="text-base font-bold leading-tight tracking-tight text-gray-900 md:text-base dark:text-white text-center">
+        <h1>
           <% if catch.persisted? %>
+          <a href="#" class="flex items-center justify-center mb-2 text-lg text-gray-900 dark:text-white">
+            <%= image_tag "/2.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
             <%= t('activerecord.attributes.catch.edit.title') %>
+          </a>
             <%= render 'catches/edit', catch: catch %>
           <% else %>
-            <%= t('activerecord.attributes.catch.new.title') %>
+            <a href="#" class="flex items-center justify-center mb-6 text-lg text-gray-900 dark:text-white">
+              <%= image_tag "/2.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
+              <%= t('activerecord.attributes.catch.new.title') %>
+            </a>
           <% end %>
         </h1>
 
         <!-- Form -->
-        <%= form_with model: catch, html: { class: "space-y-4 md:space-y-6" } do |f| %>
+        <%= form_with model: catch, html: { class: "space-y-2 md:space-y-6" } do |f| %>
           <!-- File to upload -->
           <div data-controller="file-upload">
-            <label for="dropzone-file" class="block mb-2 text-sm font-medium text-gray-500 dark:text-gray-400">
-              <%= t('activerecord.attributes.diary.new.upload_prompt') %>
-            </label>
             <div class="flex items-center justify-center w-full">
-              <label for="dropzone-file" 
-                    class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    data-file-upload-target="label">
-                <div class="flex items-center w-full space-x-2">
-                  <svg class="w-6 h-6 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                  </svg>
-                  <span class="text-base text-gray-500 dark:text-gray-400 max-w-xs text-center" data-file-upload-target="fileName">Tap to upload</span>
+              <label for="catch-dropzone-file" class="flex items-center w-full bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-base rounded-lg cursor-pointer focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                data-file-upload-target="label">
+                <!-- 左側の背景 -->
+                <div class="rounded-lg bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2">
+                  <%= t('activerecord.attributes.catch.new.upload_prompt') %>
                 </div>
-                <%= f.file_field :images, multiple: true, id: "dropzone-file", class: "hidden", data: { action: "change->file-upload#displayFileName", file_upload_target: "fileInput" } %>
+                <!-- 右側にファイル名を表示 -->
+                <div class="flex-1 px-4 py-2" style="display: inline-block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  <span class="text-base text-gray-500 dark:text-gray-400 max-w-xs text-center truncate" data-file-upload-target="fileName">
+                    <%= t('activerecord.attributes.catch.new.upload_placeholder') %>
+                  </span>
+                </div>
+                <!-- ファイル入力フィールド -->
+                <%= f.file_field :images, multiple: true, id: "catch-dropzone-file", class: "hidden", data: { action: "change->file-upload#displayFileName", file_upload_target: "fileInput" } %>
               </label>
             </div>
           </div>
-
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-2 gap-2">
             <!-- Tide -->
               <%= f.select :tide, Catch.tides.keys.map { |key| [key, key] }, 
                 { prompt: t('activerecord.attributes.catch.new.tide_prompt') }, 
-                { id: "tide_select", class: "bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+                { id: "tide_select", class: "bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
             <!-- Tide level -->
               <%= f.select :tide_level, Catch.tide_levels.keys.map { |key| [key, key] }, 
                 { prompt: t('activerecord.attributes.catch.new.tide_level_prompt') }, 
-                { id: "tide_level_select", class: "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+                { id: "tide_level_select", class: "bg-gray-50 border border-gray-300 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
             <!-- Range -->
               <%= f.select :range, Catch.ranges.keys.map { |key| [key, key] }, 
                 { prompt: t('activerecord.attributes.catch.new.range_prompt') }, 
-                { id: "range_select", class: "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+                { id: "range_select", class: "bg-gray-50 border border-gray-300 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
             <!-- Size -->
               <%= f.select :size, Catch.sizes.keys.map { |key| [key, key] }, 
                 { prompt: t('activerecord.attributes.catch.new.size_prompt') }, 
-                { id: "size_select", class: "bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
+                { id: "size_select", class: "bg-gray-50 border border-gray-300 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" } %>
           </div>
             <!-- Memo -->
               <%= f.text_area :memo, id: "memo", placeholder: t('activerecord.attributes.catch.new.memo'), class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
@@ -62,9 +68,9 @@
 
           <!-- Submit button -->
           <% if catch.persisted? %>
-            <%= f.submit t('activerecord.attributes.catch.edit.submit'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
+            <%= f.submit t('activerecord.attributes.catch.edit.submit'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
           <% else %>
-            <%= f.submit t('activerecord.attributes.catch.new.submit'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
+            <%= f.submit t('activerecord.attributes.catch.new.submit'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
           <% end %>
         <% end %>
       </div>

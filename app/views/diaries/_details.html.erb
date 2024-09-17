@@ -1,26 +1,26 @@
-<div class="px-3 py-3 font-normal text-sm text-gray-500 truncate dark:text-gray-400">
+<div class="px-3 py-3 font-normal text-base text-gray-500 truncate dark:text-gray-400">
   <!-- details -->    
   <div class="grid grid-cols-2 gap-2">
-    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
+    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
       <%= diary.weather %>
     </p>
-    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
+    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
       <%= diary.catch_count %>
     </p>
-    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
+    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
       <%= diary.time_of_day %>
     </p>
-    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
+    <p class="bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800">
       <%= diary.temperature %>
     </p>
   </div>
-  <p class="mt-2 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800 break-words whitespace-normal">
+  <p class="mt-2 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 rounded-lg block w-full p-1.5 pl-3 text-left dark:bg-gray-900 dark:border-gray-800 break-words whitespace-normal">
     <%= diary.content %>
   </p>
 
   <!-- edit and delete button -->    
   <% if current_user == @diary.user %>
-    <div class="mt-1 space-x-3 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-sm rounded-lg block w-full p-1 pl-3 text-right dark:bg-gray-900 dark:border-gray-900">
+    <div class="mt-1 space-x-3 bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 rounded-lg block w-full p-1 pl-3 text-right dark:bg-gray-900 dark:border-gray-900">
         <%= turbo_frame_tag "diary_#{diary.id}" do %>
             <%= link_to diary, data: { turbo_confirm: t('activerecord.attributes.diary.show.confirm'), turbo_method: :delete }, class: 'inline-block' do %>
                 <svg class="w-6 h-6 align-middle block" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

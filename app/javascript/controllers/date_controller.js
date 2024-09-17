@@ -4,10 +4,7 @@ export default class extends Controller {
   static targets = ["datepicker", "hiddenField"];
 
   connect() {
-    const now = new Date();
-    const jstOffset = 9 * 60;
-    const jstDate = new Date(now.getTime() + (jstOffset - now.getTimezoneOffset()) * 60 * 1000);
-    const today = jstDate.toISOString().split('T')[0];
+    const today = new Date().toISOString().split('T')[0]; // クライアントのローカル日付を使う
 
     if (!this.hiddenFieldTarget.value) {
       this.hiddenFieldTarget.value = today;

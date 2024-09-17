@@ -1,6 +1,6 @@
 <% if flash[:notice] %>
   <div class="flash-message-container">
-    <div class="flash-message text-gray-500 dark:text-gray-400 text-base notice" data-controller="flash">
+    <div class="flash-message text-gray-500 dark:text-white text-base notice" data-controller="flash">
       <%= flash[:notice].html_safe %>
     </div>
   </div>
@@ -8,7 +8,7 @@
 
 <% if flash[:alert] %>
   <div class="flash-message-container">
-    <div class="flash-message text-gray-500 dark:text-gray-400 text-base alert" data-controller="flash">
+    <div class="flash-message text-gray-500 dark:text-white text-base alert" data-controller="flash">
       <%= flash[:alert].html_safe %>
     </div>
   </div>

@@ -14,7 +14,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
 
     [ @user_one, @user_two, @user_three ].each do |user|
       unless user.profile_image.attached?
-        user.profile_image.attach(io: File.open(Rails.root.join("public/default_profile_image.png")), filename: "default_profile_image.png", content_type: "image/png")
+        user.profile_image.attach(io: File.open(Rails.root.join("public/u1.png")), filename: "u1.png", content_type: "image/png")
       end
     end
   end
