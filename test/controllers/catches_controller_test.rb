@@ -116,7 +116,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create catch for user three" do
     sign_in @user_three
-    post catches_path, params: { catch: { tide: "小潮", tide_level: "下げ後半", range: "ボトム付近", size: "40~50cm", memo: "Third Test Memo", latitude: 51.5074, longitude: -0.1278 } }
+    post catches_path, params: { catch: { tide: "小潮", tide_level: "下げ後半", range: "ボトム", size: "40~50cm", memo: "Third Test Memo", latitude: 51.5074, longitude: -0.1278 } }
     assert_response :redirect
   end
 
