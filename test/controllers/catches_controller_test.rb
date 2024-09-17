@@ -73,7 +73,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create catch for user two" do
     sign_in @user_two
-    post catches_path, params: { catch: { tide: "中潮", tide_level: "上げ3~4部", range: "中層", size: "30~40cm", memo: "Another Test Memo", latitude: 34.0522, longitude: -118.2437 } }
+    post catches_path, params: { catch: { tide: "中潮", tide_level: "上げ前半", range: "中層", size: "30~40cm", memo: "Another Test Memo", latitude: 34.0522, longitude: -118.2437 } }
     assert_response :redirect
   end
 
@@ -116,7 +116,7 @@ class CatchesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create catch for user three" do
     sign_in @user_three
-    post catches_path, params: { catch: { tide: "小潮", tide_level: "下げ7~8部", range: "ボトム付近", size: "40~50cm", memo: "Third Test Memo", latitude: 51.5074, longitude: -0.1278 } }
+    post catches_path, params: { catch: { tide: "小潮", tide_level: "下げ後半", range: "ボトム付近", size: "40~50cm", memo: "Third Test Memo", latitude: 51.5074, longitude: -0.1278 } }
     assert_response :redirect
   end
 

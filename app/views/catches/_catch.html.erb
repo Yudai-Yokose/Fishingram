@@ -1,28 +1,9 @@
-<li class="py-3 sm:py-4">
-  <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
-    <div class="flex items-center">
-      <!-- Image -->
-      <div id="catch_<%= catch.id %>_top_image">
-        <div class="flex -space-x-4 rtl:space-x-reverse">
-          <%= image_tag catch.user.profile_image, class: "w-10 h-10 border-2 border-white rounded-full dark:border-gray-800", alt: "#{catch.user.username} profile image" %>
-          <% if catch.images.any? %>
-            <%= image_tag catch.images.first, class: "w-10 h-10 border-2 border-white rounded-full dark:border-gray-800", alt: "Catch image" %>
-          <% end %>
-        </div>
-      </div>
-      <!-- User info -->
-      <div class="flex-1 min-w-0 ms-2">
-        <p class="text-sm text-gray-900 truncate dark:text-gray-400">
-          <%= catch.user.username %>
-        </p>
-        <p class="text-sm text-gray-900 truncate dark:text-gray-400">
-          <%= catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %>
-        </p>
-      </div>
-    </div>
-    <!-- Turbo frame -->
-    <div class="hidden pt-4" data-hello-target="content">
-      <%= turbo_frame_tag "catch_#{catch.id}_show", src: catch_path(catch, format: :turbo_stream), loading: "lazy" %>
-    </div>
-  </div>
-</li>
+<% @catches.each do |catch| %>
+  <%= turbo_frame_tag "destroy_catch_#{catch.id}" do %>
+    <%= render partial: "catch_list", locals: { catch: catch } %>
+  <% end %>
+<% end %>
+
+<% if @catches.next_page %>
+  <%= turbo_frame_tag "catches_pagination", loading: :lazy, src: catches_path(format: :turbo_stream, page: @catches.next_page) %>
+<% end %>

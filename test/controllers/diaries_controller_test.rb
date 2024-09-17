@@ -115,7 +115,7 @@ class DiariesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create diary for user three" do
     sign_in @user_three
-    post diaries_path, params: { diary: { diary_date: Date.today, weather: "雨", catch_count: "3匹", time_of_day: "デイゲーム", temperature: "10~20℃", content: "Third Test Content" } }
+    post diaries_path, params: { diary: { diary_date: Date.today, weather: "雨", catch_count: "3匹", time_of_day: "Day", temperature: "10~20℃", content: "Third Test Content" } }
     assert_response :redirect
   end
 

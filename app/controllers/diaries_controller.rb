@@ -20,8 +20,8 @@ class DiariesController < ApplicationController
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.diary.create.success")
           render turbo_stream: [
-            turbo_stream.prepend("diaries", partial: "diaries/diary", locals: { diary: @diary }),
-            turbo_stream.replace("new_diary_form_frame", partial: "diaries/form", locals: { diary: Diary.new }),
+            turbo_stream.prepend("diaries", partial: "diaries/diary_list", locals: { diary: @diary }),
+            turbo_stream.replace("new_diary_form", partial: "diaries/form", locals: { diary: Diary.new }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -42,7 +42,13 @@ class DiariesController < ApplicationController
   end
 
   def index
-    @diaries = current_user.diaries.includes(images_attachments: :blob).order(created_at: :desc)
+    @diaries = current_user.diaries.includes(images_attachments: :blob).order(diary_date: :desc).page(params[:page]).per(5)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.append("diaries_pagination", partial: "diaries/diary")
+      end
+      format.html
+    end
   end
 
   def show

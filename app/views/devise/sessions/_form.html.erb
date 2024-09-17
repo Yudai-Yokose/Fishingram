@@ -1,10 +1,10 @@
 <section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-3">
+  <div class="flex flex-col items-center justify-center px-3 mx-auto">
     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <!-- Title -->
-        <a href="#" class="flex items-center justify-center mb-6 text-lg font-semibold text-gray-900 dark:text-white">
-          <%= image_tag "/icon.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
+        <a href="#" class="flex items-center justify-center mb-6 text-lg text-gray-900 dark:text-white">
+          <%= image_tag "/2.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
           <%= t('devise.sessions.new.sign_in') %>  
         </a>
         
@@ -22,7 +22,7 @@
               <div class="flex items-center h-5">
                 <%= f.check_box :remember_me, id: "user_session_remember_me", class: "w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" %>
               </div>
-              <div class="ml-3 text-sm">
+              <div class="ml-3 text-base">
                 <label for="user_session_remember_me" class="font-light text-gray-500 dark:text-gray-300">
                   <%= t('devise.sessions.form.remember_me') %>
                 </label>
@@ -50,8 +50,8 @@
           </div>
 
           <!-- If not to have account -->
-          <p class="text-sm text-center font-light text-gray-500 dark:text-gray-400">
-            アカウントをお持ちでない方は <a href="<%= new_user_registration_path %>" class="font-medium text-primary-600 hover:underline dark:text-primary-500">こちら</a>
+          <p class="text-base text-center font-light text-gray-500 dark:text-gray-400">
+            アカウントがない方は <a href="<%= new_user_registration_path %>" class="font-medium text-primary-600 hover:underline dark:text-primary-500">こちら</a>
           </p>
 
         <% end %>
