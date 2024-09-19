@@ -1,4 +1,4 @@
-user = User.all
+user = User.first
 
 100.times do
   Catch.create!(

@@ -31,9 +31,10 @@ export default class extends Controller {
 
   closeModal(event) {
     if (event.detail.success) {
-      const modal = document.getElementById("record-modal");
-      modal.classList.add("hidden");
-      modal.setAttribute("aria-hidden", "true");
+      const modalCloseButton = document.querySelector("[data-modal-hide='record-modal']")
+      if (modalCloseButton) {
+        modalCloseButton.click()
+      }
     }
   }
 }

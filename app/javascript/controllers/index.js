@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CommentmodalController from "./commentmodal_controller"
+application.register("commentmodal", CommentmodalController)
+
 import DateController from "./date_controller"
 application.register("date", DateController)
 
@@ -21,6 +24,9 @@ application.register("hello", HelloController)
 
 import IntroController from "./intro_controller"
 application.register("intro", IntroController)
+
+import LikeController from "./like_controller"
+application.register("like", LikeController)
 
 import RecordController from "./record_controller"
 application.register("record", RecordController)

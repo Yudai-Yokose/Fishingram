@@ -1,5 +1,8 @@
 class Catch < ApplicationRecord
   belongs_to :user
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
+  has_many :comments, dependent: :destroy
   has_many_attached :images
 
   enum tide:       { "大潮" => 0, "中潮" => 1, "小潮" => 2, "若潮" => 3, "長潮" => 4 }

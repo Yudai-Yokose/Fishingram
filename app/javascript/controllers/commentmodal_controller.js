@@ -7,7 +7,7 @@ export default class extends Controller {
 
   closeModal(event) {
     if (event.detail.success) {
-      const modalCloseButton = document.querySelector("[data-modal-hide='editmodal']")
+      const modalCloseButton = document.querySelector("[data-modal-hide='commentmodal']")
       if (modalCloseButton) {
         modalCloseButton.click()
       }

@@ -1,0 +1,41 @@
+<%= turbo_frame_tag "like_button_#{catch.id}" do %>
+  <% if user_signed_in? %>
+    <% if current_user.liked_catches.include?(catch) %>
+      <%= button_to catch_like_path(catch), method: :delete, data: { turbo_method: :delete }, class: 'inline-block dark:border-gray-900 border rounded-lg likeButton liked' do %>
+        <div class="flex items-end">
+          <svg class="w-7 h-7 self-end" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+          </svg>
+          <span class="text-base dark:text-gray-400 self-end ml-0">Nice Catch</span>
+          <% if catch.likes.count > 0 %>
+            <span class="ml-2 text-base dark:text-gray-400 self-end"><%= catch.likes.count %></span>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= button_to catch_like_path(catch), method: :post, data: { turbo_method: :post }, class: 'inline-block dark:border-gray-900 border rounded-lg likeButton' do %>
+        <div class="flex items-end">
+          <svg class="w-7 h-7 self-end" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+          </svg>
+          <span class="text-base dark:text-gray-400 self-end ml-0">Nice Catch</span>
+          <% if catch.likes.count > 0 %>
+            <span class="ml-2 text-base dark:text-gray-400 self-end"><%= catch.likes.count %></span>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% else %>
+    <%= link_to new_user_registration_path, class: 'inline-block dark:border-gray-900 border rounded-lg likeButton' do %>
+      <div class="flex items-end">
+        <svg class="w-7 h-7 self-end" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+        </svg>
+        <span class="text-base self-end ml-0">Nice Catch</span>
+        <% if catch.likes.count > 0 %>
+          <span class="ml-2 text-base self-end"><%= catch.likes.count %></span>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>
