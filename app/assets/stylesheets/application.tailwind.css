@@ -130,7 +130,7 @@ body {
   }
   to {
     opacity: 0;
-    transform: translateY(-20px); /* 上にフェードアウト */
+    transform: translateY(-20px);
   }
 }
 
@@ -243,7 +243,31 @@ body {
 /*========================================= record tab =======================================*/
 
 .tab.active {
-  border: 2px solid #ddd; /* アクティブタブの下線 */
+  border: 2px solid #ddd;
   border-radius: 10px;
-  background-color: transparent; /* 背景色を透明に */
+  background-color: transparent;
 }
+
+/*========================================= like button =======================================*/
+
+.likeButton {
+  background-color: transparent;
+  padding: 0.01em 0.5em 0.01em;
+  cursor: pointer;
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+  outline: 0;
+  }
+
+  .likeButton__icon {
+  display: inline-block;
+  margin-right: 0.2em;
+  }
+
+  .likeButton:hover {
+  color: #2563eb ;
+  }
+
+  .likeButton.liked {
+  color: #2563eb;
+  border-color: #2563eb;
+  }

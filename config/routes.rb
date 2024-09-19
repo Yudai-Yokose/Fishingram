@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     member do
       delete :purge_image
     end
+    resource :like, only: [ :create, :destroy ]
+    resources :comments, only: [ :new, :create, :destroy ]
   end
 
   devise_for :users, controllers: {

@@ -1,12 +1,13 @@
 class User < ApplicationRecord
   require "open-uri"
+  has_many :likes, dependent: :destroy
+  has_many :liked_catches, through: :likes, source: :catch
+  has_many :comments, dependent: :destroy
   has_many :catches, dependent: :destroy
   has_many :diaries, dependent: :destroy
   validates :username, presence: true, uniqueness: true
   has_one_attached :profile_image
   after_create :set_default_profile_image
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[google_oauth2]

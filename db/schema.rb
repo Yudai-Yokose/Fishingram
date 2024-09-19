@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_30_084602) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_18_162042) do
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,6 +53,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_30_084602) do
     t.index ["user_id"], name: "index_catches_on_user_id"
   end
 
+  create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "catch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["catch_id"], name: "index_comments_on_catch_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "diaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "diary_date"
     t.integer "weather"
@@ -65,6 +75,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_30_084602) do
     t.datetime "updated_at", null: false
     t.index ["created_at"], name: "index_diaries_on_created_at"
     t.index ["user_id"], name: "index_diaries_on_user_id"
+  end
+
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "catch_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["catch_id"], name: "index_likes_on_catch_id"
+    t.index ["user_id", "catch_id"], name: "index_likes_on_user_id_and_catch_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -85,5 +105,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_30_084602) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "catches", "users"
+  add_foreign_key "comments", "catches"
+  add_foreign_key "comments", "users"
   add_foreign_key "diaries", "users"
+  add_foreign_key "likes", "catches"
+  add_foreign_key "likes", "users"
 end

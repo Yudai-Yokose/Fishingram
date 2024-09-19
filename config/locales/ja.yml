@@ -117,3 +117,7 @@ ja:
         purge_image:
           success: "画像を削除しました"
         correct_user: "権限がありません"
+      comment:
+        new:
+          title: "コメントする"
+          submit: "コメント"
