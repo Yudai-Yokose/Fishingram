@@ -10,6 +10,15 @@ application.register("commentmodal", CommentmodalController)
 import DateController from "./date_controller"
 application.register("date", DateController)
 
+import DiarynewmapController from "./diarynewmap_controller"
+application.register("diarynewmap", DiarynewmapController)
+
+import DiaryshowmapController from "./diaryshowmap_controller"
+application.register("diaryshowmap", DiaryshowmapController)
+
+import DiarytogglemapController from "./diarytogglemap_controller"
+application.register("diarytogglemap", DiarytogglemapController)
+
 import EditmodalController from "./editmodal_controller"
 application.register("editmodal", EditmodalController)
 
@@ -28,5 +37,14 @@ application.register("intro", IntroController)
 import LikeController from "./like_controller"
 application.register("like", LikeController)
 
+import CatchnewmapController from "./catchnewmap_controller"
+application.register("catchnewmap", CatchnewmapController)
+
 import RecordController from "./record_controller"
 application.register("record", RecordController)
+
+import CatchshowmapController from "./catchshowmap_controller"
+application.register("catchshowmap", CatchshowmapController)
+
+import CatchtogglemapController from "./catchtogglemap_controller";
+application.register("catchtogglemap", CatchtogglemapController);

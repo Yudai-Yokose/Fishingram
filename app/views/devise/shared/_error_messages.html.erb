@@ -1,13 +1,16 @@
 <% if resource.errors.any? %>
-  <div id="error_explanation" data-turbo-cache="false">
-    <ul>
-      <% resource.errors.full_messages.each do |message| %>
-        <div class="flash-message-container">
-          <div class="flash-message alert" data-controller="flash">
-            <li><%= message %></li>
-          </div>
-        </div>
-      <% end %>
-    </ul>
+  <div class="flash-message-container">
+    <div id="error_explanation" class="flash-message flex items-center p-4 mb-4 text-base text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800 alert" data-controller="flash" role="alert">
+      <ul>
+        <% resource.errors.full_messages.each do |message| %>
+          <li class="text-left items-start">
+            <svg class="flex-shrink-0 inline w-6 h-6 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <%= message %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
 <% end %>

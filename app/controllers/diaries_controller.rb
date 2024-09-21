@@ -132,7 +132,7 @@ class DiariesController < ApplicationController
   private
 
   def diary_params
-    params.require(:diary).permit(:diary_date, :weather, :catch_count, :time_of_day, :temperature, :content, images: [])
+    params.require(:diary).permit(:diary_date, :weather, :catch_count, :time_of_day, :temperature, :content, :latitude, :longitude, images: [])
   end
 
   def set_diary

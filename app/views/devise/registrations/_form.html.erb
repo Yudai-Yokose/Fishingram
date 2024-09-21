@@ -9,17 +9,7 @@
         </a>
         
         <!-- Validation error messages -->
-        <% if resource.errors.any? %>
-          <div class="flash-message-container">
-            <div id="error_explanation" class="flash-message text-gray-500 dark:text-gray-400 text-base notice" data-controller="flash">
-              <ul>
-                <% resource.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        <% end %>
+        <%= render 'devise/shared/error_messages' %>
 
         <!-- Form -->
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }, html: { id: "new_user", class: "space-y-4 md:space-y-6" }) do |f| %>
