@@ -105,16 +105,11 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
   z-index: 1000;
   pointer-events: none;
 }
 
 .flash-message {
-  border: 1px solid #2563eb;
-  background-color: #111827;
-  padding: 10px 20px;
-  border-radius: 0.3rem;
   animation: slideDown 0.5s ease-out forwards;
   pointer-events: auto;
 }

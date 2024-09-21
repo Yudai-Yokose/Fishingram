@@ -69,6 +69,7 @@ ja:
           range_prompt: "Range"
           size_prompt: "Size"
           memo: "Memo"
+          map: "位置情報を登録"
         create:
           success: "釣果を記録しました"
           failure: "釣果を記録できません"
@@ -76,6 +77,7 @@ ja:
           title: "釣果編集"
           submit: "釣果を更新する"
           back: "釣果詳細に戻る"
+          map: "位置情報を変更"
         update:
           success: "釣果を更新しました"
           failure: "釣果を更新できません"
@@ -102,6 +104,7 @@ ja:
           time_of_day_prompt: "時間帯"
           temperature_prompt: "気温"
           content: "Memo"
+          map: "位置情報を登録"
         create:
           success: "日記を作成しました"
           failure: "日記を作成できません"
@@ -109,6 +112,7 @@ ja:
           title: "日記編集"
           submit: "日記を更新する"
           back: "日記詳細に戻る"
+          map: "位置情報を変更"
         update:
           success: "日記を更新しました"
           failure: "日記を更新できません"
