@@ -4,11 +4,26 @@
 
 import { application } from "./application"
 
+import CatcheditmodalController from "./catcheditmodal_controller"
+application.register("catcheditmodal", CatcheditmodalController)
+
+import CatchnewmapController from "./catchnewmap_controller"
+application.register("catchnewmap", CatchnewmapController)
+
+import CatchshowmapController from "./catchshowmap_controller"
+application.register("catchshowmap", CatchshowmapController)
+
+import CatchtogglemapController from "./catchtogglemap_controller"
+application.register("catchtogglemap", CatchtogglemapController)
+
 import CommentmodalController from "./commentmodal_controller"
 application.register("commentmodal", CommentmodalController)
 
 import DateController from "./date_controller"
 application.register("date", DateController)
+
+import DiaryeditmodalController from "./diaryeditmodal_controller"
+application.register("diaryeditmodal", DiaryeditmodalController)
 
 import DiarynewmapController from "./diarynewmap_controller"
 application.register("diarynewmap", DiarynewmapController)
@@ -18,9 +33,6 @@ application.register("diaryshowmap", DiaryshowmapController)
 
 import DiarytogglemapController from "./diarytogglemap_controller"
 application.register("diarytogglemap", DiarytogglemapController)
-
-import EditmodalController from "./editmodal_controller"
-application.register("editmodal", EditmodalController)
 
 import FileUploadController from "./file_upload_controller"
 application.register("file-upload", FileUploadController)
@@ -37,14 +49,5 @@ application.register("intro", IntroController)
 import LikeController from "./like_controller"
 application.register("like", LikeController)
 
-import CatchnewmapController from "./catchnewmap_controller"
-application.register("catchnewmap", CatchnewmapController)
-
 import RecordController from "./record_controller"
 application.register("record", RecordController)
-
-import CatchshowmapController from "./catchshowmap_controller"
-application.register("catchshowmap", CatchshowmapController)
-
-import CatchtogglemapController from "./catchtogglemap_controller";
-application.register("catchtogglemap", CatchtogglemapController);

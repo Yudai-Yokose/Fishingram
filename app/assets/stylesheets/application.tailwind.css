@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,6 +11,7 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   min-height: 100vh; 
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 /*=================================== Top page setting ==========================================*/

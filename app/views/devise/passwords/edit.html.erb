@@ -1,34 +1,38 @@
-<div class="p-6 md:p-8 bg-gray-50 dark:bg-gray-900">
-  <h3 class="text-xl font-semibold text-gray-900 dark:text-white flex items-center">
-    <%= image_tag "/icon.svg", class: "h-8", alt: "Fishingram Logo" %>
-    <span class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-      <%= t('.change_your_password') %>
-    </span>
-  </h3>
+<section class="bg-gray-50 dark:bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-3 mx-auto">
+    <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "mt-4 space-y-4 lg:mt-5 md:space-y-5" }) do |f| %>
-    <%= render "devise/shared/error_messages", resource: resource %>
-    <%= f.hidden_field :reset_password_token %>
+        <!-- Validation error messages -->
+        <%= render "devise/shared/error_messages", resource: resource %>
 
-    <!-- New Password Field -->
-    <div class="relative z-0 w-full mb-5 group">
-      <%= f.password_field :password, placeholder: t('.new_password'), autocomplete: "new-password", class: "block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: " " %>
-      <label for="user_password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-        <%= t('.new_password') %>
-      </label>
+        <!-- Title -->
+        <a href="#" class="flex items-center justify-center mb-6 text-lg text-gray-900 dark:text-white">
+          <%= image_tag "/2.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
+          <%= t('.change_your_password') %>
+        </a>
+
+        <!-- Form -->
+        <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "space-y-4 md:space-y-6" }) do |f| %>
+          <%= f.hidden_field :reset_password_token %>
+
+          <!-- New Password Field -->
+          <div>
+            <%= f.password_field :password, placeholder: t('.new_password'), autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+
+          <!-- Confirm New Password Field -->
+          <div>
+            <%= f.password_field :password_confirmation, placeholder: t('.confirm_new_password'), autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="flex justify-center w-full">
+            <%= f.submit t('.change_my_password'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base text-center py-2.5 px-5 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
+          </div>
+        <% end %>
+
+      </div>
     </div>
-
-    <!-- Confirm New Password Field -->
-    <div class="relative z-0 w-full mb-5 group">
-      <%= f.password_field :password_confirmation, placeholder: t('.confirm_new_password'), autocomplete: "new-password", class: "block py-2.5 px-0 w-full text-base text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer", placeholder: " " %>
-      <label for="user_password_confirmation" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-        <%= t('.confirm_new_password') %>
-      </label>
-    </div>
-
-    <!-- Submit Button -->
-    <div class="flex justify-center w-full">
-      <%= f.submit t('.change_my_password'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
-    </div>
-  <% end %>
-</div>
+  </div>
+</section>

@@ -7,7 +7,7 @@ class DiariesController < ApplicationController
     @diary = current_user ? current_user.diaries.build : Diary.new
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("new_diary_form", partial: "diaries/form", locals: { diary: @diary })
+        render turbo_stream: turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: @diary })
       }
       format.html
     end
@@ -20,8 +20,8 @@ class DiariesController < ApplicationController
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.diary.create.success")
           render turbo_stream: [
-            turbo_stream.prepend("diaries", partial: "diaries/diary_list", locals: { diary: @diary }),
-            turbo_stream.replace("new_diary_form", partial: "diaries/form", locals: { diary: Diary.new }),
+            turbo_stream.prepend("indexes", partial: "diaries/index_content", locals: { diary: @diary }),
+            turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: Diary.new }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -32,7 +32,7 @@ class DiariesController < ApplicationController
         format.turbo_stream {
           flash.now[:alert] = I18n.t("activerecord.attributes.diary.create.failure")
           render turbo_stream: [
-            turbo_stream.replace("new_diary_form_frame", partial: "diaries/form", locals: { diary: @diary }),
+            turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: @diary }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -45,7 +45,7 @@ class DiariesController < ApplicationController
     @diaries = current_user.diaries.includes(images_attachments: :blob).order(diary_date: :desc).page(params[:page]).per(5)
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.append("diaries_pagination", partial: "diaries/diary")
+        render turbo_stream: turbo_stream.append("index_pagination", partial: "diaries/index")
       end
       format.html
     end
@@ -63,7 +63,7 @@ class DiariesController < ApplicationController
   def edit
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("edit_diary_form", partial: "diaries/form", locals: { diary: @diary })
+        render turbo_stream: turbo_stream.replace("diary_#{@diary.id}_form", partial: "diaries/edit", locals: { diary: @diary })
       }
       format.html
     end
@@ -76,9 +76,9 @@ class DiariesController < ApplicationController
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.diary.update.success")
           render turbo_stream: [
-            turbo_stream.replace("diary_#{@diary.id}_details", partial: "diaries/details", locals: { diary: @diary }),
-            turbo_stream.replace("diary_#{@diary.id}_images", partial: "diaries/images", locals: { diary: @diary }),
-            turbo_stream.replace("diary_#{@diary.id}_top_image", partial: "diaries/top_image", locals: { diary: @diary }),
+            turbo_stream.replace("show_#{@diary.id}_details", partial: "diaries/show_details", locals: { diary: @diary }),
+            turbo_stream.replace("show_#{@diary.id}_images", partial: "diaries/show_images", locals: { diary: @diary }),
+            turbo_stream.replace("index_#{@diary.id}_image", partial: "diaries/index_image", locals: { diary: @diary }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -89,7 +89,7 @@ class DiariesController < ApplicationController
         format.turbo_stream {
           flash.now[:alert] = I18n.t("activerecord.attributes.diary.update.failure")
           render turbo_stream: [
-            turbo_stream.replace("edit_diary_form", partial: "dairy/form", locals: { diary: @diary }),
+            turbo_stream.replace("diary_#{@diary.id}_form", partial: "dairy/edit", locals: { diary: @diary }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -104,7 +104,7 @@ class DiariesController < ApplicationController
       format.turbo_stream {
         flash.now[:notice] = I18n.t("activerecord.attributes.diary.destroy.success")
         render turbo_stream: [
-          turbo_stream.remove("destroy_diary_#{@diary.id}"),
+          turbo_stream.remove("diary_#{@diary.id}"),
           turbo_stream.update("flash", partial: "shared/flash")
         ]
       }

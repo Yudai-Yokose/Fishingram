@@ -1,9 +1,0 @@
-<% @catches.each do |catch| %>
-  <%= turbo_frame_tag "destroy_catch_#{catch.id}" do %>
-    <%= render partial: "catch_list", locals: { catch: catch } %>
-  <% end %>
-<% end %>
-
-<% if @catches.next_page %>
-  <%= turbo_frame_tag "catches_pagination", loading: :lazy, src: catches_path(format: :turbo_stream, page: @catches.next_page) %>
-<% end %>

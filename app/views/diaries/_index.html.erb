@@ -1,0 +1,9 @@
+<% @diaries.each do |diary| %>
+  <%= turbo_frame_tag "diary_#{diary.id}" do %>
+    <%= render partial: "index_content", locals: { diary: diary } %>
+  <% end %>
+<% end %>
+
+<% if @diaries.next_page %>
+  <%= turbo_frame_tag "index_pagination", loading: :lazy, src: diaries_path(format: :turbo_stream, page: @diaries.next_page) %>
+<% end %>
