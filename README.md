@@ -1,4 +1,4 @@
-[![Image from Gyazo](https://i.gyazo.com/9fc34a8813b479f9ed5ec89a0906c7c8.jpg)](https://gyazo.com/9fc34a8813b479f9ed5ec89a0906c7c8)
+![Fishingram Banner](public/banner.png)
 
 ## サービス名
 ### Fishingram

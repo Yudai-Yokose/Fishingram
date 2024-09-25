@@ -1,9 +1,0 @@
-<% @diaries.each do |diary| %>
-  <%= turbo_frame_tag "destroy_diary_#{diary.id}" do %>
-    <%= render partial: "diary_list", locals: { diary: diary } %>
-  <% end %>
-<% end %>
-
-<% if @diaries.next_page %>
-  <%= turbo_frame_tag "diaries_pagination", loading: :lazy, src: diaries_path(format: :turbo_stream, page: @diaries.next_page) %>
-<% end %>

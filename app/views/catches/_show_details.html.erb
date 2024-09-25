@@ -1,0 +1,179 @@
+<div class="px-4 pt-4 text-base truncate text-gray-400">
+  <!-- Details -->
+  <div class="grid grid-cols-2 gap-2">
+    <div class="flex flex-col">
+      <label class="text-xs text-gray-400 mb-0">
+        <%= t('activerecord.attributes.catch.show.tide') %>
+      </label>
+      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
+        <%= catch.tide %>
+      </p>
+    </div>
+    <div class="flex flex-col">
+      <label class="text-xs text-gray-400 mb-0">
+        <%= t('activerecord.attributes.catch.show.tide_level') %>
+      </label>
+      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
+        <%= catch.tide_level %>
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-2 gap-2 mt-1">
+    <div class="flex flex-col">
+      <label class="text-xs text-gray-400 mb-0">
+        <%= t('activerecord.attributes.catch.show.range') %>
+      </label>
+      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
+        <%= catch.range %>
+      </p>
+    </div>
+    <div class="flex flex-col">
+      <label class="text-xs text-gray-400 mb-0">
+        <%= t('activerecord.attributes.catch.show.size') %>
+      </label>
+      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
+        <%= catch.size %>
+      </p>
+    </div>
+  </div>
+
+  <% if catch.memo.present? %>
+    <div class="flex flex-col mt-1">
+      <label class="text-xs text-gray-400 mb-0">
+        <%= t('activerecord.attributes.catch.show.memo') %>
+      </label>
+      <p class="w-full p-2 pl-3 text-left break-words border border-gray-800 rounded-lg whitespace-normal mt-0">
+        <%= catch.memo %>
+      </p>
+    </div>
+  <% end %>
+
+  <% if catch.latitude.present? && catch.longitude.present? %>
+    <div class="flex flex-col mt-1">
+      <label class="text-xs text-gray-400 mb-0">
+        <%= t('activerecord.attributes.catch.show.map') %>
+      </label>
+      <div class="w-full p-0.5 pl-0.5 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0" 
+          data-controller="catchshowmap" 
+          data-catchshowmap-latitude-value="<%= catch.latitude %>" 
+          data-catchshowmap-longitude-value="<%= catch.longitude %>" 
+          data-catchshowmap-map-id-value="<%= Rails.application.credentials.google[:maps_id] %>" 
+          data-catchshowmap-api-key-value="<%= Rails.application.credentials.google[:maps_api_key] %>" 
+          data-catchshowmap-catch-id-value="<%= catch.id %>">
+        <div id="map_<%= catch.id %>" class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0" style="width: 100%; height: 200px;"></div>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Bottom menu -->
+  <div class="flex justify-between items-end mt-2">
+    <div class="flex space-x-3">
+      <% if user_signed_in? %>
+        <div class="inline-block">
+          <button data-modal-target="commentmodal_<%= catch.id %>" 
+                  data-modal-toggle="commentmodal_<%= catch.id %>" 
+                  data-action="click->hello#stopToggle" 
+                  type="button">
+            <svg class="w-7 h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7.556 8.5h8m-8 3.5H12m7.111-7H4.89a.896.896 0 0 0-.629.256.868.868 0 0 0-.26.619v9.25c0 .232.094.455.26.619A.896.896 0 0 0 4.89 16H9l3 4 3-4h4.111a.896.896 0 0 0 .629-.256.868.868 0 0 0 .26-.619v-9.25a.868.868 0 0 0-.26-.619.896.896 0 0 0-.63-.256Z"/>
+            </svg>
+          </button>
+        </div>
+      <% end %>
+
+      <% if current_user == @catch.user %>
+        <div class="inline-block">
+          <button data-modal-target="catcheditmodal_<%= catch.id %>" 
+                  data-modal-toggle="catcheditmodal_<%= catch.id %>" 
+                  data-action="click->hello#stopToggle" 
+                  type="button">
+            <svg class="w-7 h-7 align-middle block" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+            </svg>
+          </button>
+        </div>
+        <%= turbo_frame_tag "catch_#{catch.id}" do %>
+          <%= link_to catch, data: { turbo_confirm: t('activerecord.attributes.catch.show.confirm'), turbo_method: :delete }, class: 'inline-block' do %>
+            <svg class="w-7 h-7 align-middle block" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+            </svg>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%= turbo_frame_tag "like_button_#{catch.id}" do %>
+      <%= render partial: 'likes/like_button', locals: { catch: catch } %>
+    <% end %>
+  </div>
+
+  <!-- Comment -->
+  <div class="flow-root">
+    <%= turbo_frame_tag "comments_#{catch.id}" do %>
+      <% @catch.comments.each do |comment| %>
+        <%= render partial: "comments/comment", locals: { comment: comment } %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<!-- catcheditmodal -->
+<% if current_user == @catch.user %>
+  <div id="catcheditmodal_<%= catch.id %>" 
+       data-catcheditmodal-catch-id-value="<%= catch.id %>" 
+       data-catcheditmodal-target="catcheditmodal" 
+       data-controller="catcheditmodal" 
+       data-action="click->hello#stopToggle" 
+       tabindex="-1" 
+       aria-hidden="true" 
+       class="hidden fixed inset-0 z-50 flex justify-center items-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-70">
+    <div class="relative p-4 w-full max-w-sm min-h-[60vh] max-h-full">
+      <div class="border border-gray-700 rounded-lg shadow bg-gray-900">
+        <div class="relative rounded-t text-center">
+          <button type="button" 
+                  class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-600 hover:text-white rounded-lg w-8 h-8 inline-flex justify-center items-center" 
+                  data-modal-hide="catcheditmodal_<%= catch.id %>">
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <div class="py-1 px-1">
+          <%= turbo_frame_tag "catch_#{catch.id}_form", src: edit_catch_path(catch, format: :turbo_stream), data: { turbo_action: "replace" }, loading: "lazy" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<!-- commentmodal -->
+<% if user_signed_in? %>
+  <div id="commentmodal_<%= catch.id %>" 
+       data-commentmodal-catch-id-value="<%= catch.id %>" 
+       data-commentmodal-target="commentmodal" 
+       data-controller="commentmodal" 
+       data-action="click->hello#stopToggle" 
+       tabindex="-1" 
+       aria-hidden="true" 
+       class="hidden fixed inset-0 z-50 flex justify-center items-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-70">
+    <div class="relative p-4 w-full max-w-sm min-h-[60vh] max-h-full">
+      <div class="border border-gray-700 rounded-lg shadow bg-gray-900">
+        <div class="relative rounded-t text-center">
+          <button type="button" 
+                  class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-600 hover:text-white rounded-lg w-8 h-8 inline-flex justify-center items-center" 
+                  data-modal-hide="commentmodal_<%= catch.id %>">
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <div class="py-1 px-1">
+          <%= turbo_frame_tag "comment_form_#{catch.id}", src: new_catch_comment_path(catch, format: :turbo_stream), data: { turbo_action: "replace" }, loading: "lazy" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
 <div id="comment_<%= comment.id %>" class="pt-1">
   <% if comment.user == @catch.user %>
     <div class="chat chat-end" style="max-width: 100%; word-wrap: break-word; word-break: break-word;">
-      <div class="chat-header text-sm text-gray-400">
+      <div class="chat-header text-xs text-gray-400">
         <%= comment.user.username %>
       </div>
       <div class="chat-bubble text-base text-gray-400 dark:bg-gray-800" style="max-width: 100%; white-space: normal;">
@@ -15,7 +15,7 @@
     </div>
   <% else %>
     <div class="chat chat-start" style="max-width: 100%; word-wrap: break-word; word-break: break-word;">
-      <div class="chat-header text-sm text-gray-400"">
+      <div class="chat-header text-xs text-gray-400"">
         <%= comment.user.username %>
       </div>
       <div class="chat-bubble text-base text-gray-400 dark:bg-gray-800" style="max-width: 100%; white-space: normal;">

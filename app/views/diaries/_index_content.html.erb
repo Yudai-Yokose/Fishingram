@@ -1,15 +1,15 @@
-<li class="py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
+<li class="py-3 border-b border-gray-700">
   <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
     <div class="flex items-center">
       <!-- Image -->
-      <div id="diary_<%= diary.id %>_top_image">
+      <%= turbo_frame_tag "index_#{diary.id}_image" do %>
         <div class="flex -space-x-4 rtl:space-x-reverse">
-          <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] border-2 border-white rounded-full dark:border-gray-800", alt: "#{diary.user.username} profile image" %>
+          <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] border-2 rounded-full border-gray-800", alt: "#{diary.user.username} profile image" %>
           <% if diary.images.any? %>
-            <%= image_tag diary.images.first, class: "w-[42px] h-[42px] border-2 border-white rounded-full dark:border-gray-800", alt: "Diary image" %>
+            <%= image_tag diary.images.first, class: "w-[42px] h-[42px] border-2 rounded-full border-gray-800", alt: "Diary image" %>
           <% end %>
         </div>
-      </div>
+      <% end %>
       <!-- User info -->
       <div class="flex-1 min-w-0 ms-2">
         <p class="text-base text-gray-900 truncate dark:text-gray-400">

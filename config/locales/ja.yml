@@ -46,6 +46,9 @@ ja:
         password_confirmation: "パスワード(確認用)"
         password_requirements: "英数4字以上"
         profile_image: "プロフィール画像"
+      home:
+        terms:
+          title: "利用規約"
       catch:
         index:
           all: "All Catches"
@@ -55,14 +58,16 @@ ja:
           edit: "編集"
           delete: "削除"
           confirm: "本当に削除しますか？"
-          tide: "潮名: "
-          tide_level: "潮位: "
-          range: "Range: "
-          size:  "Size: "
+          tide: "潮名"
+          tide_level: "潮位"
+          range: "Range"
+          size:  "Size"
+          memo: "Memo"
+          map: "位置情報"
         new:
           title: "釣果を記録"
           submit: "釣果を記録する"
-          upload_prompt: "画像を添付"
+          upload_prompt: "ファイル選択"
           upload_placeholder: "未選択"
           tide_prompt: "潮名"
           tide_level_prompt: "潮位"
@@ -94,10 +99,16 @@ ja:
           edit: "編集"
           delete: "削除"
           confirm: "本当に削除しますか？"
+          weather: "天気"
+          catch_count: "釣果数"
+          time_of_day: "時間帯"
+          temperature: "気温"
+          content: "Memo"
+          map: "位置情報"
         new:
           title: "日記を作成"
           submit: "日記を作成する"
-          upload_prompt: "画像を添付"
+          upload_prompt: "ファイル選択"
           upload_placeholder: "未選択"
           weather_prompt: "天気"
           catch_count_prompt: "釣果数"
@@ -123,5 +134,5 @@ ja:
         correct_user: "権限がありません"
       comment:
         new:
-          title: "コメントする"
-          submit: "コメント"
+          title: "Comment"
+          submit: "コメントする"

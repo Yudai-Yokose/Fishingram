@@ -1,8 +1,0 @@
-<%= turbo_frame_tag "catch_#{catch.id}_top_image" do %>
-  <div class="flex -space-x-4 rtl:space-x-reverse">
-    <%= image_tag catch.user.profile_image, class: "w-10 h-10 border-2 border-white rounded-full dark:border-gray-800", alt: "#{catch.user.username} profile image" %>
-    <% if catch.images.any? %>
-      <%= image_tag catch.images.first, class: "w-10 h-10 border-2 border-white rounded-full dark:border-gray-800", alt: "Catch image" %>
-    <% end %>
-  </div>
-<% end %>
