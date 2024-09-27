@@ -5,5 +5,5 @@
 <% end %>
 
 <% if @diaries.next_page %>
-  <%= turbo_frame_tag "index_pagination", loading: :lazy, src: diaries_path(format: :turbo_stream, page: @diaries.next_page) %>
+  <%= turbo_frame_tag "diary_index_pagination", loading: :lazy, src: diaries_path(format: :turbo_stream, page: @diaries.next_page) %>
 <% end %>

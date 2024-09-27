@@ -3,12 +3,12 @@
     <div class="w-full rounded-lg border md:mt-0 sm:max-w-md bg-gray-900 border-gray-700">
       <div class="p-6 space-y-3 md:space-y-6 sm:p-8">
         <!-- title -->
-        <span class="text-2xl font-extrabold tracking-tight">All</span>
+        <span class="text-2xl font-extrabold tracking-tight">Your</span>
         <span class="ms-1 text-base font-normal text-gray-400">diaries</span>
         <!-- list of catches -->
         <div class="flow-root">
             <ul role="list">
-              <%= turbo_frame_tag "indexes" do %>
+              <%= turbo_frame_tag "diary_index" do %>
                 <%= render 'index' %>
               <% end %>
             </ul>

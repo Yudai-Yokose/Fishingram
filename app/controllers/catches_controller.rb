@@ -20,8 +20,8 @@ class CatchesController < ApplicationController
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.catch.create.success")
           render turbo_stream: [
-            turbo_stream.prepend("indexes", partial: "catches/index_content", locals: { catch: @catch }),
-            turbo_stream.prepend("indexes_user", partial: "catches/index_content", locals: { catch: @catch }),
+            turbo_stream.prepend("catch_index", partial: "catches/index_content", locals: { catch: @catch }),
+            turbo_stream.prepend("catch_index_user", partial: "catches/index_content", locals: { catch: @catch }),
             turbo_stream.replace("new_catch_form", partial: "catches/new", locals: { catch: Catch.new }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
@@ -46,7 +46,7 @@ class CatchesController < ApplicationController
     @catches = Catch.includes(:user, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(5)
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.append("index_pagination", partial: "catches/index")
+        render turbo_stream: turbo_stream.append("catch_index_pagination", partial: "catches/index")
       end
       format.html
     end
@@ -56,7 +56,7 @@ class CatchesController < ApplicationController
     @catches = current_user.catches.includes(:user, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(5)
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.append("index_user_pagination", partial: "catches/index_user")
+        render turbo_stream: turbo_stream.append("catch_index_user_pagination", partial: "catches/index_user")
       end
       format.html
     end
@@ -65,7 +65,7 @@ class CatchesController < ApplicationController
   def show
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("index_#{@catch.id}_show", partial: "catches/show", locals: { catch: @catch })
+        render turbo_stream: turbo_stream.replace("catch_index_#{@catch.id}_show", partial: "catches/show", locals: { catch: @catch })
       }
       format.html
     end
@@ -74,7 +74,7 @@ class CatchesController < ApplicationController
   def edit
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("catch_#{@catch.id}_form", partial: "catches/edit", locals: { catch: @catch })
+        render turbo_stream: turbo_stream.replace("edit_catch_#{@catch.id}_form", partial: "catches/edit", locals: { catch: @catch })
       }
       format.html
     end
@@ -87,9 +87,9 @@ class CatchesController < ApplicationController
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.catch.update.success")
           render turbo_stream: [
-            turbo_stream.replace("show_#{@catch.id}_details", partial: "catches/show_details", locals: { catch: @catch }),
-            turbo_stream.replace("show_#{@catch.id}_images", partial: "catches/show_images", locals: { catch: @catch }),
-            turbo_stream.replace("index_#{@catch.id}_image", partial: "catches/index_image", locals: { catch: @catch }),
+            turbo_stream.update("catch_show_#{@catch.id}_details", partial: "catches/show_details", locals: { catch: @catch }),
+            turbo_stream.update("catch_show_#{@catch.id}_images", partial: "catches/show_images", locals: { catch: @catch }),
+            turbo_stream.update("catch_index_#{@catch.id}_image", partial: "catches/index_image", locals: { catch: @catch }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -100,7 +100,7 @@ class CatchesController < ApplicationController
         format.turbo_stream {
           flash.now[:alert] = I18n.t("activerecord.attributes.catch.update.failure")
           render turbo_stream: [
-            turbo_stream.replace("catch_#{@catch.id}_form", partial: "catches/edit", locals: { catch: @catch }),
+            turbo_stream.replace("edit_catch_#{@catch.id}_form", partial: "catches/edit", locals: { catch: @catch }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -131,9 +131,8 @@ class CatchesController < ApplicationController
       format.turbo_stream {
         flash.now[:notice] = I18n.t("activerecord.attributes.catch.purge_image.success")
         render turbo_stream: [
-          turbo_stream.remove("slide_#{image_id}"),
-          turbo_stream.remove("show_#{image_id}_images"),
-          turbo_stream.remove("carousel_link_#{image_id}"),
+          turbo_stream.remove("catch_slide_#{image_id}"),
+          turbo_stream.remove("catch_carousel_link_#{image_id}"),
           turbo_stream.update("flash", partial: "shared/flash")
         ]
       }
