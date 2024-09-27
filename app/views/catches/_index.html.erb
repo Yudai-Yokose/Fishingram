@@ -5,5 +5,5 @@
 <% end %>
 
 <% if @catches.next_page %>
-  <%= turbo_frame_tag "index_pagination", loading: :lazy, src: catches_path(format: :turbo_stream, page: @catches.next_page) %>
+  <%= turbo_frame_tag "catch_index_pagination", loading: :lazy, src: catches_path(format: :turbo_stream, page: @catches.next_page) %>
 <% end %>

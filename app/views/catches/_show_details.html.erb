@@ -50,7 +50,7 @@
   <% end %>
 
   <% if catch.latitude.present? && catch.longitude.present? %>
-    <div class="flex flex-col mt-1">
+    <div class="flex flex-col mt-2">
       <label class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.catch.show.map') %>
       </label>
@@ -109,13 +109,13 @@
   </div>
 
   <!-- Comment -->
-  <div class="flow-root">
-    <%= turbo_frame_tag "comments_#{catch.id}" do %>
-      <% @catch.comments.each do |comment| %>
-        <%= render partial: "comments/comment", locals: { comment: comment } %>
+    <div class="flow-root">
+      <%= turbo_frame_tag "catch_#{catch.id}_comments" do %>
+        <% @catch.comments.each do |comment| %>
+          <%= render partial: "comments/comment", locals: { catch: catch, comment: comment } %>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
 </div>
 
 <!-- catcheditmodal -->
@@ -141,7 +141,7 @@
           </button>
         </div>
         <div class="py-1 px-1">
-          <%= turbo_frame_tag "catch_#{catch.id}_form", src: edit_catch_path(catch, format: :turbo_stream), data: { turbo_action: "replace" }, loading: "lazy" %>
+          <%= turbo_frame_tag "edit_catch_#{catch.id}_form", src: edit_catch_path(catch, format: :turbo_stream), data: { turbo_action: "replace" }, loading: "lazy" %>
         </div>
       </div>
     </div>
@@ -171,7 +171,7 @@
           </button>
         </div>
         <div class="py-1 px-1">
-          <%= turbo_frame_tag "comment_form_#{catch.id}", src: new_catch_comment_path(catch, format: :turbo_stream), data: { turbo_action: "replace" }, loading: "lazy" %>
+          <%= turbo_frame_tag "new_comment_#{catch.id}_form", src: new_catch_comment_path(catch, format: :turbo_stream), data: { turbo_action: "advance" }, loading: "lazy" %>
         </div>
       </div>
     </div>

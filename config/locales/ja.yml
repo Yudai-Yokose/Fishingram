@@ -136,3 +136,17 @@ ja:
         new:
           title: "Comment"
           submit: "コメントする"
+        create:
+          success: "コメントしました"
+          failure: "コメントに失敗しました"
+        edit:
+          title: "Comment"
+          submit: "編集する"
+          edit: "編集"
+          delete: "削除"
+        update:
+          success: "コメントを編集しました"
+          failure: "コメント編集に失敗しました"
+        destroy:
+           success: "コメントを削除しました"
+           failure: "コメント削除に失敗しました"         

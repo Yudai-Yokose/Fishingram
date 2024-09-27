@@ -34,6 +34,9 @@ application.register("diaryshowmap", DiaryshowmapController)
 import DiarytogglemapController from "./diarytogglemap_controller"
 application.register("diarytogglemap", DiarytogglemapController)
 
+import EditcommentmodalController from "./editcommentmodal_controller"
+application.register("editcommentmodal", EditcommentmodalController)
+
 import FileUploadController from "./file_upload_controller"
 application.register("file-upload", FileUploadController)
 

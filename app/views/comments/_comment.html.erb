@@ -1,31 +1,63 @@
-<div id="comment_<%= comment.id %>" class="pt-1">
-  <% if comment.user == @catch.user %>
-    <div class="chat chat-end" style="max-width: 100%; word-wrap: break-word; word-break: break-word;">
-      <div class="chat-header text-xs text-gray-400">
-        <%= comment.user.username %>
+<div id="comment_<%= comment.id %>" class="py-3 flex items-start gap-2.5">
+  <div class="relative">
+    <img class="w-10 h-8 rounded-full object-cover" src="<%= comment.user.profile_image.url %>" alt="<%= comment.user.username %> image">
+    <% if comment.user == current_user %>
+      <button id="dropdownMenuIconButton_<%= comment.id %>" data-dropdown-toggle="dropdownDots_<%= comment.id %>" data-dropdown-placement="bottom-start" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 inline-flex items-center text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600" type="button">
+        <svg class="w-6 h-6 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+          <path stroke="currentColor" stroke-linecap="round" stroke-width="3" d="M6 12h.01m6 0h.01m5.99 0h.01"/>
+        </svg>
+      </button>
+      <div id="dropdownDots_<%= comment.id %>" class="absolute z-10 hidden rounded-lg shadow w-40 dark:bg-gray-900 border border-gray-800 top-14 left-1/2 transform -translate-x-1/2">
+        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton_<%= comment.id %>">
+          <li class="w-full block">
+            <button class="block w-full px-4 py-2 text-gray-400 text-left" data-modal-target="editcommentmodal_<%= comment.id %>" data-modal-toggle="editcommentmodal_<%= comment.id %>" data-action="click->hello#stopToggle" type="button">
+              <%= t('activerecord.attributes.comment.edit.edit') %>
+            </button>
+          </li>
+          <li class="w-full block">
+            <%= button_to t('activerecord.attributes.comment.edit.delete'), catch_comment_path(comment.catch, comment), method: :delete, data: { turbo_method: :delete }, class: 'block w-full px-4 py-2 text-left text-red-500' %>
+          </li>
+        </ul>
       </div>
-      <div class="chat-bubble text-base text-gray-400 dark:bg-gray-800" style="max-width: 100%; white-space: normal;">
-        <%= comment.content %>
-      </div>
-      <div class="chat-footer opacity-50">
-        <% if comment.user == current_user %>
-          <%= button_to 'Delete', catch_comment_path(comment.catch, comment), method: :delete, data: { turbo_method: :delete }, class: 'text-red-500 text-xs' %>
-        <% end %>
-      </div>
+    <% end %>
+  </div>
+  <div class="flex flex-col gap-1 w-full max-w-[320px]">
+    <div class="flex items-center space-x-2 rtl:space-x-reverse">
+      <span class="text-xs text-gray-400"><%= comment.user.username %></span>
+      <span class="text-xs text-gray-400"><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime("%-m月%-d日 %-H時%-M分") %></span>
     </div>
-  <% else %>
-    <div class="chat chat-start" style="max-width: 100%; word-wrap: break-word; word-break: break-word;">
-      <div class="chat-header text-xs text-gray-400"">
-        <%= comment.user.username %>
-      </div>
-      <div class="chat-bubble text-base text-gray-400 dark:bg-gray-800" style="max-width: 100%; white-space: normal;">
-        <%= comment.content %>
-      </div>
+    <div class="flex flex-col leading-1.5 p-2 pl-3 border border-gray-800 rounded-e-lg rounded-es-lg dark:bg-gray-900">
+      <p class="text-sm text-gray-400" style="white-space: normal;"><%= comment.content %></p>
     </div>
-    <div class="chat-footer opacity-50">
-      <% if comment.user == current_user %>
-        <%= button_to 'Delete', catch_comment_path(comment.catch, comment), method: :delete, data: { turbo_method: :delete }, class: 'text-red-500 text-xs' %>
-      <% end %>
-    </div>
-  <% end %>
+  </div>
 </div>
+
+<!-- editcommentmodal -->
+<% if comment.user == current_user %>
+  <div id="editcommentmodal_<%= comment.id %>" 
+       data-editcommentmodal-comment-id-value="<%= comment.id %>" 
+       data-editcommentmodal-target="editcommentmodal" 
+       data-controller="editcommentmodal" 
+       data-action="click->hello#stopToggle" 
+       tabindex="-1" 
+       aria-hidden="true" 
+       class="hidden fixed inset-0 z-50 flex justify-center items-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-70">
+    <div class="relative p-4 w-full max-w-sm min-h-[60vh] max-h-full">
+      <div class="border border-gray-700 rounded-lg shadow bg-gray-900">
+        <div class="relative rounded-t text-center">
+          <button type="button" 
+                  class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-600 hover:text-white rounded-lg w-8 h-8 inline-flex justify-center items-center" 
+                  data-modal-hide="editcommentmodal_<%= comment.id %>">
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <div class="py-1 px-1">
+          <%= turbo_frame_tag "edit_comment_#{comment.id}_form", src: edit_catch_comment_path(catch, comment, format: :turbo_stream), data: { turbo_action: "replace" }, loading: "lazy" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

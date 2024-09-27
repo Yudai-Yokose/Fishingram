@@ -1,9 +1,9 @@
 <div class="max-w-sm border rounded-lg shadow bg-gray-900 border-gray-800" data-action="click->hello#stopToggle">
-    <%= turbo_frame_tag "show_#{diary.id}_images" do %>
+    <%= turbo_frame_tag "diary_show_#{diary.id}_images" do %>
         <%= render 'show_images', diary: diary %>
     <% end %>
 
-    <%= turbo_frame_tag "show_#{diary.id}_details" do %>
+    <%= turbo_frame_tag "diary_show_#{diary.id}_details" do %>
         <%= render 'show_details', diary: diary %>
     <% end %>
 </div>
