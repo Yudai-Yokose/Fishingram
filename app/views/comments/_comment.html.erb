@@ -1,6 +1,6 @@
 <div id="comment_<%= comment.id %>" class="py-3 flex items-start gap-2.5">
   <div class="relative">
-    <img class="w-10 h-8 rounded-full object-cover" src="<%= comment.user.profile_image.url %>" alt="<%= comment.user.username %> image">
+    <%= image_tag comment.user.profile_image, class: "w-10 h-8 rounded-full object-cover", alt: "#{comment.user.username} profile image" %>
     <% if comment.user == current_user %>
       <button id="dropdownMenuIconButton_<%= comment.id %>" data-dropdown-toggle="dropdownDots_<%= comment.id %>" data-dropdown-placement="bottom-start" class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 inline-flex items-center text-sm font-medium text-center text-gray-900 bg-white rounded-lg focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600" type="button">
         <svg class="w-6 h-6 text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
