@@ -14,7 +14,7 @@ ja:
       locked: アカウントはロックされています。
       not_found_in_database: "メールアドレスまたはパスワードが違います。"
       timeout: セッションがタイムアウトしました。もう一度ログインしてください。
-      unauthenticated: ログインまたはユーザー登録してください。
+      unauthenticated: "ログインかユーザー登録してください。"
       unconfirmed: メールアドレスの本人確認が必要です。
     mailer:
       confirmation_instructions:
@@ -91,7 +91,6 @@ ja:
     sessions:
       success: ログインしました。
       already_signed_out: 既にログアウト済みです。
-      invalid: メールアドレスまたはパスワードが違います。
       form:
         sign_in: ログイン
         forgot_your_password: パスワードを忘れた場合

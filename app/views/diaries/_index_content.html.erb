@@ -4,10 +4,7 @@
       <!-- Image -->
       <%= turbo_frame_tag "diary_index_#{diary.id}_image" do %>
         <div class="flex -space-x-4 rtl:space-x-reverse">
-          <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] border-2 rounded-full border-gray-800", alt: "#{diary.user.username} profile image" %>
-          <% if diary.images.any? %>
-            <%= image_tag diary.images.first, class: "w-[42px] h-[42px] border-2 rounded-full border-gray-800", alt: "Diary image" %>
-          <% end %>
+          <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] rounded-full", alt: "#{diary.user.username} profile image" %>
         </div>
       <% end %>
       <!-- User info -->

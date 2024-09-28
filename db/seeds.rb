@@ -1,4 +1,4 @@
-user = User.find(29)
+user = User.find(32)
 
 100.times do
   Catch.create!(
