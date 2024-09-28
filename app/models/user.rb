@@ -28,7 +28,7 @@ class User < ApplicationRecord
 
   def set_default_profile_image
     unless profile_image.attached?
-      default_image_path = Rails.root.join("public/u1.png")
+      default_image_path = Rails.root.join("public/icon.png")
       profile_image.attach(io: File.open(default_image_path), filename: "profile_image.png", content_type: "image/png")
     end
   end

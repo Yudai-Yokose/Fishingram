@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "pages/contact"
   resources :diaries do
     member do
       delete :purge_image

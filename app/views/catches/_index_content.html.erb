@@ -4,10 +4,7 @@
       <!-- Image -->
       <%= turbo_frame_tag "catch_index_#{catch.id}_image" do %>
         <div class="flex -space-x-4 rtl:space-x-reverse">
-          <%= image_tag catch.user.profile_image, class: "w-[42px] h-[42px] border-2 rounded-full border-gray-800", alt: "#{catch.user.username} profile image" %>
-          <% if catch.images.any? %>
-            <%= image_tag catch.images.first, class: "w-[42px] h-[42px] border-2 rounded-full border-gray-800", alt: "Catch image" %>
-          <% end %>
+          <%= image_tag catch.user.profile_image, class: "w-[42px] h-[42px] rounded-full", alt: "#{catch.user.username} profile image" %>
         </div>
       <% end %>
       <!-- Info -->
