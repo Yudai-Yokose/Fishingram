@@ -26,18 +26,18 @@ module ApplicationHelper
       canonical: request.original_url,
       separator: "|",
       og: {
-        site_name: :site,
-        title: :title,
-        description: :description,
+        site_name: "Fishingram",
+        title: "釣り人のための釣果記録サービス",
+        description: "Fishingramは手軽に釣果や位置情報などを記録することができるツール系サービスです。",
         type: "website",
         url: request.original_url,
-        image: image_url("banner_2_bg.png"),
-        local: "ja-JP"
+        image: '/banner_2_bg.png',
+        locale: "ja-JP"
       },
       twitter: {
         card: "summary_large_image",
         site: "@",
-        image: image_url("banner_2_bg.png")
+        image: '/banner_2_bg.png'
       }
     }
   end
