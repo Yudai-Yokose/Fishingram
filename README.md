@@ -89,7 +89,7 @@
 |フロントエンド|TailwindCSS <br> Flowbite <br> Stimulus <br> Turbo|
 |バックエンド|Ruby 3.2.3 <br> Rails 7.2.1|
 |認証|Devise|
-|デプロイ|Heroc|
+|デプロイ|Heroku|
 |DB|Jawsdb <br> MySQL|
 |開発環境|Docker 4.32.0|
 |CI/CD|GitHub Actions|
