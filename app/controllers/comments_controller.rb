@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_catch
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: %i[new create]
   before_action :set_comment, only: [ :edit, :update, :destroy ]
 
   def new
@@ -12,30 +12,45 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = @catch.comments.build(comment_params)
-    @comment.user = current_user
-    if @comment.save
-      respond_to do |format|
-        format.turbo_stream do
-          flash.now[:notice] = I18n.t("activerecord.attributes.comment.create.success")
-          render turbo_stream: [
-            turbo_stream.append("catch_#{@catch.id}_comments", partial: "comments/comment", locals: { catch: @catch, comment: @comment }),
-            turbo_stream.replace("new_comment_#{@catch.id}_form", partial: "comments/new", locals: { catch: @catch, comment: Comment.new }),
-            turbo_stream.update("flash", partial: "shared/flash")
-          ]
+    if user_signed_in?
+      @comment = @catch.comments.build(comment_params)
+      @comment.user = current_user
+
+      if @comment.save
+        respond_to do |format|
+          format.turbo_stream do
+            flash.now[:notice] = I18n.t("activerecord.attributes.comment.create.success")
+            render turbo_stream: [
+              turbo_stream.append("catch_#{@catch.id}_comments", partial: "comments/comment", locals: { catch: @catch, comment: @comment }),
+              turbo_stream.replace("new_comment_#{@catch.id}_form", partial: "comments/new", locals: { catch: @catch, comment: Comment.new }),
+              turbo_stream.update("flash", partial: "shared/flash")
+            ]
+          end
+          format.html { redirect_to @catch, notice: I18n.t("activerecord.attributes.comment.create.success") }
         end
-        format.html { redirect_to @catch, notice: I18n.t("activerecord.attributes.comment.create.success") }
+      else
+        respond_to do |format|
+          format.turbo_stream do
+            flash.now[:alert] = I18n.t("activerecord.attributes.comment.create.failure")
+            render turbo_stream: [
+              turbo_stream.replace("new_comment_#{@catch.id}_form", partial: "comments/new", locals: { catch: @catch, comment: Comment.new }),
+              turbo_stream.update("flash", partial: "shared/flash")
+            ]
+          end
+          format.html { render "catches/show", alert: I18n.t("activerecord.attributes.comment.create.failure") }
+        end
       end
     else
+      # 未ログインの場合の処理
       respond_to do |format|
         format.turbo_stream do
-          flash.now[:alert] = I18n.t("activerecord.attributes.comment.create.failure")
+          flash.now[:alert] = I18n.t("devise.failure.unauthenticated")
           render turbo_stream: [
-            turbo_stream.replace("new_comment_#{@catch.id}_form", partial: "comments/new", locals: { catch: @catch, comment: @comment }),
-            turbo_stream.update("flash", partial: "shared/flash")
+            turbo_stream.update("flash", partial: "shared/flash"),
+            turbo_stream.replace("new_comment_#{@catch.id}_form", partial: "comments/new", locals: { catch: @catch, comment: Comment.new })
           ]
         end
-        format.html { render "catches/show", alert: I18n.t("activerecord.attributes.comment.create.failure") }
+        format.html { redirect_to new_user_session_path, alert: I18n.t("devise.failure.unauthenticated") }
       end
     end
   end
