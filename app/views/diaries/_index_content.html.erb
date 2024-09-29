@@ -1,25 +1,27 @@
-<li class="py-3 border-b border-gray-700">
-  <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
-    <div class="flex items-center">
-      <!-- Image -->
-      <%= turbo_frame_tag "diary_index_#{diary.id}_image" do %>
-        <div class="flex -space-x-4 rtl:space-x-reverse">
-          <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] rounded-full", alt: "#{diary.user.username} profile image" %>
+<%= turbo_frame_tag "diary_#{diary.id}" do %>
+  <li class="py-3 border-b border-gray-700">
+    <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
+      <div class="flex items-center">
+        <!-- Image -->
+        <%= turbo_frame_tag "diary_index_#{diary.id}_image" do %>
+          <div class="flex -space-x-4 rtl:space-x-reverse">
+            <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] rounded-full", alt: "#{diary.user.username} profile image" %>
+          </div>
+        <% end %>
+        <!-- User info -->
+        <div class="flex-1 min-w-0 ms-2">
+          <p class="text-base text-gray-900 truncate dark:text-gray-400">
+            <%= diary.user.username %>
+          </p>
+          <p class="text-base text-gray-900 truncate dark:text-gray-400">
+            <%= l diary.diary_date, format: :long %>
+          </p>
         </div>
-      <% end %>
-      <!-- User info -->
-      <div class="flex-1 min-w-0 ms-2">
-        <p class="text-base text-gray-900 truncate dark:text-gray-400">
-          <%= diary.user.username %>
-        </p>
-        <p class="text-base text-gray-900 truncate dark:text-gray-400">
-          <%= l diary.diary_date, format: :long %>
-        </p>
+      </div>
+      <!-- Turbo frame -->
+      <div class="hidden pt-4" data-hello-target="content">
+        <%= turbo_frame_tag "diary_index_#{diary.id}_show", src: diary_path(diary, format: :turbo_stream), loading: "lazy" %>
       </div>
     </div>
-    <!-- Turbo frame -->
-    <div class="hidden pt-4" data-hello-target="content">
-      <%= turbo_frame_tag "diary_index_#{diary.id}_show", src: diary_path(diary, format: :turbo_stream), loading: "lazy" %>
-    </div>
-  </div>
-</li>
+  </li>
+<% end %>

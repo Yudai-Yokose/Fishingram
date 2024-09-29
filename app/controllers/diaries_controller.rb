@@ -1,5 +1,5 @@
 class DiariesController < ApplicationController
-  before_action :authenticate_user!, except: %i[new]
+  before_action :authenticate_user!, except: %i[new create]
   before_action :set_diary, only: %i[show edit update destroy purge_image]
   before_action :correct_user, only: %i[show edit update destroy purge_image]
 
@@ -14,29 +14,42 @@ class DiariesController < ApplicationController
   end
 
   def create
-    @diary = current_user.diaries.build(diary_params)
-    if @diary.save
-      respond_to do |format|
-        format.turbo_stream {
-          flash.now[:notice] = I18n.t("activerecord.attributes.diary.create.success")
-          render turbo_stream: [
-            turbo_stream.prepend("diary_index", partial: "diaries/index_content", locals: { diary: @diary }),
-            turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: Diary.new }),
-            turbo_stream.update("flash", partial: "shared/flash")
-          ]
-        }
-        format.html { redirect_to diaries_path, notice: I18n.t("activerecord.attributes.diary.create.success") }
+    if user_signed_in?
+      @diary = current_user.diaries.build(diary_params)
+      if @diary.save
+        respond_to do |format|
+          format.turbo_stream {
+            flash.now[:notice] = I18n.t("activerecord.attributes.diary.create.success")
+            render turbo_stream: [
+              turbo_stream.prepend("diary_index", partial: "diaries/index_content", locals: { diary: @diary }),
+              turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: Diary.new }),
+              turbo_stream.update("flash", partial: "shared/flash")
+            ]
+          }
+          format.html { redirect_to diaries_path, notice: I18n.t("activerecord.attributes.diary.create.success") }
+        end
+      else
+        respond_to do |format|
+          format.turbo_stream {
+            flash.now[:alert] = I18n.t("activerecord.attributes.diary.create.failure")
+            render turbo_stream: [
+              turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: @diary }),
+              turbo_stream.update("flash", partial: "shared/flash")
+            ]
+          }
+          format.html { render :new, notice: I18n.t("activerecord.attributes.diary.create.failure") }
+        end
       end
     else
       respond_to do |format|
         format.turbo_stream {
-          flash.now[:alert] = I18n.t("activerecord.attributes.diary.create.failure")
+          flash.now[:alert] = I18n.t("devise.failure.unauthenticated")
           render turbo_stream: [
-            turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: @diary }),
-            turbo_stream.update("flash", partial: "shared/flash")
+            turbo_stream.update("flash", partial: "shared/flash"),
+            turbo_stream.replace("new_diary_form", partial: "diaries/new", locals: { diary: Diary.new })
           ]
         }
-        format.html { render :new, notice: I18n.t("activerecord.attributes.diary.create.failure") }
+        format.html { redirect_to new_user_session_path, alert: I18n.t("devise.failure.unauthenticated") }
       end
     end
   end

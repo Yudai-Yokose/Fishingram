@@ -1,5 +1,5 @@
 class CatchesController < ApplicationController
-  before_action :authenticate_user!, except: %i[index show new]
+  before_action :authenticate_user!, except: %i[index show new create]
   before_action :set_catch, only: %i[show edit update destroy purge_image]
   before_action :correct_user, only: %i[edit update destroy purge_image]
 
@@ -14,30 +14,43 @@ class CatchesController < ApplicationController
   end
 
   def create
-    @catch = current_user.catches.build(catch_params)
-    if @catch.save
-      respond_to do |format|
-        format.turbo_stream {
-          flash.now[:notice] = I18n.t("activerecord.attributes.catch.create.success")
-          render turbo_stream: [
-            turbo_stream.prepend("catch_index", partial: "catches/index_content", locals: { catch: @catch }),
-            turbo_stream.prepend("catch_index_user", partial: "catches/index_content", locals: { catch: @catch }),
-            turbo_stream.replace("new_catch_form", partial: "catches/new", locals: { catch: Catch.new }),
-            turbo_stream.update("flash", partial: "shared/flash")
-          ]
-        }
-        format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.create.success") }
+    if user_signed_in?
+      @catch = current_user.catches.build(catch_params)
+      if @catch.save
+        respond_to do |format|
+          format.turbo_stream {
+            flash.now[:notice] = I18n.t("activerecord.attributes.catch.create.success")
+            render turbo_stream: [
+              turbo_stream.prepend("catch_index", partial: "catches/index_content", locals: { catch: @catch }),
+              turbo_stream.prepend("catch_index_user", partial: "catches/index_content", locals: { catch: @catch }),
+              turbo_stream.replace("new_catch_form", partial: "catches/new", locals: { catch: Catch.new }),
+              turbo_stream.update("flash", partial: "shared/flash")
+            ]
+          }
+          format.html { redirect_to catches_path, notice: I18n.t("activerecord.attributes.catch.create.success") }
+        end
+      else
+        respond_to do |format|
+          format.turbo_stream {
+            flash.now[:alert] = I18n.t("activerecord.attributes.catch.create.failure")
+            render turbo_stream: [
+              turbo_stream.replace("new_catch_form", partial: "catches/new", locals: { catch: @catch }),
+              turbo_stream.update("flash", partial: "shared/flash")
+            ]
+          }
+          format.html { render :new, alert: I18n.t("activerecord.attributes.catch.create.failure") }
+        end
       end
     else
       respond_to do |format|
         format.turbo_stream {
-          flash.now[:alert] = I18n.t("activerecord.attributes.catch.create.failure")
+          flash.now[:alert] = I18n.t("devise.failure.unauthenticated")
           render turbo_stream: [
-            turbo_stream.replace("new_catch_form", partial: "catches/new", locals: { catch: @catch }),
-            turbo_stream.update("flash", partial: "shared/flash")
+            turbo_stream.update("flash", partial: "shared/flash"),
+            turbo_stream.replace("new_catch_form", partial: "catches/new", locals: { catch: Catch.new })
           ]
         }
-        format.html { render :new, I18n.t("activerecord.attributes.catch.create.failure") }
+        format.html { redirect_to new_user_session_path, alert: I18n.t("devise.failure.unauthenticated") }
       end
     end
   end

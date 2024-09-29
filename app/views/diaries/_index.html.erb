@@ -1,7 +1,5 @@
 <% @diaries.each do |diary| %>
-  <%= turbo_frame_tag "diary_#{diary.id}" do %>
-    <%= render partial: "index_content", locals: { diary: diary } %>
-  <% end %>
+  <%= render partial: "index_content", locals: { diary: diary } %>
 <% end %>
 
 <% if @diaries.next_page %>
