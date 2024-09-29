@@ -10,11 +10,12 @@
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/2.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="/icon_and_text_navy_bg.png" type="image/png">
+    <link rel="icon" href="/icon_and_text_navy_bg.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon_and_text_navy_bg.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%= display_meta_tags(default_meta_tags) %>
   </head>
 
   <body class="bg-gray-900 text-white">

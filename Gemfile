@@ -72,3 +72,5 @@ gem "google-cloud-storage"
 
 gem "faker"
 gem "kaminari"
+
+gem "meta-tags"
