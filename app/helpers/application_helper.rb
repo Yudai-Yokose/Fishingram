@@ -21,14 +21,14 @@ module ApplicationHelper
       title: "釣り人のための釣果記録サービス",
       reverse: true,
       charset: "utf-8",
-      description: "Fishingramは手軽に釣果や位置情報などを記録することができるツール系サービスです。",
+      description: "釣れた時のレンジや潮位、画像、位置情報などを簡単に記録できます。",
       keywords: "釣り,海,川,フィッシング",
       canonical: request.original_url,
       separator: "|",
       og: {
         site_name: "Fishingram",
         title: "釣り人のための釣果記録サービス",
-        description: "Fishingramは手軽に釣果や位置情報などを記録することができるツール系サービスです。",
+        description: "釣れた時のレンジや潮位、画像、位置情報などを簡単に記録できます。",
         type: "website",
         url: request.original_url,
         image: '/banner_2_bg.png',
@@ -37,7 +37,7 @@ module ApplicationHelper
       twitter: {
         card: "summary_large_image",
         site: "@",
-        image: '/banner_2_bg.png'
+        image: image_url('banner_2_bg.png')
       }
     }
   end
