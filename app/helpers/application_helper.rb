@@ -37,7 +37,7 @@ module ApplicationHelper
       twitter: {
         card: "summary_large_image",
         site: "@",
-        image: image_url('banner_2_bg.png')
+        image: '/banner_2_bg.png'
       }
     }
   end
