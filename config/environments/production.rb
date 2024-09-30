@@ -99,12 +99,12 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  config.action_mailer.default_url_options = { host: "https://fishingram-3dead5b2b24d.herokuapp.com/" }
+  config.action_mailer.default_url_options = { host: "https://www.fishingram.net/" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              "smtp.gmail.com",
     port:                 587,
-    domain:               "fishingram-3dead5b2b24d.herokuapp.com",
+    domain:               "www.fishingram.net",
     user_name:            Rails.application.credentials.mailer[:sender],
     password:             Rails.application.credentials.mailer[:password],
     authentication:       "plain",
