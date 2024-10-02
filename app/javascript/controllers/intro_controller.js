@@ -44,6 +44,13 @@ export default class extends Controller {
           element.classList.add("show");
         } else {
           element.classList.add("fade-in-bottom");
+
+          const underlineElement = element.querySelector('.underline-fade-in');
+          if (underlineElement) {
+            setTimeout(() => {
+              underlineElement.classList.add('fade-in-complete');
+            }, 1000);
+          }
         }
       }, this.delayValue * index);
     });

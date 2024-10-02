@@ -2,17 +2,17 @@
   <!-- Details -->
   <div class="grid grid-cols-2 gap-2">
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.diary.show.weather') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= diary.weather %>
       </p>
     </div>
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.diary.show.time_of_day') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= diary.time_of_day %>
       </p>
@@ -21,17 +21,17 @@
 
   <div class="grid grid-cols-2 gap-2 mt-1">
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.diary.show.temperature') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= diary.temperature %>
       </p>
     </div>
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.diary.show.catch_count') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= diary.catch_count %>
       </p>
@@ -40,9 +40,9 @@
 
   <% if diary.content.present? %>
     <div class="flex flex-col mt-1">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.diary.show.content') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left break-words border border-gray-800 rounded-lg whitespace-normal mt-0">
         <%= diary.content %>
       </p>

@@ -3,11 +3,9 @@
     <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
       <div class="flex items-center">
         <!-- Image -->
-        <%= turbo_frame_tag "catch_index_#{catch.id}_image" do %>
-          <div class="flex -space-x-4 rtl:space-x-reverse">
-            <%= image_tag catch.user.profile_image, class: "w-[42px] h-[42px] rounded-full", alt: "#{catch.user.username} profile image" %>
-          </div>
-        <% end %>
+        <div class="flex -space-x-4 rtl:space-x-reverse">
+          <%= image_tag catch.user.profile_image, class: "w-[42px] h-[42px] rounded-full object-cover", alt: "#{catch.user.username} profile image" %>
+        </div>
         <!-- Info -->
         <div class="flex-1 min-w-0 ms-2">
           <p class="text-base truncate text-gray-400">

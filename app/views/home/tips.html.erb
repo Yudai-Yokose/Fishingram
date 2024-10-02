@@ -1,0 +1,108 @@
+<section class="bg-gray-900">
+  <div class="flex flex-col items-center justify-center px-3 pb-6 mx-auto">
+    <div class="w-full rounded-lg border md:mt-0 sm:max-w-md bg-gray-900 border-gray-700">
+      <div class="p-6 space-y-3 md:space-y-6 sm:p-8">
+        <!-- title -->
+        <div class="flex items-baseline mb-6"> 
+          <span class="text-2xl font-extrabold tracking-tight">How</span>
+          <span class="ms-2 text-base font-normal text-gray-400">to use</span>
+        </div>
+
+        <!-- content -->
+        <ol class="relative border-s border-gray-200 dark:border-gray-700">
+          <li class="mb-10 ms-6">            
+            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+              <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+              </svg>
+            </span>
+            <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">釣果を見る</h3>
+            <div class="flex justify-center py-3">
+              <%= image_tag "/mocup1.svg", class: "h-54", alt: "mocup1" %>
+            </div>
+            <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400">
+              それぞれの釣果をタップすると、ページ遷移することなく、詳しい釣果情報をすぐに見ることができます。
+            </p>
+          </li>
+
+          <li class="mb-10 ms-6">
+            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+            <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
+            </svg>
+            </span>
+            <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">記録する</h3>
+            <div class="flex justify-center pt-6 pb-3">
+              <%= image_tag "/mocup5.svg", class: "h-54", alt: "mocup5" %>
+            </div>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+              釣果の記録も日記の作成も「記録する」ボタンから。位置情報登録ボタンをオンにすると、Googleマップが開き、自動で現在地にピンが置かれます。オフにすれば位置情報は保存されません。
+            </p>
+            <div class="flex justify-center py-3">
+              <%= image_tag "/mocup2.svg", class: "h-54", alt: "mocup2" %>
+            </div>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+              上部にあるタブのワンタップで釣果の記録と日記フォームの切り替えが可能です。記録保存には、ログインが必要です。
+            </p>
+          </li>
+
+          <li class="mb-10 ms-6">
+            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+              <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 19">
+                  <path d="M14.5 0A3.987 3.987 0 0 0 11 2.1a4.977 4.977 0 0 1 3.9 5.858A3.989 3.989 0 0 0 14.5 0ZM9 13h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
+                  <path d="M5 19h10v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2ZM5 7a5.008 5.008 0 0 1 4-4.9 3.988 3.988 0 1 0-3.9 5.859A4.974 4.974 0 0 1 5 7Zm5 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm5-1h-.424a5.016 5.016 0 0 1-1.942 2.232A6.007 6.007 0 0 1 17 17h2a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5ZM5.424 9H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h2a6.007 6.007 0 0 1 4.366-5.768A5.016 5.016 0 0 1 5.424 9Z"/>
+              </svg>
+            </span>
+            <h3 class="flex justify-between items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+            交流する
+            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">要ログイン</span>
+            </h3>
+            <div class="flex justify-center py-3">
+              <%= image_tag "/mocup3.svg", class: "h-54", alt: "mocup3" %>
+            </div>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+              釣果の詳細画面からコメントやいいね（=Nice Catch!）をすることができます。釣り方のコツなどを聞いてみましょう。
+            </p>
+          </li>
+
+          <li class="mb-10 ms-6">
+            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+              <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+              </svg>
+            </span>
+            <h3 class="flex justify-between items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+            自分の釣果を見る
+            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">要ログイン</span>
+            </h3>
+            <div class="flex justify-center py-3">
+              <%= image_tag "/mocup4.svg", class: "h-54", alt: "mocup4" %>
+            </div>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+              自分の釣果だけを一覧表示させることも可能です。自分の釣果を一つずつ積み重ねていきましょう。
+            </p>
+          </li>
+
+          <li class="ms-6">
+            <span class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-3 ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900">
+              <svg class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M11.074 4 8.442.408A.95.95 0 0 0 7.014.254L2.926 4h8.148ZM9 13v-1a4 4 0 0 1 4-4h6V6a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1v-2h-6a4 4 0 0 1-4-4Z"/>
+                <path d="M19 10h-6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1Zm-4.5 3.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM12.62 4h2.78L12.539.41a1.086 1.086 0 1 0-1.7 1.352L12.62 4Z"/>
+              </svg>
+            </span>
+            <h3 class="flex justify-between items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white">
+            日記で振り返る
+            <span class="bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">要ログイン</span>
+            </h3>
+            <div class="flex justify-center py-3">
+              <%= image_tag "/mocup6.svg", class: "h-54", alt: "mocup6" %>
+            </div>
+            <p class="text-base font-normal text-gray-500 dark:text-gray-400">
+              それぞれの日記をタップすると、日記の内容を見ることができます。過去の自分の釣行を振り返り、大物に繋げましょう。日記は他の誰からも見られることはありません。
+            </p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>

@@ -2,17 +2,17 @@
   <!-- Details -->
   <div class="grid grid-cols-2 gap-2">
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.catch.show.tide') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= catch.tide %>
       </p>
     </div>
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.catch.show.tide_level') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= catch.tide_level %>
       </p>
@@ -21,17 +21,17 @@
 
   <div class="grid grid-cols-2 gap-2 mt-1">
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.catch.show.range') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= catch.range %>
       </p>
     </div>
     <div class="flex flex-col">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.catch.show.size') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
         <%= catch.size %>
       </p>
@@ -40,9 +40,9 @@
 
   <% if catch.memo.present? %>
     <div class="flex flex-col mt-1">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.catch.show.memo') %>
-      </label>
+      </span>
       <p class="w-full p-2 pl-3 text-left break-words border border-gray-800 rounded-lg whitespace-normal mt-0">
         <%= catch.memo %>
       </p>
@@ -51,9 +51,9 @@
 
   <% if catch.latitude.present? && catch.longitude.present? %>
     <div class="flex flex-col mt-2">
-      <label class="text-xs text-gray-400 mb-0">
+      <span class="text-xs text-gray-400 mb-0">
         <%= t('activerecord.attributes.catch.show.map') %>
-      </label>
+      </span>
       <div class="w-full p-0.5 pl-0.5 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0" 
           data-controller="catchshowmap" 
           data-catchshowmap-latitude-value="<%= catch.latitude %>" 

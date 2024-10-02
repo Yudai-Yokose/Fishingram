@@ -68,6 +68,24 @@ body {
     animation: lineGrow 1.5s forwards;
 }
 
+@keyframes text-underline-fade {
+  from {
+    text-decoration-color: transparent;
+  }
+  to {
+    text-decoration-color: currentColor;
+  }
+}
+
+.underline-fade-in {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+}
+
+.fade-in-complete {
+  animation: text-underline-fade 1s ease forwards;
+}
+
 /*================================ flash and error messages' setting ===================================*/
 
 @keyframes slideDown {

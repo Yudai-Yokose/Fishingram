@@ -52,5 +52,8 @@ application.register("intro", IntroController)
 import LikeController from "./like_controller"
 application.register("like", LikeController)
 
+import ProfilemodalController from "./profilemodal_controller"
+application.register("profilemodal", ProfilemodalController)
+
 import RecordController from "./record_controller"
 application.register("record", RecordController)
