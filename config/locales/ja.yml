@@ -49,6 +49,8 @@ ja:
       home:
         terms:
           title: "利用規約"
+        privacy_policy:
+          title: "プライバシーポリシー"          
       catch:
         index:
           all: "All Catches"

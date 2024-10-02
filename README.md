@@ -1,20 +1,33 @@
-## サービス名
-### Fishingram
+## Fishingram
+[![Image from Gyazo](https://i.gyazo.com/3b271d0c00797339cde364060c76fed2.png)](https://gyazo.com/3b271d0c00797339cde364060c76fed2)
 <p align="left">
-  <img src="https://img.shields.io/badge/Rails-D30001?logo=rubyonrails&style=flat">
-  <img src="https://img.shields.io/badge/React-555?logo=react&style=popout">
-  <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwind-css&style=flat">
-  <img src="https://img.shields.io/badge/DaisyUI-5A0EF8?logo=daisyui&style=flat">
-  <img src="https://img.shields.io/badge/Amazon%20S3-569A31?logo=amazon-aws&style=flat">
-  <img src="https://img.shields.io/badge/MySQL-4479A1?logo=mysql&style=flat">
-  <img src="https://img.shields.io/badge/Heroku-430098?logo=heroku&style=flat">
-  <img src="https://img.shields.io/badge/Docker-555?logo=docker&style=popout">
-  <img src="https://img.shields.io/badge/GitHub-181717?logo=github&style=popout">
-  <img src="https://img.shields.io/badge/OpenAI-412991?logo=openai&style=flat">
-  <img src="https://img.shields.io/badge/Google%20Cloud%20Platform-4285F4?logo=google-cloud&style=flat">
+  <img src="https://img.shields.io/badge/-Tailwind-06B.svg?logo=tailwind%20css&style=plastic">
+  <img src="https://img.shields.io/badge/-Flowbite-111827.svg?logo=&style=plastic">
+  <img src="https://img.shields.io/badge/-%20Hotwire-FFE801.svg?logo=%20Hotwire&style=plastic">
+  <img src="https://img.shields.io/badge/-Stimulus-77E.svg?logo=stimulus&style=plastic">
+  <img src="https://img.shields.io/badge/-Turbo-5.svg?logo=turbo&style=plastic">
+  <img src="https://img.shields.io/badge/-Ruby-CC342D.svg?logo=ruby&style=plastic">
+  <img src="https://img.shields.io/badge/-Rubygems-E9573F.svg?logo=rubygems&style=plastic">
+  <img src="https://img.shields.io/badge/-Rails-CC0000.svg?logo=ruby%20on%20rails&style=plastic">
+  <img src="https://img.shields.io/badge/-Heroku-430098.svg?logo=heroku&style=plastic">
+  <img src="https://img.shields.io/badge/-Linux-FCC624.svg?logo=linux&style=plastic">
+  <img src="https://img.shields.io/badge/-Mysql-447.svg?logo=mysql&style=plastic">
+  <img src="https://img.shields.io/badge/-Docker-1488C6.svg?logo=docker&style=plastic">
+  <img src="https://img.shields.io/badge/-Jawsdb-148.svg?logo=&style=plastic">
+  <img src="https://img.shields.io/badge/-Git-F05032.svg?logo=git&style=plastic">
+  <img src="https://img.shields.io/badge/-Github-181717.svg?logo=github&style=plastic">
+  <img src="https://img.shields.io/badge/-Google%20cloud-4285F4.svg?logo=google-cloud&style=plastic">
+  <img src="https://img.shields.io/badge/-Google%20Maps-4285F4.svg?logo=Google%20Maps&style=plastic">
+  <img src="https://img.shields.io/badge/-Google%20Cloud%20Storage-4285F4.svg?logo=Google%20Cloud%20Storage&style=plastic">
+  <img src="https://img.shields.io/badge/-Maps%20JavaScript%20API-44444.svg?logo=Maps%20JavaScript%20API&style=plastic">
+  <img src="https://img.shields.io/badge/-Geocording%20API-FAAD4D.svg?logo=Geocording%20API&style=plastic">
+  <img src="https://img.shields.io/badge/-Javascript-F7DF1E.svg?logo=javascript&style=plastic">
+  <img src="https://img.shields.io/badge/-Html5-E34F26.svg?logo=html5&style=plastic">
+  <img src="https://img.shields.io/badge/-RuboCop-000000.svg?logo=RuboCop&style=plastic">
 </p>
 
-[![Image from Gyazo](https://i.gyazo.com/64c990463659ba0c1d04dedc1ef7a241.png)](https://gyazo.com/64c990463659ba0c1d04dedc1ef7a241)
+## URL
+https://www.fishingram.net
 
 ## サービス概要
 - 本サービスは、釣り人の釣果記録を支援するツール系サービスです。
@@ -93,8 +106,15 @@
 総務省発行「令和5年版 情報通信白書」によると、日本のGmailの平均利用率は65.2%であり、特に男性の若年層〜壮年層での利用率が69.5%と特に高く、本サービスの想定ユーザー層とも合致することから、Googleアカウントによるユーザー認証機能を実装します。
 
 ## 機能候補（本リリース時）
-- [ ] 問い合わせフォーム
+- [x] 問い合わせフォーム
+- [x] プライバシーポリシー
+- [x] OGP
+- [x] Tips
+- [x] レスポンシブデザイン
+- [x] Lintチェック
 - [ ] 管理画面
+- [ ] RSpec
+
 
 ## 主な使用技術
 |カテゴリー|使用技術| 
@@ -112,7 +132,7 @@
 [![Image from Gyazo](https://i.gyazo.com/d9c305545cd0f645e17d717cd3290bf7.png)](https://gyazo.com/d9c305545cd0f645e17d717cd3290bf7)
 
 ## 画面遷移図
-[![Image from Gyazo](https://i.gyazo.com/e6eea87105eadd7f8dfb6954802fd704.png)](https://gyazo.com/e6eea87105eadd7f8dfb6954802fd704)
+[![Image from Gyazo](https://i.gyazo.com/19e221af45b2bc060e47a9cf637aaa4c.jpg)](https://gyazo.com/19e221af45b2bc060e47a9cf637aaa4c)
 
 ## ER図
 [![Image from Gyazo](https://i.gyazo.com/c17f2a1e2059fd670ef616770af38bf1.png)](https://gyazo.com/c17f2a1e2059fd670ef616770af38bf1)

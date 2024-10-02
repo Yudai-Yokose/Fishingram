@@ -3,11 +3,9 @@
     <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
       <div class="flex items-center">
         <!-- Image -->
-        <%= turbo_frame_tag "diary_index_#{diary.id}_image" do %>
-          <div class="flex -space-x-4 rtl:space-x-reverse">
-            <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] rounded-full", alt: "#{diary.user.username} profile image" %>
-          </div>
-        <% end %>
+        <div class="flex -space-x-4 rtl:space-x-reverse">
+          <%= image_tag diary.user.profile_image, class: "w-[42px] h-[42px] rounded-full object-cover", alt: "#{diary.user.username} profile image" %>
+        </div>
         <!-- User info -->
         <div class="flex-1 min-w-0 ms-2">
           <p class="text-base text-gray-900 truncate dark:text-gray-400">

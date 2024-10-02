@@ -91,7 +91,6 @@ class DiariesController < ApplicationController
           render turbo_stream: [
             turbo_stream.update("diary_show_#{@diary.id}_details", partial: "diaries/show_details", locals: { diary: @diary }),
             turbo_stream.update("diary_show_#{@diary.id}_images", partial: "diaries/show_images", locals: { diary: @diary }),
-            turbo_stream.update("diary_index_#{@diary.id}_image", partial: "diaries/index_image", locals: { diary: @diary }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }

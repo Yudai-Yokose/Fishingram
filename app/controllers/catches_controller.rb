@@ -102,7 +102,6 @@ class CatchesController < ApplicationController
           render turbo_stream: [
             turbo_stream.update("catch_show_#{@catch.id}_details", partial: "catches/show_details", locals: { catch: @catch }),
             turbo_stream.update("catch_show_#{@catch.id}_images", partial: "catches/show_images", locals: { catch: @catch }),
-            turbo_stream.update("catch_index_#{@catch.id}_image", partial: "catches/index_image", locals: { catch: @catch }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }

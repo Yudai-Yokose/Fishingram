@@ -8,7 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         format.turbo_stream do
           flash.now[:notice] = t("devise.registrations.updated")
           render turbo_stream: [
-            turbo_stream.replace("flash", partial: "shared/flash"),
+            turbo_stream.update("flash", partial: "shared/flash"),
             turbo_stream.replace("edit_content", partial: "edit_content", locals: { resource: resource }),
             turbo_stream.replace("edit_form", partial: "edit_form", locals: { resource: resource })
           ]
@@ -19,7 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         format.turbo_stream do
           render turbo_stream: [
             turbo_stream.replace("edit_form", partial: "edit_form", locals: { resource: resource }),
-            turbo_stream.replace("flash", partial: "shared/flash")
+            turbo_stream.update("flash", partial: "shared/flash")
           ]
         end
       end
