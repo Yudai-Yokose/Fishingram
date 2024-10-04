@@ -63,6 +63,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Install dependencies
+        run: docker compose exec web bash -c "bundle install"
+
       - name: Set environment variables
         env:
           RAILS_ENV: test
