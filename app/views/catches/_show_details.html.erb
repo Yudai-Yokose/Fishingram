@@ -101,9 +101,7 @@
       <% end %>
     </div>
 
-    <%= turbo_frame_tag "like_button_#{catch.id}" do %>
-      <%= render partial: 'likes/like_button', locals: { catch: catch } %>
-    <% end %>
+    <%= render partial: 'likes/like_button', locals: { catch: catch } %>
   </div>
 
   <!-- Comment -->

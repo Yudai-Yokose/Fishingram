@@ -2,14 +2,6 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def after_sign_in_path_for(resource)
-    index_user_path
-  end
-
-  def after_sign_up_path_for(resource)
-    catches_path
-  end
-
   def after_sign_out_path_for(resource_or_scope)
     root_path
   end
