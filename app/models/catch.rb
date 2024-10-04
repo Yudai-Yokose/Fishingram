@@ -4,6 +4,10 @@ class Catch < ApplicationRecord
   has_many :liked_users, through: :likes, source: :user
   has_many :comments, dependent: :destroy
   has_many_attached :images
+  validates :tide, presence: true
+  validates :tide_level, presence: true
+  validates :range, presence: true
+  validates :size, presence: true
 
   enum :tide,       { "大潮" => 0, "中潮" => 1, "小潮" => 2, "若潮" => 3, "長潮" => 4 }
   enum :tide_level, { "満潮前後" => 0, "上げ前半" => 1, "上げ後半" => 2, "干潮前後" => 3, "下げ前半" => 4, "下げ後半" => 5 }

@@ -63,19 +63,22 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Install dependencies
+        run: docker compose exec web bash -c "bundle install"
+
       - name: Set environment variables
         env:
           RAILS_ENV: test
           DATABASE_URL: mysql2://root:password@127.0.0.1:3306/test_database
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}  # ここでRAILS_MASTER_KEYを設定
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
         run: |
           echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
 
+      - name: Build and run Docker Compose
+        run: docker compose up -d
+
       - name: Run tests
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: mysql2://root:password@127.0.0.1:3306/test_database
-        run: bin/rails db:test:prepare test test:system
+        run: docker compose exec web bash -c "bundle exec rspec"
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4

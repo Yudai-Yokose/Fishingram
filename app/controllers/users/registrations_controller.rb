@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  def after_sign_up_path_for(resource)
+    catches_path
+  end
+
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     respond_to do |format|

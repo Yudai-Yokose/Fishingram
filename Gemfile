@@ -45,6 +45,14 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # RSpec and FactoryBot for testing
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  # Capybara for integration testing
+  gem "capybara"
+  # Selenium Webdriver for system testing
+  gem "selenium-webdriver"
 end
 
 group :development do
@@ -52,25 +60,15 @@ group :development do
   gem "web-console"
 end
 
-group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
-end
-
+# Additional
 gem "devise"
 gem "rails-i18n"
 gem "devise-i18n-views"
-
-
 gem "dotenv-rails"
 gem "omniauth", "1.9.1"
 gem "omniauth-google-oauth2"
-
 gem "image_processing", "~> 1.2"
 gem "google-cloud-storage"
-
 gem "faker"
 gem "kaminari"
-
 gem "meta-tags"

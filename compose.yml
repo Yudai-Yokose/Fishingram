@@ -27,11 +27,17 @@ services:
       - node_modules:/myapp/node_modules
     environment:
       TZ: Asia/Tokyo
+      SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
     ports:
       - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
+  selenium_chrome:
+    image: seleniarm/standalone-chromium
+    shm_size: 256m
+    ports:
+      - "4444:4444"
 volumes:
   mysql_data:
   bundle_data:

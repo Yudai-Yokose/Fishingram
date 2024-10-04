@@ -11,7 +11,7 @@
             <%= t('activerecord.attributes.catch.new.upload_placeholder') %>
           </span>
         </div>
-        <%= f.file_field :images, multiple: true, id: "catch-dropzone-file", class: "hidden", data: { action: "change->file-upload#displayFileName", file_upload_target: "fileInput" } %>
+        <%= f.file_field :images, multiple: true, id: "catch-dropzone-file", class: "hidden", direct_upload: true, data: { action: "change->file-upload#displayFileName", file_upload_target: "fileInput" } %>
       </label>
     </div>
   </div>
