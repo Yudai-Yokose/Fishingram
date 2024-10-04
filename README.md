@@ -109,15 +109,17 @@ https://www.fishingram.net
 - [x] Googleアカウントでのユーザー認証機能
 
 ## 機能候補（本リリース時）
+- [x] Lintチェック
+- [x] RSpec
+- [x] GCSへのダイレクトアップロード
 - [x] 問い合わせフォーム
 - [x] DNS、SSL対応
 - [x] プライバシーポリシー
 - [x] OGP
 - [x] Tips
 - [x] レスポンシブデザイン
-- [x] Lintチェック
 - [ ] 管理画面
-- [ ] RSpec
+
 
 
 ## 主な使用技術

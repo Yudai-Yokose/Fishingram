@@ -74,9 +74,6 @@ jobs:
       - name: Build and run Docker Compose
         run: docker compose up -d
 
-      - name: Prepare database
-        run: docker compose exec web bash -c "bundle exec rails db:test:prepare"
-
       - name: Run tests
         run: docker compose exec web bash -c "bundle exec rspec"
 
