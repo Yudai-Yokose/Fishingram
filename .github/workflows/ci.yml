@@ -1,4 +1,3 @@
-
 name: Rails CI
 
 on:
@@ -40,16 +39,18 @@ jobs:
         gem install bundler
         bundle install
 
+    - name: Set RAILS_MASTER_KEY
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
     - name: Setup database
       run: |
-          cp config/database.ci.yml config/database.yml
-          bundle exec rails db:create RAILS_ENV=test
-          bundle exec rails db:migrate RAILS_ENV=test
+        cp config/database.ci.yml config/database.yml
+        bundle exec rails db:create RAILS_ENV=test
+        bundle exec rails db:migrate RAILS_ENV=test
   
     - name: Run RSpec
-      run: bundle exec rspec spec/models spec/requests  spec/system 
+      run: bundle exec rspec spec/models spec/requests spec/system
 
     - name: Run RuboCop
       run: bundle exec rubocop
-
-
