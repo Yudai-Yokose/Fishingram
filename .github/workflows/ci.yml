@@ -28,8 +28,8 @@ jobs:
     - name: Cache Ruby gems
       uses: actions/cache@v3
       with:
-        path: vendor/bundle # キャッシュするディレクトリを指定
-        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }} # キャッシュのキーを指定
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }} 
         restore-keys: |
           ${{ runner.os }}-gems-  # 部分一致する最新のキャッシュを探します。
 
@@ -55,7 +55,7 @@ jobs:
         bundle exec rails db:create RAILS_ENV=test
         bundle exec rails db:migrate RAILS_ENV=test
 
-    # アセットプリコンパイルを追加
+    # アセットプリコンパイル
     - name: Precompile assets
       run: RAILS_ENV=test bundle exec rails assets:precompile
   
@@ -64,3 +64,11 @@ jobs:
 
     - name: Run RuboCop
       run: bundle exec rubocop
+
+    - name: Upload screenshots from failed tests
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: screenshots
+        path: tmp/capybara
+        if-no-files-found: ignore
