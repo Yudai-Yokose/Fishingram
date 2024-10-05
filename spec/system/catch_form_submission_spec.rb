@@ -3,6 +3,10 @@ require 'rails_helper'
 RSpec.describe 'Catch Form Submission', type: :system, js: true do
   let(:user) { User.create!(email: 'test@example.com', password: 'password', username: 'testuser') }
 
+  before do
+    page.driver.browser.manage.window.resize_to(475, 1000) # ここでウィンドウサイズを変更
+  end
+
   context 'when user is not signed in' do
     it 'does not allow submission for guests' do
       visit root_path

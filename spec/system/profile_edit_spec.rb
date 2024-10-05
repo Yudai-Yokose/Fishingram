@@ -4,6 +4,10 @@ RSpec.describe 'User Profile Edit', type: :system, js: true do
   let(:user) { User.create!(email: 'test@example.com', password: 'password', username: 'testuser') }
 
   before do
+    page.driver.browser.manage.window.resize_to(475, 1000) # ここでウィンドウサイズを変更
+  end
+
+  before do
     login_as(user, scope: :user)
   end
 

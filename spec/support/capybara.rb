@@ -8,7 +8,8 @@ Capybara.register_driver :remote_chrome do |app|
         'no-sandbox',
         'headless',
         'disable-gpu',
-        'window-size=1680,1050'
+        'window-size=475,1000',
+        '--force-device-scale-factor=0.5'
       ]
     }
   )
