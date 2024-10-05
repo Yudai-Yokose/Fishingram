@@ -1,7 +1,7 @@
 require 'capybara/rspec'
 require 'selenium-webdriver'
 
-Capybara.register_driver :remote_chrome do |app|
+Capybara.register_driver :selenium_chrome_headless do |app|
   url = ENV["SELENIUM_DRIVER_URL"]
   capabilities = ::Selenium::WebDriver::Chrome::Options.new(
     "goog:chromeOptions" => {
@@ -31,7 +31,7 @@ RSpec.configure do |config|
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
     Capybara.server_port = 4444
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
-    driven_by :remote_chrome
+    driven_by :selenium_chrome_headless
   end
   config.after(:each, type: :system) do
     Capybara.reset_sessions!
