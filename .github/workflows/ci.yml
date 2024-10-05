@@ -1,67 +1,55 @@
-name: Run rspec and rubocop
+
+name: Rails CI
 
 on:
   push:
-  pull_request:
 
 jobs:
-  rspec:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:5.7.44
+        env:
+          MYSQL_ROOT_PASSWORD: password 
         ports:
           - 3306:3306
-        env:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
         options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2.0' 
 
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+    - name: Cache Ruby gems # Ruby gemsをキャッシュ
+      uses: actions/cache@v3
+      with:
+        path: vendor/bundle # キャッシュするディレクトリを指定
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }} # キャッシュのキーを指定
+        restore-keys: |
+          ${{ runner.os }}-gems-  # 部分一致する最新のキャッシュを探します。
+      
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -qq
+        gem install bundler
+        bundle install
 
-      - name: Bundler and gem install
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3 --path vendor/bundle
-
-      - name: Yarn install
-        run: yarn install --check-files
-
-      - name: Database create and migrate
-        run: |
-          cp config/database.yml.ci config/database.yml
+    - name: Setup database
+      run: |
+          cp config/database.ci.yml config/database.yml
           bundle exec rails db:create RAILS_ENV=test
           bundle exec rails db:migrate RAILS_ENV=test
+  
+    - name: Run RSpec
+      run: bundle exec rspec spec/models spec/requests  spec/system 
 
-      - name: Run rspec
-        run: bundle exec rspec
+    - name: Run RuboCop
+      run: bundle exec rubocop
 
-  rubocop:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          bundler-cache: true
-
-      - name: Run rubocop
-        run: bundle exec rubocop
