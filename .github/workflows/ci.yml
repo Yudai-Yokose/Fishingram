@@ -54,6 +54,10 @@ jobs:
         cp config/database.ci.yml config/database.yml
         bundle exec rails db:create RAILS_ENV=test
         bundle exec rails db:migrate RAILS_ENV=test
+
+    # アセットプリコンパイルを追加
+    - name: Precompile assets
+      run: RAILS_ENV=test bundle exec rails assets:precompile
   
     - name: Run RSpec
       run: bundle exec rspec
