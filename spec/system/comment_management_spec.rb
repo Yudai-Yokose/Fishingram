@@ -13,7 +13,7 @@ RSpec.describe 'Comment System', type: :system, js: true do
   let!(:other_comment) { Comment.create!(content: 'This is a comment on another user\'s post', user: other_user, catch: other_catch) }
 
   before do
-    page.driver.browser.manage.window.resize_to(475, 1000) 
+    page.driver.browser.manage.window.resize_to(475, 1000)
   end
 
   before do
