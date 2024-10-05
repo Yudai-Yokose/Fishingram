@@ -2,7 +2,7 @@ require 'capybara/rspec'
 
 Capybara.register_driver :remote_chrome do |app|
   url = ENV['SELENIUM_DRIVER_URL']
-  capabilities = ::Selenium::WebDriver::Remote::Capabilities.chrome(
+  capabilities = ::Selenium::WebDriver::Chrome::Options.new(
     'goog:chromeOptions' => {
       'args' => [
         'no-sandbox',
