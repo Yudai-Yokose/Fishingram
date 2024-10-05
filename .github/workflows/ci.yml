@@ -25,14 +25,19 @@ jobs:
       with:
         ruby-version: '3.2.0' 
 
-    - name: Cache Ruby gems # Ruby gemsをキャッシュ
+    - name: Cache Ruby gems
       uses: actions/cache@v3
       with:
         path: vendor/bundle # キャッシュするディレクトリを指定
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }} # キャッシュのキーを指定
         restore-keys: |
           ${{ runner.os }}-gems-  # 部分一致する最新のキャッシュを探します。
-      
+
+    # Google Chrome をインストール
+    - name: Chrome Install
+      run: |
+        sudo apt-get install -y google-chrome-stable
+
     - name: Install dependencies
       run: |
         sudo apt-get update -qq
