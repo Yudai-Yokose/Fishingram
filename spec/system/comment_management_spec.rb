@@ -5,12 +5,16 @@ RSpec.describe 'Comment System', type: :system, js: true do
   let(:other_user) { User.create!(email: 'other@example.com', password: 'password', username: 'otheruser') }
 
   # 自分の投稿とコメント
-  let!(:catch) { Catch.create!(user: user, tide: '大潮', tide_level: '満潮前後', range: 'トップ', size: '30~40cm', memo: '良い釣果！') }
+  let!(:catch) { Catch.create!(user: user, tide: '大潮', tide_level: '満潮前後', range: 'トップ', size: '30~40cm', memo: '良い釣果！', images: [ fixture_file_upload(Rails.root.join('public', 'icon.png')) ]) }
   let!(:comment) { Comment.create!(content: 'This is a test comment', user: user, catch: catch) }
 
   # 他ユーザーの投稿とコメント
-  let!(:other_catch) { Catch.create!(user: other_user, tide: '小潮', tide_level: '干潮前後', range: 'ボトム', size: '50~60cm', memo: '素晴らしい釣果！') }
+  let!(:other_catch) { Catch.create!(user: other_user, tide: '小潮', tide_level: '干潮前後', range: 'ボトム', size: '50~60cm', memo: '素晴らしい釣果！', images: [ fixture_file_upload(Rails.root.join('public', 'icon.png')) ]) }
   let!(:other_comment) { Comment.create!(content: 'This is a comment on another user\'s post', user: other_user, catch: other_catch) }
+
+  before do
+    page.driver.browser.manage.window.resize_to(475, 1000)
+  end
 
   before do
     login_as(user, scope: :user)  # ログイン処理

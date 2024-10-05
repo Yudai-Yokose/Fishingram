@@ -6,6 +6,10 @@ RSpec.describe 'Catch Post Management', type: :system, js: true do
   let(:other_user) { User.create!(email: 'other@example.com', password: 'password', username: 'otheruser') }
   let!(:catch) { Catch.create!(user: user, tide: '大潮', tide_level: '満潮前後', range: 'トップ', size: '30~40cm', memo: '良い釣果！', images: [ fixture_file_upload(Rails.root.join('public', 'icon.png')) ]) }
 
+  before do
+    page.driver.browser.manage.window.resize_to(475, 1000) # ここでウィンドウサイズを変更
+  end
+
   context 'when viewing a catch post' do
     before do
       visit catches_path  # 投稿一覧ページに遷移

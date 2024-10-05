@@ -1,89 +1,74 @@
-name: CI
+name: Rails CI
 
 on:
-  pull_request:
   push:
-    branches: [ main ]
 
 jobs:
-  scan_ruby:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Lint code for consistent style
-        run: bin/rubocop -f github
-
-  test:
+  build:
     runs-on: ubuntu-latest
 
     services:
       mysql:
-        image: mysql:8.0
+        image: mysql:5.7.44
         env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: test_database
+          MYSQL_ROOT_PASSWORD: password 
         ports:
           - 3306:3306
-        options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd "mysqladmin ping" --health-interval 10s --health-timeout 5s --health-retries 10
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl default-mysql-client libjemalloc2 libvips
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2.0' 
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+    - name: Cache Ruby gems
+      uses: actions/cache@v3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }} 
+        restore-keys: |
+          ${{ runner.os }}-gems-  # 部分一致する最新のキャッシュを探します。
 
-      - name: Install dependencies
-        run: docker compose exec web bash -c "bundle install"
+    # Google Chrome をインストール
+    - name: Chrome Install
+      run: |
+        sudo apt-get install -y google-chrome-stable
 
-      - name: Set environment variables
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: mysql2://root:password@127.0.0.1:3306/test_database
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }} 
-        run: |
-          echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -qq
+        gem install bundler
+        bundle install
 
-      - name: Build and run Docker Compose
-        run: docker compose up -d
+    - name: Set RAILS_MASTER_KEY
+      env:
+        RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      run: echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
 
-      - name: Run tests
-        run: docker compose exec web bash -c "bundle exec rspec"
+    - name: Setup database
+      run: |
+        cp config/database.ci.yml config/database.yml
+        bundle exec rails db:create RAILS_ENV=test
+        bundle exec rails db:migrate RAILS_ENV=test
 
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
+    # アセットプリコンパイル
+    - name: Precompile assets
+      run: RAILS_ENV=test bundle exec rails assets:precompile
+  
+    - name: Run RSpec
+      run: bundle exec rspec
+
+    - name: Run RuboCop
+      run: bundle exec rubocop
+
+    - name: Upload screenshots from failed tests
+      uses: actions/upload-artifact@v3
+      if: failure()
+      with:
+        name: screenshots
+        path: tmp/capybara
+        if-no-files-found: ignore

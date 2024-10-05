@@ -11,6 +11,10 @@ RSpec.describe 'Like System', type: :system, js: true do
   let!(:other_catch) { Catch.create!(user: other_user, tide: '小潮', tide_level: '干潮前後', range: 'ボトム', size: '50~60cm', memo: '素晴らしい釣果！') }
 
   before do
+    page.driver.browser.manage.window.resize_to(475, 1000) # ここでウィンドウサイズを変更
+  end
+
+  before do
     login_as(user, scope: :user)  # ログイン処理
   end
 
