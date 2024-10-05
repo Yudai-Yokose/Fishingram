@@ -51,7 +51,7 @@ jobs:
         bundle exec rails db:migrate RAILS_ENV=test
   
     - name: Run RSpec
-      run: bundle exec rspec spec/models spec/requests spec/system
+      run: bundle exec rspec
 
     - name: Run RuboCop
       run: bundle exec rubocop
