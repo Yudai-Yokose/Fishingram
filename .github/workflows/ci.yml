@@ -39,9 +39,11 @@ jobs:
         gem install bundler
         bundle install
 
+    # ここでRAILS_MASTER_KEYを設定するステップを追加
     - name: Set RAILS_MASTER_KEY
       env:
         RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      run: echo "RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }}" >> $GITHUB_ENV
 
     - name: Setup database
       run: |
