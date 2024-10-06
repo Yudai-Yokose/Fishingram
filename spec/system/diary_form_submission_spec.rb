@@ -4,7 +4,7 @@ RSpec.describe 'Diary Form Submission', type: :system, js: true do
   let(:user) { User.create!(email: 'test@example.com', password: 'password', username: 'testuser') }
 
   before do
-    page.driver.browser.manage.window.resize_to(475, 1000) # ここでウィンドウサイズを変更
+    page.driver.browser.manage.window.resize_to(475, 1000)
   end
 
   context 'when user is not signed in' do

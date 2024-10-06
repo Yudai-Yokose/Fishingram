@@ -7,7 +7,7 @@ RSpec.describe 'Diary Post Management', type: :system, js: true do
   let!(:diary) { Diary.create!(user: user, diary_date: Date.today, content: '今日は良い釣り日和でした', weather: '晴れ', catch_count: '1匹', time_of_day: '朝まづめ', temperature: '20~30℃', images: [ fixture_file_upload(Rails.root.join('public', 'icon.png')) ]) }
 
   before do
-    page.driver.browser.manage.window.resize_to(475, 1000) # ここでウィンドウサイズを変更
+    page.driver.browser.manage.window.resize_to(475, 1000)
   end
 
   context 'when the user is the owner of the diary' do

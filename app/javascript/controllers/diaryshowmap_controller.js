@@ -11,11 +11,19 @@ export default class extends Controller {
     const diaryId = this.diaryIdValue;
 
     if (!window.google || !window.google.maps) {
-      this.loadGoogleMapsAPI(apiKey).then(() => {
-        this.initMap(latitude, longitude, mapId, diaryId);
-      });
+      this.loadGoogleMapsAPI(apiKey)
+        .then(() => {
+          this.initMap(latitude, longitude, mapId, diaryId);
+        })
+        .catch(() => {
+          this.showErrorMessage();
+        });
     } else {
-      this.initMap(latitude, longitude, mapId, diaryId);
+      try {
+        this.initMap(latitude, longitude, mapId, diaryId);
+      } catch {
+        this.showErrorMessage();
+      }
     }
   }
 
@@ -39,7 +47,7 @@ export default class extends Controller {
     const mapElement = document.getElementById(`map_${diaryId}`);
 
     if (!mapElement) {
-      console.error("Map element not found");
+      this.showErrorMessage();
       return;
     }
 
@@ -56,5 +64,9 @@ export default class extends Controller {
       position: { lat: parseFloat(lat), lng: parseFloat(lng) },
       map: map,
     });
+  }
+
+  showErrorMessage() {
+    alert("地図を表示できませんでした。ブラウザの設定を確認してください。"); 
   }
 }
