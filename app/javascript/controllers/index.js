@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import CatchSpinnerController from "./catch_spinner_controller"
+application.register("catch-spinner", CatchSpinnerController)
+
 import CatcheditmodalController from "./catcheditmodal_controller"
 application.register("catcheditmodal", CatcheditmodalController)
 
@@ -21,6 +24,9 @@ application.register("commentmodal", CommentmodalController)
 
 import DateController from "./date_controller"
 application.register("date", DateController)
+
+import DiarySpinnerController from "./diary_spinner_controller"
+application.register("diary-spinner", DiarySpinnerController)
 
 import DiaryeditmodalController from "./diaryeditmodal_controller"
 application.register("diaryeditmodal", DiaryeditmodalController)

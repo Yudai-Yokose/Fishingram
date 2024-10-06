@@ -31,9 +31,8 @@ jobs:
         path: vendor/bundle
         key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }} 
         restore-keys: |
-          ${{ runner.os }}-gems-  # 部分一致する最新のキャッシュを探します。
+          ${{ runner.os }}-gems-
 
-    # Google Chrome をインストール
     - name: Chrome Install
       run: |
         sudo apt-get install -y google-chrome-stable
@@ -55,7 +54,6 @@ jobs:
         bundle exec rails db:create RAILS_ENV=test
         bundle exec rails db:migrate RAILS_ENV=test
 
-    # アセットプリコンパイル
     - name: Precompile assets
       run: RAILS_ENV=test bundle exec rails assets:precompile
   

@@ -6,7 +6,7 @@ export default class extends Controller {
   initializeMap() {
     const apiKey = this.element.dataset.mapApiKeyValue;
     const mapId = this.element.dataset.mapIdValue;
-  
+
     this.showSpinner();
 
     const savedLatitude = this.hasDiaryLatitudeTarget ? parseFloat(this.diaryLatitudeTarget.value) : null;
@@ -21,8 +21,8 @@ export default class extends Controller {
             this.setPosition(mapId);
             window.diaryMapInitialized = true;
           })
-          .catch(error => {
-            this.hideSpinner();
+          .catch(() => {
+            this.showErrorMessage();
           });
       } else {
         this.setPosition(mapId);
@@ -40,8 +40,8 @@ export default class extends Controller {
         script.onload = () => {
           resolve();
         };
-        script.onerror = (error) => {
-          reject(error);
+        script.onerror = () => {
+          reject();
         };
         document.head.appendChild(script);
       } else {
@@ -55,11 +55,11 @@ export default class extends Controller {
       navigator.geolocation.getCurrentPosition(
         this.showMap.bind(this, mapId),
         () => {
-          this.hideSpinner();
+          this.showErrorMessage();
         }
       );
     } else {
-      this.hideSpinner();
+      this.showErrorMessage();
     }
   }
 
@@ -82,7 +82,7 @@ export default class extends Controller {
     const mapElement = document.getElementById(`diary-map-${this.element.dataset.diaryIdValue}`);
 
     if (!mapElement) {
-      console.error("Map element not found");
+      this.showErrorMessage();
       return;
     }
 
@@ -118,6 +118,11 @@ export default class extends Controller {
         this.diaryLongitudeTarget.value = newLng;
       }
     });
+  }
+
+  showErrorMessage() {
+    alert("地図を表示できませんでした。ブラウザの設定を確認してください。"); 
+    this.hideSpinner();
   }
 
   showSpinner() {

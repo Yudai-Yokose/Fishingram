@@ -24,6 +24,7 @@
   <img src="https://img.shields.io/badge/-Javascript-F7DF1E.svg?logo=javascript&style=plastic">
   <img src="https://img.shields.io/badge/-Html5-E34F26.svg?logo=html5&style=plastic">
   <img src="https://img.shields.io/badge/-RuboCop-000000.svg?logo=RuboCop&style=plastic">
+  <img src="https://img.shields.io/badge/-RSpec-CC342D.svg?logo=ruby&style=plastic">
 </p>
 
 ## URL
@@ -111,7 +112,7 @@ https://www.fishingram.net
 ## 機能候補（本リリース時）
 - [x] Lintチェック
 - [x] RSpec
-- [x] GCSへのダイレクトアップロード
+- [x] GCSダイレクトアップロード
 - [x] 問い合わせフォーム
 - [x] DNS、SSL対応
 - [x] プライバシーポリシー
@@ -135,7 +136,7 @@ https://www.fishingram.net
 |API|Maps JavaScript API <br> Geocording API|
 
 ## 構成図
-[![Image from Gyazo](https://i.gyazo.com/d9c305545cd0f645e17d717cd3290bf7.png)](https://gyazo.com/d9c305545cd0f645e17d717cd3290bf7)
+[![Image from Gyazo](https://i.gyazo.com/9d597335d3379480aabcf2eac3abb653.png)](https://gyazo.com/9d597335d3379480aabcf2eac3abb653)
 
 ## 画面遷移図
 [![Image from Gyazo](https://i.gyazo.com/19e221af45b2bc060e47a9cf637aaa4c.jpg)](https://gyazo.com/19e221af45b2bc060e47a9cf637aaa4c)

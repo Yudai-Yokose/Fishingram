@@ -7,7 +7,7 @@ RSpec.describe 'Catch Post Management', type: :system, js: true do
   let!(:catch) { Catch.create!(user: user, tide: '大潮', tide_level: '満潮前後', range: 'トップ', size: '30~40cm', memo: '良い釣果！', images: [ fixture_file_upload(Rails.root.join('public', 'icon.png')) ]) }
 
   before do
-    page.driver.browser.manage.window.resize_to(475, 1000) # ここでウィンドウサイズを変更
+    page.driver.browser.manage.window.resize_to(475, 1000)
   end
 
   context 'when viewing a catch post' do

@@ -6,7 +6,7 @@ export default class extends Controller {
   initializeMap() {
     const apiKey = this.element.dataset.mapApiKeyValue;
     const mapId = this.element.dataset.mapIdValue;
-  
+
     this.showSpinner();
 
     const savedLatitude = this.hasCatchLatitudeTarget ? parseFloat(this.catchLatitudeTarget.value) : null;
@@ -21,8 +21,8 @@ export default class extends Controller {
             this.setPosition(mapId);
             window.catchMapInitialized = true;
           })
-          .catch(error => {
-            this.hideSpinner();
+          .catch(() => {
+            this.showErrorMessage();
           });
       } else {
         this.setPosition(mapId);
@@ -40,8 +40,8 @@ export default class extends Controller {
         script.onload = () => {
           resolve();
         };
-        script.onerror = (error) => {
-          reject(error);
+        script.onerror = () => {
+          reject();
         };
         document.head.appendChild(script);
       } else {
@@ -55,11 +55,11 @@ export default class extends Controller {
       navigator.geolocation.getCurrentPosition(
         this.showMap.bind(this, mapId),
         () => {
-          this.hideSpinner();
+          this.showErrorMessage();
         }
       );
     } else {
-      this.hideSpinner();
+      this.showErrorMessage();
     }
   }
 
@@ -82,7 +82,7 @@ export default class extends Controller {
     const mapElement = document.getElementById(`catch-map-${this.element.dataset.catchIdValue}`);
 
     if (!mapElement) {
-      console.error("Map element not found");
+      this.showErrorMessage();
       return;
     }
 
@@ -120,6 +120,11 @@ export default class extends Controller {
     });
   }
 
+  showErrorMessage() {
+    alert("地図を表示できませんでした。ブラウザの設定を確認してください。"); 
+    this.hideSpinner();
+  }
+
   showSpinner() {
     const spinnerElement = document.getElementById(`map-spinner-catch-${this.element.dataset.catchIdValue}`);
     const mapElement = document.getElementById(`catch-map-${this.element.dataset.catchIdValue}`);
@@ -150,7 +155,7 @@ export default class extends Controller {
     if (this.hasCatchLatitudeTarget) {
       this.catchLatitudeTarget.value = '';
     }
-    
+
     if (this.hasCatchLongitudeTarget) {
       this.catchLongitudeTarget.value = '';
     }
