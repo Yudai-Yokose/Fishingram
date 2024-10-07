@@ -64,7 +64,7 @@ jobs:
       run: bundle exec rubocop
 
     - name: Upload screenshots from failed tests
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: failure()
       with:
         name: screenshots
