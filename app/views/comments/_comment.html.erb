@@ -7,7 +7,7 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-width="3" d="M6 12h.01m6 0h.01m5.99 0h.01"/>
         </svg>
       </button>
-      <div id="dropdownDots_<%= comment.id %>" class="absolute z-10 hidden rounded-lg shadow w-40 dark:bg-gray-900 border border-gray-800 top-14 left-1/2 transform -translate-x-1/2">
+      <div id="dropdownDots_<%= comment.id %>" class="absolute z-10 hidden rounded-lg shadow w-40 dark:bg-gray-800 border border-gray-800 top-10 left-1/2 transform -translate-x-1/2">
         <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconButton_<%= comment.id %>">
           <li class="w-full block">
             <button class="block w-full px-4 py-2 text-gray-400 text-left" data-modal-target="editcommentmodal_<%= comment.id %>" data-modal-toggle="editcommentmodal_<%= comment.id %>" data-action="click->hello#stopToggle" type="button">
@@ -23,8 +23,8 @@
   </div>
   <div class="flex flex-col gap-1 w-full max-w-[320px]">
     <div class="flex items-center space-x-2 rtl:space-x-reverse">
-      <span class="text-xs text-gray-400"><%= comment.user.username %></span>
-      <span class="text-xs text-gray-400"><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime("%-m月%-d日 %-H時%-M分") %></span>
+      <span class="text-xs dark:text-white"><%= comment.user.username %></span>
+      <span class="text-xs dark:text-white"><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime("%-m月%-d日 %-H時%-M分") %></span>
     </div>
     <div class="flex flex-col leading-1.5 p-2 pl-3 border border-gray-800 rounded-e-lg rounded-es-lg dark:bg-gray-900">
       <p class="text-sm text-gray-400" style="white-space: normal;"><%= comment.content %></p>

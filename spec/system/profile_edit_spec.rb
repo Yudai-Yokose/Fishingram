@@ -14,7 +14,7 @@ RSpec.describe 'User Profile Edit', type: :system, js: true do
   it 'allows user to open and close the profile edit modal' do
     visit edit_user_registration_path
 
-    expect(page).to have_content('My profile')
+    expect(page).to have_content('My Page')
     find('button[data-modal-target="profilemodal"]').click
     expect(page).to have_selector('#profilemodal', visible: true)
     expect(page).to have_field('user[username]', with: user.username)
@@ -26,7 +26,7 @@ RSpec.describe 'User Profile Edit', type: :system, js: true do
   it 'allows user to edit profile information with new image' do
     visit edit_user_registration_path
 
-    expect(page).to have_content('My profile')
+    expect(page).to have_content('My Page')
     find('button[data-modal-target="profilemodal"]').click
     attach_file 'profile-dropzone-file', Rails.root.join('public', 'icon_white.png'), visible: false
     fill_in 'user[username]', with: 'newuser'

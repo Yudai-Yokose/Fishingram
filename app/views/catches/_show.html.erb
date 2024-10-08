@@ -1,9 +1,9 @@
-<div class="max-w-sm border rounded-lg shadow bg-gray-900 border-gray-800" data-action="click->hello#stopToggle">
-    <%= turbo_frame_tag "catch_show_#{catch.id}_images" do %>
-        <%= render 'show_images', catch: catch %>
-    <% end %>
+<div class="max-w-sm border rounded-lg shadow bg-gray-900 border-gray-700" data-action="click->hello#stopToggle">
+  <%= turbo_frame_tag "catch_show_#{catch.id}_images" do %>
+      <%= render 'show_images', catch: catch %>
+  <% end %>
 
-    <%= turbo_frame_tag "catch_show_#{catch.id}_details" do %>
-        <%= render 'show_details', catch: catch %>
-    <% end %>
+  <%= turbo_frame_tag "catch_show_#{catch.id}_details" do %>
+      <%= render 'show_details', catch: catch %>
+  <% end %>
 </div>

@@ -25,6 +25,13 @@ Rails.application.routes.draw do
 
   root "home#index"
 
+  namespace :admin do
+    get "dashboard", to: "dashboard#index"
+    resources :users
+    resources :catches
+    resources :diaries
+  end
+
   get "terms", to: "home#terms"
   get "privacy_policy", to: "home#privacy_policy"
   get "tips", to: "home#tips"

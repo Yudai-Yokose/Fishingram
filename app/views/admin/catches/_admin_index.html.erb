@@ -1,0 +1,7 @@
+<% @catches.each do |catch| %>
+  <%= render partial: "admin_index_content", locals: { catch: catch } %>
+<% end %>
+
+<% if @catches.next_page %>
+  <%= turbo_frame_tag "admin_catch_index_pagination", loading: :lazy, src: admin_catches_path(format: :turbo_stream, page: @catches.next_page) %>
+<% end %>

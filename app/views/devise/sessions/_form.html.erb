@@ -30,6 +30,11 @@
             </div>
           <% end %>
 
+          <!-- Submit button -->
+          <div class="flex justify-center w-full">
+            <%= f.submit t('.sign_in'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
+          </div>
+
           <!-- Google login button -->
           <div class="flex justify-center">
             <%= link_to user_google_oauth2_omniauth_authorize_path, class: "w-full inline-flex items-center justify-center px-5 py-2.5 text-base text-gray-700 border border-gray-300 rounded-lg bg-transparent hover:bg-gray-50 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600", data: { turbo: false } do %>
@@ -42,11 +47,6 @@
               </svg>
               <span>Sign in with Google</span>
             <% end %>
-          </div>
-
-          <!-- Submit button -->
-          <div class="flex justify-center w-full">
-            <%= f.submit t('.sign_in'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
           </div>
           
           <!-- If not to have account -->

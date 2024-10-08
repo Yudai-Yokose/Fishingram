@@ -1,16 +1,20 @@
 <% if resource.errors.any? %>
   <div class="flash-message-container">
-    <div id="error_explanation" class="flash-message flex items-center p-4 mb-4 text-base text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800 alert" data-controller="flash" role="alert">
-      <ul>
-        <% resource.errors.full_messages.each do |message| %>
-          <li class="text-left items-start">
-            <svg class="flex-shrink-0 inline w-6 h-6 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-            </svg>
+    <div id="error_explanation" class="flash-message flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" data-controller="flash" role="alert">
+      <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+        <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 11.793a1 1 0 1 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 1.414-1.414L10 8.586l2.293-2.293a1 1 0 0 1 1.414 1.414L11.414 10l2.293 2.293Z"/>
+        </svg>
+      </div>
+      <div class="ms-3 text-sm font-normal">
+        <ul>
+          <% resource.errors.full_messages.each do |message| %>
+            <li class="text-left">
               <%= message.html_safe %>
-          </li>
-        <% end %>
-      </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
   </div>
 <% end %>

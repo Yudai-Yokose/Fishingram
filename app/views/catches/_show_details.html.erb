@@ -1,111 +1,76 @@
-<div class="px-4 pt-4 text-base truncate text-gray-400">
+<div class="px-4 pt-6">
   <!-- Details -->
-  <div class="grid grid-cols-2 gap-2">
-    <div class="flex flex-col">
-      <span class="text-xs text-gray-400 mb-0">
-        <%= t('activerecord.attributes.catch.show.tide') %>
-      </span>
-      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
-        <%= catch.tide %>
-      </p>
-    </div>
-    <div class="flex flex-col">
-      <span class="text-xs text-gray-400 mb-0">
-        <%= t('activerecord.attributes.catch.show.tide_level') %>
-      </span>
-      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
-        <%= catch.tide_level %>
-      </p>
-    </div>
+  <div class="grid grid-cols-2 gap-4">
+    <% attributes = {
+      tide: t('activerecord.attributes.catch.show.tide'),
+      tide_level: t('activerecord.attributes.catch.show.tide_level'),
+      range: t('activerecord.attributes.catch.show.range'),
+      size: t('activerecord.attributes.catch.show.size')
+    } %>
+
+    <% attributes.each do |key, label| %>
+      <div class="flex flex-col">
+        <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">
+          <%= label %>
+        </span>
+        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-3 p-2 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+          <%= catch.send(key) %>
+        </p>
+      </div>
+    <% end %>
   </div>
 
-  <div class="grid grid-cols-2 gap-2 mt-1">
-    <div class="flex flex-col">
-      <span class="text-xs text-gray-400 mb-0">
-        <%= t('activerecord.attributes.catch.show.range') %>
-      </span>
-      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
-        <%= catch.range %>
-      </p>
-    </div>
-    <div class="flex flex-col">
-      <span class="text-xs text-gray-400 mb-0">
-        <%= t('activerecord.attributes.catch.show.size') %>
-      </span>
-      <p class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0">
-        <%= catch.size %>
-      </p>
-    </div>
-  </div>
-
+  <!-- Memo -->
   <% if catch.memo.present? %>
-    <div class="flex flex-col mt-1">
-      <span class="text-xs text-gray-400 mb-0">
-        <%= t('activerecord.attributes.catch.show.memo') %>
-      </span>
-      <p class="w-full p-2 pl-3 text-left break-words border border-gray-800 rounded-lg whitespace-normal mt-0">
-        <%= catch.memo %>
-      </p>
+    <div class="flex flex-col mt-4">
+      <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"><%= t('activerecord.attributes.catch.show.memo') %></span>
+      <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-3 p-2 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 break-words whitespace-normal"><%= catch.memo %></p>
     </div>
   <% end %>
 
+  <!-- Google Map -->
   <% if catch.latitude.present? && catch.longitude.present? %>
-    <div class="flex flex-col mt-2">
-      <span class="text-xs text-gray-400 mb-0">
-        <%= t('activerecord.attributes.catch.show.map') %>
-      </span>
-      <div class="w-full p-0.5 pl-0.5 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0" 
-          data-controller="catchshowmap" 
-          data-catchshowmap-latitude-value="<%= catch.latitude %>" 
-          data-catchshowmap-longitude-value="<%= catch.longitude %>" 
-          data-catchshowmap-map-id-value="<%= Rails.application.credentials.google[:maps_id] %>" 
-          data-catchshowmap-api-key-value="<%= Rails.application.credentials.google[:maps_api_key] %>" 
+    <div class="flex flex-col mt-4">
+      <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"><%= t('activerecord.attributes.catch.show.map') %></span>
+      <div data-controller="catchshowmap"
+          data-catchshowmap-latitude-value="<%= catch.latitude %>"
+          data-catchshowmap-longitude-value="<%= catch.longitude %>"
+          data-catchshowmap-map-id-value="<%= Rails.application.credentials.google[:maps_id] %>"
+          data-catchshowmap-api-key-value="<%= Rails.application.credentials.google[:maps_api_key] %>"
           data-catchshowmap-catch-id-value="<%= catch.id %>">
-        <div id="map_<%= catch.id %>" class="w-full p-2 pl-3 text-left bg-gray-900 border border-gray-800 rounded-lg mt-0" style="width: 100%; height: 200px;"></div>
+        <div id="map_<%= catch.id %>" class="rounded-lg map-container" style="height: 200px;">
+        </div>
       </div>
     </div>
   <% end %>
 
   <!-- Bottom menu -->
-  <div class="flex justify-between items-end mt-2">
-    <div class="flex space-x-3">
-      <div class="inline-block">
-        <button data-modal-target="commentmodal_<%= catch.id %>" 
-                data-modal-toggle="commentmodal_<%= catch.id %>" 
-                data-action="click->hello#stopToggle" 
-                type="button">
-          <svg class="w-7 h-7" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M7.556 8.5h8m-8 3.5H12m7.111-7H4.89a.896.896 0 0 0-.629.256.868.868 0 0 0-.26.619v9.25c0 .232.094.455.26.619A.896.896 0 0 0 4.89 16H9l3 4 3-4h4.111a.896.896 0 0 0 .629-.256.868.868 0 0 0 .26-.619v-9.25a.868.868 0 0 0-.26-.619.896.896 0 0 0-.63-.256Z"/>
-          </svg>
-        </button>
-      </div>
-
-      <% if current_user == @catch.user %>
-        <div class="inline-block">
-          <button data-modal-target="catcheditmodal_<%= catch.id %>" 
-                  data-modal-toggle="catcheditmodal_<%= catch.id %>" 
-                  data-action="click->hello#stopToggle" 
-                  type="button">
-            <svg class="w-7 h-7 align-middle block" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
-            </svg>
-          </button>
-        </div>
-        <%= turbo_frame_tag "catch_#{catch.id}" do %>
-          <%= link_to catch, data: { turbo_confirm: t('activerecord.attributes.catch.show.confirm'), turbo_method: :delete }, class: 'inline-block' do %>
-            <svg class="w-7 h-7 align-middle block" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-            </svg>
-          <% end %>
+  <div class="grid grid-cols-4 gap-1 mt-4">
+    <% if current_user == @catch.user %>
+      <!-- Delete --> 
+      <%= turbo_frame_tag "catch_#{catch.id}" do %>
+        <%= link_to catch, method: :delete, data: { turbo_method: :delete, turbo_confirm: t('activerecord.attributes.catch.show.confirm') }, class: 'flex items-center justify-center text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs px-3 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' do %>
+          <%= t('activerecord.attributes.catch.show.delete') %>
         <% end %>
       <% end %>
-    </div>
 
+      <!-- Edit --> 
+      <button data-modal-target="catcheditmodal_<%= catch.id %>" data-modal-toggle="catcheditmodal_<%= catch.id %>" data-action="click->hello#stopToggle" type="button" class="flex items-center justify-center text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs px-3 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+        <%= t('activerecord.attributes.catch.show.edit') %>
+      </button>
+    <% end %>
+
+    <!-- Comment form -->    
+    <button data-modal-target="commentmodal_<%= catch.id %>" data-modal-toggle="commentmodal_<%= catch.id %>" data-action="click->hello#stopToggle" type="button" class="flex items-center justify-center text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs px-0 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+      <%= t('activerecord.attributes.catch.show.comment') %>
+    </button>
+
+    <!-- Like -->  
     <%= render partial: 'likes/like_button', locals: { catch: catch } %>
   </div>
 
-  <!-- Comment -->
-    <div class="flow-root">
+  <!-- Comment board -->
+    <div class="flow-root mt-4">
       <%= turbo_frame_tag "catch_#{catch.id}_comments" do %>
         <% @catch.comments.each do |comment| %>
           <%= render partial: "comments/comment", locals: { catch: catch, comment: comment } %>
@@ -114,7 +79,7 @@
     </div>
 </div>
 
-<!-- catcheditmodal -->
+<!-- Editmodal -->
 <% if current_user == @catch.user %>
   <div id="catcheditmodal_<%= catch.id %>" 
     data-catcheditmodal-catch-id-value="<%= catch.id %>" 
@@ -144,7 +109,7 @@
   </div>
 <% end %>
 
-<!-- commentmodal -->
+<!-- Comment create modal -->
 <div id="commentmodal_<%= catch.id %>" 
   data-commentmodal-catch-id-value="<%= catch.id %>" 
   data-commentmodal-target="commentmodal" 
