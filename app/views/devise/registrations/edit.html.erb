@@ -1,39 +1,22 @@
 <section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-3 mx-auto">
-    <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-900 dark:border-gray-700">
-      <div class="p-6 space-y-3 md:space-y-6 sm:p-8">
-        <!-- title -->
-        <span class="text-2xl font-extrabold tracking-tight">My</span>
-        <span class="ms-1 text-base font-normal text-gray-400">profile</span>
-        <!-- Dropdown -->
-        <div class="flex justify-start px-4 pt-4">
-          <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-base p-1.5" type="button">
-            <span class="sr-only">Open dropdown</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
-              <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
-            </svg>
-          </button>
-          <div id="dropdown" class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-36 dark:bg-gray-800">
-            <ul class="py-2" aria-labelledby="dropdownButton">
-              <li>
-                <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "block px-1 py-1 text-base text-center text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-red-600 dark:hover:text-red" %>
-              </li>
-            </ul>
-          </div>
-        </div>
+  <div class="flex flex-col items-center justify-center px-4 py-2 mx-auto">
+    <div class="w-full max-w-md p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-900 dark:border-gray-700">
+      <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">My Page</h5>
+        <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "text-sm font-medium text-blue-600 hover:underline dark:text-blue-500" %>
+      </div>
         <!-- Image and Buttons -->
         <%= turbo_frame_tag "edit_content" do %>
-          <div class="flex flex-col items-center pb-10">
-              <%= image_tag resource.profile_image, class: 'w-24 h-24 mb-6 rounded-full shadow-lg object-cover' %>
+          <div class="flex flex-col items-center py-10">
+              <%= image_tag resource.profile_image, class: 'w-24 h-24 mb-3 rounded-full shadow-lg object-cover' %>
               <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%= resource.username %></h5>
-              <span class="text-base text-gray-500 dark:text-gray-400"><%= resource.email %></span>
+              <span class="text-sm text-gray-500 dark:text-gray-400"><%= resource.email %></span>
               <div class="flex mt-4 md:mt-6">
-                <button data-modal-target="profilemodal" data-modal-toggle="profilemodal" type="button" class="inline-flex items-center px-4 py-2 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">編集</button>
-                <a href="<%= catches_path %>" data-turbo="false" class="py-2 px-4 ms-2 text-base font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">戻る</a>
+                <button data-modal-target="profilemodal" data-modal-toggle="profilemodal" type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">編集</button>
+                <a href="<%= catches_path %>" data-turbo="false" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">戻る</a>
               </div>
           </div>
         <% end %>
-      </div>
     </div>
   </div>
 </section>

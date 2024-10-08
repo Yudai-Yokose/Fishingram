@@ -1,24 +1,24 @@
-<%= turbo_frame_tag "diary_#{diary.id}" do %>
+<%= turbo_frame_tag "admin_catch_#{catch.id}" do %>
   <li class="py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
     <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
       <div class="flex items-center">
         <!-- Image -->
         <div class="flex-shrink-0">
-          <%= image_tag diary.user.profile_image, class: "w-9 h-9 rounded-full object-cover", alt: "#{diary.user.username} profile image" %>
+          <%= image_tag catch.user.profile_image, class: "w-9 h-9 rounded-full object-cover", alt: "#{catch.user.username} profile image" %>
         </div>
         <!-- Info -->
         <div class="flex-1 min-w-0 ms-4">
           <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-            <%= diary.user.username %>
+            <%= catch.user.username %>
           </p>
           <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-            <%= l diary.diary_date, format: :long %>
+            <%= catch.created_at.in_time_zone('Asia/Tokyo').strftime("%Y年%-m月%-d日 %-H時%-M分") %>
           </p>
         </div>
       </div>
       <!-- Turbo Frame -->
       <div class="hidden pt-4" data-hello-target="content">
-        <%= turbo_frame_tag "diary_index_#{diary.id}_show", src: diary_path(diary, format: :turbo_stream), loading: "lazy" %>
+        <%= turbo_frame_tag "admin_catch_index_#{catch.id}_show", src: admin_catch_path(catch, format: :turbo_stream), loading: "lazy" %>
       </div>
     </div>
   </li>

@@ -1,0 +1,37 @@
+<section class="bg-gray-900 pb-24">
+  <div class="flex flex-col items-center justify-center px-3 mx-auto">
+    <div class="w-full rounded-lg border md:mt-0 sm:max-w-md bg-gray-900 border-gray-700">
+      <div class="p-6 space-y-3 md:space-y-6 sm:p-8 w-full max-w-lg">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
+          <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+            User Management
+          </h5>
+          <a href="<%= admin_dashboard_path %>" class="mt-2 sm:mt-0 text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            Dashboard
+          </a>
+        </div>
+        <div class="flow-root">
+          <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <% @users.each do |user| %>
+              <li class="py-3 sm:py-4">
+                <%= link_to admin_user_path(user), class: 'flex items-center' do %>
+                  <div class="flex-shrink-0">
+                    <%= image_tag user.profile_image.attached? ? url_for(user.profile_image) : 'default-avatar.png', class: "w-8 h-8 rounded-full object-cover" %>
+                  </div>
+                  <div class="flex-1 min-w-0 ms-4">
+                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                      <%= user.username %>
+                    </p>
+                    <p class="text-xs text-gray-500 truncate dark:text-gray-400">
+                      <%= user.email %>
+                    </p>
+                  </div>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

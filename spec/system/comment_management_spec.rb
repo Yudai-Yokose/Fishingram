@@ -13,18 +13,18 @@ RSpec.describe 'Comment System', type: :system, js: true do
   let!(:other_comment) { Comment.create!(content: 'This is a comment on another user\'s post', user: other_user, catch: other_catch) }
 
   before do
-    page.driver.browser.manage.window.resize_to(475, 1000)
+    page.driver.browser.manage.window.resize_to(475, 1500)
   end
 
   before do
-    login_as(user, scope: :user)  # ログイン処理
+    login_as(user, scope: :user)
   end
 
   context 'for own catch' do
     before do
-      visit catches_path  # 自分の投稿の一覧ページに遷移
+      visit catches_path
       within("turbo-frame#catch_#{catch.id}") do
-        find("div.block[role='button']").click  # 詳細ページに遷移
+        find("div.block[role='button']").click
       end
     end
 
@@ -35,22 +35,15 @@ RSpec.describe 'Comment System', type: :system, js: true do
     end
 
     it 'allows a logged-in user to edit a comment' do
-      # スクロールして編集ボタンが表示されるようにする
       find("button[data-dropdown-toggle='dropdownDots_#{comment.id}']")
-
-      # ドロップダウンメニューを開く
       find("button[data-dropdown-toggle='dropdownDots_#{comment.id}']").click
-
-      # 編集モーダルを開く
       find("button[data-modal-target='editcommentmodal_#{comment.id}']").click
 
-      # コメントを編集して送信
       within "turbo-frame#edit_comment_#{comment.id}_form" do
         fill_in 'comment_content', with: 'This is an updated comment'
         click_button I18n.t('activerecord.attributes.comment.edit.submit')
       end
 
-      # 編集後のコメントが表示されていることを確認
       within "turbo-frame#catch_#{catch.id}_comments" do
         expect(page).to have_content('This is an updated comment')
         expect(page).not_to have_content('This is a test comment')
@@ -58,16 +51,10 @@ RSpec.describe 'Comment System', type: :system, js: true do
     end
 
     it 'allows a logged-in user to delete a comment' do
-      # スクロールして削除ボタンが表示されるようにする
       find("button[data-dropdown-toggle='dropdownDots_#{comment.id}']")
-
-      # ドロップダウンメニューを開く
       find("button[data-dropdown-toggle='dropdownDots_#{comment.id}']").click
-
-      # 削除ボタンをクリック
       find("form[action='#{catch_comment_path(catch, comment)}'] button").click
 
-      # コメントが削除されたことを確認
       within "turbo-frame#catch_#{catch.id}_comments" do
         expect(page).not_to have_content('This is a test comment')
       end
@@ -76,9 +63,9 @@ RSpec.describe 'Comment System', type: :system, js: true do
 
   context 'for another user\'s catch' do
     before do
-      visit catches_path  # 他ユーザーの投稿の一覧ページに遷移
+      visit catches_path
       within("turbo-frame#catch_#{other_catch.id}") do
-        find("div.block[role='button']").click  # 他のユーザーの投稿の詳細ページに遷移
+        find("div.block[role='button']").click
       end
     end
 
@@ -90,7 +77,6 @@ RSpec.describe 'Comment System', type: :system, js: true do
 
     it 'does not display edit and delete buttons for comments on another user\'s post' do
       within "turbo-frame#catch_#{other_catch.id}_comments" do
-        # 編集・削除ボタンが表示されていないことを確認
         expect(page).not_to have_selector("button[data-modal-target='editcommentmodal_#{other_comment.id}']")
         expect(page).not_to have_selector("form[action='#{catch_comment_path(other_catch, other_comment)}'] button")
       end

@@ -1,0 +1,38 @@
+<section class="bg-gray-900 pb-24">
+  <div class="flex flex-col items-center justify-center px-3 mx-auto w-full">
+    <div class="w-full rounded-lg border md:mt-0 sm:max-w-md bg-gray-900 border-gray-700">
+      <div class="p-6 space-y-3 md:space-y-6 sm:p-8 w-full max-w-lg">
+          <h5 class="mb-3 text-xl font-bold leading-none text-gray-900 dark:text-white">
+            Admin Dashboard
+          </h5>
+          <p class="text-sm font-normal text-gray-500 dark:text-gray-400">Please select from the following management options.</p>
+          <ul class="my-4 space-y-3">
+            <li>
+              <%= link_to admin_users_path, class: 'flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-800 dark:hover:bg-gray-500 dark:text-white' do %>
+                <svg aria-hidden="true" class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap">User Management</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to admin_catches_path, class: 'flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-800 dark:hover:bg-gray-500 dark:text-white' do %>
+                <svg aria-hidden="true" class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3v14m7-7H3"/>
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap">Catch Management</span>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to admin_diaries_path, class: 'flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-800 dark:hover:bg-gray-500 dark:text-white' do %>
+                <svg aria-hidden="true" class="h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h12M4 10h12M4 14h12M4 18h12"/>
+                </svg>
+                <span class="flex-1 ms-3 whitespace-nowrap">Diary Management</span>
+              <% end %>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</section>

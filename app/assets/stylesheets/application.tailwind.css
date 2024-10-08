@@ -261,27 +261,3 @@ body {
   border-radius: 10px;
   background-color: transparent;
 }
-
-/*========================================= like button =======================================*/
-
-.likeButton {
-  background-color: transparent;
-  padding: 0.01em 0.5em 0.01em;
-  cursor: pointer;
-  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
-  outline: 0;
-  }
-
-  .likeButton__icon {
-  display: inline-block;
-  margin-right: 0.2em;
-  }
-
-  .likeButton:hover {
-  color: #2563eb ;
-  }
-
-  .likeButton.liked {
-  color: #2563eb;
-  border-color: #2563eb;
-  }

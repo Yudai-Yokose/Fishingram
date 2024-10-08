@@ -1,4 +1,4 @@
-<%= turbo_frame_tag "diary_#{diary.id}" do %>
+<%= turbo_frame_tag "admin_diary_#{diary.id}" do %>
   <li class="py-3 sm:py-4 border-b border-gray-200 dark:border-gray-700">
     <div class="block" role="button" tabindex="0" data-controller="hello" data-action="click->hello#toggle" style="cursor: pointer;">
       <div class="flex items-center">
@@ -18,7 +18,7 @@
       </div>
       <!-- Turbo Frame -->
       <div class="hidden pt-4" data-hello-target="content">
-        <%= turbo_frame_tag "diary_index_#{diary.id}_show", src: diary_path(diary, format: :turbo_stream), loading: "lazy" %>
+         <%= turbo_frame_tag "admin_diary_index_#{diary.id}_show", src: admin_diary_path(diary, format: :turbo_stream), loading: "lazy" %>
       </div>
     </div>
   </li>

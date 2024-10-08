@@ -1,32 +1,39 @@
 <header class="fixed top-0 left-0 w-full z-50">
   <nav class="border-gray-200 bg-gray-50 dark:bg-gray-900 dark:border-gray-700">
-    <!-- ここで max-width を 475px に設定して、中央に寄せる -->
     <div class="mx-auto" style="max-width: 475px;">
       <div class="flex flex-wrap items-center justify-between p-2">
         <a href="<%= root_path %>" class="flex items-center space-x-2 rtl:space-x-reverse">
           <%= image_tag "/icon_white.svg", class: "h-10", alt: "Fishingram Logo" %>
           <%= image_tag "/banner_white.svg", class: "h-10", alt: "Fishingram Banner" %>
         </a>
-        <button data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center justify-center p-2 w-10 h-10 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
-          <span class="sr-only">Open main menu</span>
-          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+        
+        <!-- New Dropdown Button -->
+        <button id="dropdownMenuIconHorizontalButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button">
+          <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+            <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
           </svg>
         </button>
-        <div class="hidden w-full" id="navbar-hamburger">
-          <ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+
+        <!-- Dropdown menu -->
+        <div id="dropdownDotsHorizontal" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-800 dark:divide-gray-600">
+          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
             <li>
-              <a href="<%= terms_path %>" class="block py-2 px-3 text-white bg-blue-700 rounded dark:bg-blue-600" aria-current="page">利用規約</a>
+              <%= link_to '利用規約', terms_path, class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
             </li>
             <li>
-              <a href="<%= privacy_policy_path %>" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">プライバシーポリシー</a>
+              <%= link_to 'プライバシーポリシー', privacy_policy_path, class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
             </li>
             <li>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfo8LgIDTyXKO3_wR37ONSLzs22f3wBH7_B1SWHbex0SJQOOA/viewform" target="_blank" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">問い合わせ</a>
+              <%= link_to '問い合わせ', 'https://docs.google.com/forms/d/e/1FAIpQLSfo8LgIDTyXKO3_wR37ONSLzs22f3wBH7_B1SWHbex0SJQOOA/viewform', target: '_blank', class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
             </li>
             <% if user_signed_in? %>
               <li>
-                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white", data: { turbo_method: :delete } %>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
+              </li>
+            <% end %>
+            <% if current_user && current_user.admin? %>
+              <li>
+                <%= link_to 'Admin Dashboard', admin_dashboard_path, class: "block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white" %>
               </li>
             <% end %>
           </ul>
