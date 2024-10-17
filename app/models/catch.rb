@@ -13,4 +13,12 @@ class Catch < ApplicationRecord
   enum :tide_level, { "満潮前後" => 0, "上げ前半" => 1, "上げ後半" => 2, "干潮前後" => 3, "下げ前半" => 4, "下げ後半" => 5 }
   enum :range,      { "トップ" => 0, "表層" => 1, "中層" => 2, "ボトム" => 3 }
   enum :size,       { "20cm以下" => 0, "20~30cm" => 1, "30~40cm" => 2, "40~50cm" => 3, "50~60cm" => 4, "60~70cm" => 5, "70~80cm" => 6, "80~90cm" => 7, "90cm以上" => 8 }
+
+  def self.ransackable_attributes(auth_object = nil)
+    [ "created_at", "id", "latitude", "longitude", "memo", "range", "size", "tide", "tide_level", "updated_at", "user_id" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "comments", "images_attachments", "images_blobs", "liked_users", "likes", "user" ]
+  end
 end

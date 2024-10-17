@@ -1,4 +1,5 @@
 class DiariesController < ApplicationController
+  include ActionView::RecordIdentifier
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_diary, only: %i[show edit update destroy purge_image]
   before_action :correct_user, only: %i[show edit update destroy purge_image]
@@ -55,19 +56,13 @@ class DiariesController < ApplicationController
   end
 
   def index
-    @diaries = current_user.diaries.includes(images_attachments: :blob).order(diary_date: :desc).page(params[:page]).per(5)
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.append("diary_index_pagination", partial: "diaries/index")
-      end
-      format.html
-    end
+    @diaries = current_user.diaries.includes(images_attachments: :blob).order(diary_date: :desc).page(params[:page]).per(8)
   end
 
   def show
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace("diary_index_#{@diary.id}_show", partial: "diaries/show", locals: { diary: @diary })
+        render turbo_stream: turbo_stream.replace(dom_id(@diary, :show), partial: "diaries/show", locals: { diary: @diary })
       end
       format.html
     end
@@ -76,7 +71,7 @@ class DiariesController < ApplicationController
   def edit
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("edit_diary_#{@diary.id}_form", partial: "diaries/edit", locals: { diary: @diary })
+        render turbo_stream: turbo_stream.replace(dom_id(@diary, :edit), partial: "diaries/edit", locals: { diary: @diary })
       }
       format.html
     end
@@ -89,8 +84,11 @@ class DiariesController < ApplicationController
         format.turbo_stream {
           flash.now[:notice] = I18n.t("activerecord.attributes.diary.update.success")
           render turbo_stream: [
-            turbo_stream.update("diary_show_#{@diary.id}_details", partial: "diaries/show_details", locals: { diary: @diary }),
-            turbo_stream.update("diary_show_#{@diary.id}_images", partial: "diaries/show_images", locals: { diary: @diary }),
+            turbo_stream.update(dom_id(@diary, :details), partial: "diaries/show_details", locals: { diary: @diary }),
+            turbo_stream.update(dom_id(@diary, :images), partial: "diaries/show_images", locals: { diary: @diary }),
+            turbo_stream.update(dom_id(@diary, :index_image), partial: "diaries/index_image", locals: { diary: @diary }),
+            turbo_stream.update(dom_id(@diary, :memo), partial: "diaries/index_memo", locals: { diary: @diary }),
+            turbo_stream.update(dom_id(@diary, :edit), partial: "diaries/edit", locals: { diary: @diary }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -101,7 +99,7 @@ class DiariesController < ApplicationController
         format.turbo_stream {
           flash.now[:alert] = I18n.t("activerecord.attributes.diary.update.failure")
           render turbo_stream: [
-            turbo_stream.replace("edit_diary_#{@diary.id}_form", partial: "dairy/edit", locals: { diary: @diary }),
+            turbo_stream.replace(dom_id(@diary, :edit), partial: "dairy/edit", locals: { diary: @diary }),
             turbo_stream.update("flash", partial: "shared/flash")
           ]
         }
@@ -116,7 +114,7 @@ class DiariesController < ApplicationController
       format.turbo_stream {
         flash.now[:notice] = I18n.t("activerecord.attributes.diary.destroy.success")
         render turbo_stream: [
-          turbo_stream.remove("diary_#{@diary.id}"),
+          turbo_stream.remove(dom_id(@diary)),
           turbo_stream.update("flash", partial: "shared/flash")
         ]
       }
@@ -132,8 +130,8 @@ class DiariesController < ApplicationController
       format.turbo_stream {
         flash.now[:notice] = I18n.t("activerecord.attributes.diary.purge_image.success")
         render turbo_stream: [
-          turbo_stream.remove("diary_slide_#{image_id}"),
-          turbo_stream.remove("diary_carousel_link_#{image_id}"),
+          turbo_stream.remove(dom_id(@diary, :slide)),
+          turbo_stream.remove(dom_id(@diary, :carousel_link)),
           turbo_stream.update("flash", partial: "shared/flash")
         ]
       }

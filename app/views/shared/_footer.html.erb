@@ -1,101 +1,103 @@
 <div class="fixed bottom-0 left-0 z-50 w-full h-20 bg-white border-t border-gray-200 dark:bg-gray-900 dark:border-gray-900">
-    <div class="grid h-full max-w-lg grid-cols-5 mx-auto font-medium">
+    <div class="grid h-full max-w-screen-xl mx-auto grid-cols-5 font-medium">
     <% if user_signed_in? %>
         <a href="<%= catches_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
             </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">全ての釣果</span>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">全ての釣果</span>
         </a>
         <a href="<%= index_user_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
             </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">自分の釣果</span>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">自分の釣果</span>
         </a>
     <% else %>
-        <a href="<%= tips_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-            </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">使い方</span>
-        </a>
-        <a href="<%= catches_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <a href="<%= root_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
             </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">釣果を見る</span>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">ホーム</span>
+        </a>
+        <a href="<%= catches_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">釣果を見る</span>
         </a>
     <% end %>
         <button type="button" data-modal-target="record-modal" data-modal-toggle="record-modal" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 1v16M1 9h16"/>
             </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">記録する</span>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">記録する</span>
         </button>
     <% if user_signed_in? %>
-        <a href="<%= diaries_path %>"  class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <a href="<%= diaries_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M11.074 4 8.442.408A.95.95 0 0 0 7.014.254L2.926 4h8.148ZM9 13v-1a4 4 0 0 1 4-4h6V6a1 1 0 0 0-1-1H1a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1v-2h-6a4 4 0 0 1-4-4Z"/>
                 <path d="M19 10h-6a2 2 0 0 0-2 2v1a2 2 0 0 0 2 2h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1Zm-4.5 3.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2ZM12.62 4h2.78L12.539.41a1.086 1.086 0 1 0-1.7 1.352L12.62 4Z"/>
             </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">自分の日記</span>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">自分の日記</span>
         </a>
         <a href="<%= edit_user_registration_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
             </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">マイページ</span>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">マイページ</span>
         </a>
     <% else %>
         <a href="<%= new_user_registration_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
-                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
-                </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">新規登録</span>
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+            </svg>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">新規登録</span>
         </a>
         <a href="<%= new_user_session_path %>" class="inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 20">
+            <svg class="w-5 h-5 mb-2 text-gray-500 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 14 20">
                 <path d="M13 20a1 1 0 0 1-.64-.231L7 15.3l-5.36 4.469A1 1 0 0 1 0 19V2a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v17a1 1 0 0 1-1 1Z"/>
             </svg>
-            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">ログイン</span>
+            <span class="text-xs text-gray-500 md:text-base dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500">ログイン</span>
         </a>
     <% end %>
     </div>
 </div>
 
 <!-- Record modal -->
-<div id="record-modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex justify-center items-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-70" data-controller="record">
-  <div class="relative p-4 w-full max-w-sm min-h-[60vh] max-h-full">
-    <div class="border border-gray-700 rounded-lg shadow bg-gray-900">
-      <div class="flex items-center justify-between p-3 md:p-4 border-b border-gray-700 rounded-t">
-        <ul class="flex items-center w-full">
-          <li class="flex-1 text-lg text-gray-400 text-right" data-record-target="tab">
-            <button data-index="0" data-action="click->record#show" class="w-full p-1 rounded-t-lg">
-              <span class="text-base font-extrabold tracking-tight">釣果</span>
-            </button>
-          </li>
-          <li class="flex-1 text-lg text-gray-400 text-left" data-record-target="tab">
-            <button data-index="1" data-action="click->record#show" class="w-full p-1 rounded-t-lg">
-              <span class="text-base font-extrabold tracking-tight">日記</span>
-            </button>
-          </li>
-        </ul>
-        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-600 hover:text-white rounded-lg w-8 h-8 inline-flex justify-center items-center" data-modal-hide="record-modal">
-          <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
-      </div>
-      <div class="py-1 px-1">
-        <div data-record-target="content" class="catch-form">
-          <%= turbo_frame_tag "new_catch_form", src: new_catch_path(format: :turbo_stream), data: { turbo_temporary: true }, loading: "lazy" %>
+<div id="record-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" data-controller="record">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-sm md:text-base xl:text-lg font-semibold text-gray-900 dark:text-white w-full">
+                  <ul class="flex flex-wrap justify-center space-x-4 font-medium text-center" id="record-tab" data-tabs-toggle="#record-tab-content" role="tablist">
+                      <li role="catch">
+                          <button class="inline-block p-2 border-b-2 rounded-t-lg text-base md:text-lg" id="catch-tab" data-tabs-target="#catch" type="button" role="tab" aria-controls="catch" aria-selected="false">釣果</button>
+                      </li>
+                      <li role="diary">
+                          <button class="inline-block p-2 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 text-base md:text-lg" id="diary-tab" data-tabs-target="#diary" type="button" role="tab" aria-controls="diary" aria-selected="false">日記</button>
+                      </li>
+                  </ul>
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="record-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
+              <div id="record-tab-content">
+                  <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="catch" role="tabpanel" aria-labelledby="catch-tab">
+                    <%= turbo_frame_tag "new_catch_form", src: new_catch_path(format: :turbo_stream), loading: "lazy" %>
+                  </div>
+                  <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="diary" role="tabpanel" aria-labelledby="diary-tab">
+                    <%= turbo_frame_tag "new_diary_form", src: new_diary_path(format: :turbo_stream), loading: "lazy" %>
+                  </div>
+              </div>
+            </div>
         </div>
-        <div data-record-target="content" class="diary-form hidden">
-          <%= turbo_frame_tag "new_diary_form", src: new_diary_path(format: :turbo_stream),  data: { turbo_temporary: true }, loading: "lazy" %>
-        </div>
-      </div>
     </div>
-  </div>
-</div>
+</div> 

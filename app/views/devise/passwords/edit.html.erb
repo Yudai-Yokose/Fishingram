@@ -1,13 +1,11 @@
-<section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-3 mx-auto">
-    <div class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+<section class="bg-gray-50 dark:bg-gray-900 py-16 md:pt-0 md:pb-24">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
 
-        <!-- Title -->
-        <a href="#" class="flex items-center justify-center mb-6 text-lg text-gray-900 dark:text-white">
-          <%= image_tag "/icon_white.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
-          <%= t('.change_your_password') %>
-        </a>
+    <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+          Change Password
+        </h1>
 
         <!-- Form -->
         <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "space-y-4 md:space-y-6" }) do |f| %>
@@ -15,20 +13,25 @@
 
           <!-- New Password Field -->
           <div>
-            <%= f.password_field :password, placeholder: t('.new_password'), autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            <label for="user_password_reset_new" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              New Password
+            </label>
+            <%= f.password_field :password, id: "user_password_reset_new", autocomplete: "new-password", placeholder: t('activerecord.attributes.user.password'), class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
           </div>
 
           <!-- Confirm New Password Field -->
           <div>
-            <%= f.password_field :password_confirmation, placeholder: t('.confirm_new_password'), autocomplete: "new-password", class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            <label for="user_password_reset_confirm" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Confirm password
+            </label>
+            <%= f.password_field :password_confirmation, id: "user_password_reset_confirm", autocomplete: "new-password", placeholder: t('.confirm_new_password'), class: "bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
           </div>
 
           <!-- Submit Button -->
-          <div class="flex justify-center w-full">
+          <div class="mt-6 flex justify-center w-full">
             <%= f.submit t('.change_my_password'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-base text-center py-2.5 px-5 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800" %>
           </div>
         <% end %>
-
       </div>
     </div>
   </div>

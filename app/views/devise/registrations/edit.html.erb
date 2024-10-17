@@ -1,50 +1,49 @@
-<section class="bg-gray-50 dark:bg-gray-900">
-  <div class="flex flex-col items-center justify-center px-4 py-2 mx-auto">
-    <div class="w-full max-w-md p-8 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-900 dark:border-gray-700">
-      <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">My Page</h5>
-        <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "text-sm font-medium text-blue-600 hover:underline dark:text-blue-500" %>
-      </div>
-        <!-- Image and Buttons -->
+<section class="bg-gray-50 dark:bg-gray-900 py-16 md:pt-0 md:pb-24">
+  <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto">
+    <div class="w-full max-w-md bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex justify-end px-4 pt-4">
+            <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm md:text-base p-1.5" type="button">
+                <span class="sr-only">Open dropdown</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                </svg>
+            </button>
+            <!-- Dropdown menu -->
+            <div id="dropdown" class="z-10 hidden text-sm md:text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                <ul class="py-2" aria-labelledby="dropdownButton">
+                  <li>
+                    <%= link_to t('.cancel_my_account'), registration_path(resource_name), data: { turbo_confirm: t('.are_you_sure'), turbo_method: :delete }, class: "block px-4 py-2 text-sm md:text-base text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" %>
+                  </li>
+                </ul>
+            </div>
+        </div>
         <%= turbo_frame_tag "edit_content" do %>
-          <div class="flex flex-col items-center py-10">
-              <%= image_tag resource.profile_image, class: 'w-24 h-24 mb-3 rounded-full shadow-lg object-cover' %>
-              <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%= resource.username %></h5>
-              <span class="text-sm text-gray-500 dark:text-gray-400"><%= resource.email %></span>
-              <div class="flex mt-4 md:mt-6">
-                <button data-modal-target="profilemodal" data-modal-toggle="profilemodal" type="button" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">編集</button>
-                <a href="<%= catches_path %>" data-turbo="false" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">戻る</a>
-              </div>
-          </div>
+          <%= render partial: 'edit_content', locals: { resource: resource } %>
         <% end %>
     </div>
   </div>
 </section>
 
-<!-- profilemodal -->
-<div id="profilemodal" 
-  data-profilemodal-catch-id-value="profilemodal" 
-  data-profilemodal-target="profilemodal" 
-  data-controller="profilemodal" 
-  data-action="click->hello#stopToggle" 
-  tabindex="-1" 
-  aria-hidden="true" 
-  class="hidden fixed inset-0 z-50 flex justify-center items-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-70">
-  <div class="relative p-4 w-full max-w-sm min-h-[60vh] max-h-full">
-    <div class="border border-gray-700 rounded-lg shadow bg-gray-900">
-      <div class="relative rounded-t text-center">
-        <button type="button" 
-                class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-600 hover:text-white rounded-lg w-8 h-8 inline-flex justify-center items-center" 
-                data-modal-hide="profilemodal">
-          <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
-      </div>
-      <div class="py-1 px-1">
-        <%= render partial: 'edit_form', locals: { resource: resource } %>
-      </div>
+<!-- Profile modal -->
+<div id="profilemodal" data-profilemodal-catch-id-value="profilemodal" data-profilemodal-target="profilemodal" data-controller="profilemodal" data-action="click->hello#stopToggle" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" data-controller="record">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-sm md:text-base font-semibold text-gray-900 dark:text-white w-full">
+                  プロフィール編集
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="profilemodal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5">
+              <%= render partial: 'edit_form', locals: { resource: resource } %>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
+</div> 

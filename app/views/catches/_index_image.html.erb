@@ -1,0 +1,5 @@
+<% if catch.images.attached? %>
+    <%= image_tag catch.images.first, class: "object-cover w-full h-full rounded-t-lg md:rounded-none md:rounded-s-lg", alt: "Catch Image" %>
+<% else %>
+    <img src="/index.png" class="object-cover w-full h-full rounded-t-lg md:rounded-none md:rounded-s-lg" alt="Default Image">
+<% end %>

@@ -7,6 +7,9 @@ import { application } from "./application"
 import CatchSpinnerController from "./catch_spinner_controller"
 application.register("catch-spinner", CatchSpinnerController)
 
+import CatchdestroyController from "./catchdestroy_controller"
+application.register("catchdestroy", CatchdestroyController)
+
 import CatcheditmodalController from "./catcheditmodal_controller"
 application.register("catcheditmodal", CatcheditmodalController)
 
@@ -27,6 +30,9 @@ application.register("date", DateController)
 
 import DiarySpinnerController from "./diary_spinner_controller"
 application.register("diary-spinner", DiarySpinnerController)
+
+import DiarydestroyController from "./diarydestroy_controller"
+application.register("diarydestroy", DiarydestroyController)
 
 import DiaryeditmodalController from "./diaryeditmodal_controller"
 application.register("diaryeditmodal", DiaryeditmodalController)

@@ -1,0 +1,5 @@
+<% if diary.content.present? %>
+  <p class="mb-3 text-sm md:text-base font-normal text-gray-700 dark:text-gray-400">
+    <%= truncate(diary.content, length: 60, omission: '...') %>
+  </p>
+<% end %>

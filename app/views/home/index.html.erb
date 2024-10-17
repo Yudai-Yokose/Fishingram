@@ -1,60 +1,116 @@
-<div class="flex justify-center">
-  <div class="px-8 py-2" data-controller="intro" data-intro-delay-value="500" style="max-width: 475px;">
-    <h1 class="hidden fade-in-top mt-32 mb-2 flex justify-center" data-intro-target="element">
-      <%= image_tag "/icon_white.svg", class: "h-32", alt: "Fishingram Logo" %>
+<div class="py-24 md:py-24 lg:py-8">
+  <!-- Top -->
+  <div class="flex flex-col items-center justify-center px-3 w-full max-w-screen-xl mx-auto" data-controller="intro" data-intro-delay-value="500">
+    <h1 class="hidden fade-in-top mt-36 md:mt-40 mb-2 flex justify-center" data-intro-target="element">
+      <%= image_tag "/icon_white.svg", class: "h-32 md:h-48", alt: "Fishingram Logo" %>
     </h1>
-    <p class="hidden fade-in-bottom flex mt-8 justify-center mb-4" data-intro-target="element">
-      <%= image_tag "/banner_white.svg", class: "h-16", alt: "Fishingram Banner" %>
+    <p class="hidden fade-in-bottom flex mt-2 justify-center mb-4" data-intro-target="element">
+      <%= image_tag "/banner_white_subtitle.svg", class: "h-16 md:h-24", alt: "Fishingram Banner" %>
     </p>
 
-    <p class="hidden fade-in-bottom text-neutral-content mb-6 flex items-center justify-start" data-intro-target="element">
-      <svg class="w-6 h-6 mr-4 flex-shrink-0 text-neutral-content" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16.881V7.119a1 1 0 0 1 1.636-.772l5.927 4.881a1 1 0 0 1 0 1.544l-5.927 4.88A1 1 0 0 1 8 16.882Z"/>
-      </svg>
-      Fishingramは手軽に釣果を記録することができるサービスです。
-    </p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-6">
+      <!-- Card 1 -->
+      <div class="mb-6 md:mb-6 lg:mb-0 hidden fade-in-bottom flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full max-w-screen-xl mx-auto hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900" data-intro-target="element">
+          <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/1.png" alt="">
+          <div class="flex flex-col justify-between p-4 leading-normal">
+              <h5 class="mb-2 text-base md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">What is Fishingram?</h5>
+              <p class="mb-3 text-sm md:text-base font-normal text-gray-700 dark:text-gray-400">Fishingramは手軽に釣果を記録することができる、釣り人のための釣果記録サービスです。釣れた時の状況や魚の画像を簡単に記録に残すことができます。</p>
+          </div>
+      </div>
 
-    <p class="hidden fade-in-bottom text-neutral-content mt-6 mb-1" data-intro-target="element">
-      主な機能
-    </p>
+      <!-- Card 2 -->
+      <div class="mb-6 md:mb-6 lg:mb-0 hidden fade-in-bottom flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full max-w-screen-xl mx-auto hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900" data-intro-target="element">
+          <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/2.png" alt="">
+          <div class="flex flex-col justify-between p-4 leading-normal">
+              <h5 class="mb-2 text-base md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">釣果を記録する</h5>
+              <p class="mb-3 text-sm md:text-base font-normal text-gray-700 dark:text-gray-400">シンプルな操作で、魚のサイズや潮汐、釣れたレンジなどを登録することができます。画像はクラウドストレージに保存されるため、記録することでデバイスの空き容量を増やせます。</p>
+              <button data-modal-target="large-modal-1" data-modal-toggle="large-modal-1" class="block w-full md:w-auto text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-base px-5 py-2.5 text-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                詳しく見る
+              </button>
+          </div>
+      </div>
 
-    <hr class="hidden line-grow border-t border-neutral-content mb-4" data-intro-target="element">
+      <!-- Card 3 -->
+      <div class="mb-6 md:mb-6 lg:mb-0 hidden fade-in-bottom flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full max-w-screen-xl mx-auto hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900" data-intro-target="element">
+          <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/3.png" alt="">
+          <div class="flex flex-col justify-between p-4 leading-normal">
+              <h5 class="mb-2 text-base md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">日記を書く</h5>
+              <p class="mb-3 text-sm md:text-base font-normal text-gray-700 dark:text-gray-400">シンプルな操作で日記の作成も可能です。天気や気温、釣果数などを日記として残し、自分だけの釣果の記録を作りましょう。日記は他人から見られることはありません。</p>
+              <button data-modal-target="large-modal-1" data-modal-toggle="large-modal-1" class="block w-full md:w-auto text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-base px-5 py-2.5 text-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                詳しく見る
+              </button>
+          </div>
+      </div>
 
-    <p class="hidden fade-in-bottom text-neutral-content mb-4 flex items-center justify-start" data-intro-target="element">
-      <svg class="w-6 h-6 mr-4 flex-shrink-0 text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-        <path fill-rule="evenodd" d="M7.5 4.586A2 2 0 0 1 8.914 4h6.172a2 2 0 0 1 1.414.586L17.914 6H19a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h1.086L7.5 4.586ZM10 12a2 2 0 1 1 4 0 2 2 0 0 1-4 0Zm2-4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z" clip-rule="evenodd"/>
-      </svg>
-      魚の写真と一緒に釣れた時の状況を簡単に記録できます。
-    </p>
+      <!-- Card 4 -->
+      <div class="mb-6 md:mb-6 lg:mb-0 hidden fade-in-bottom flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full max-w-screen-xl mx-auto hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900" data-intro-target="element">
+          <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/4.png" alt="">
+          <div class="flex flex-col justify-between p-4 leading-normal">
+              <h5 class="mb-2 text-base md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">位置情報機能</h5>
+              <p class="mb-3 text-sm md:text-base xl:text-lg font-normal text-gray-700 dark:text-gray-400">釣果の記録や日記の作成時に、Googleマップで位置情報を登録することができます。位置情報の登録は任意です。</p>
+              <button data-modal-target="large-modal-1" data-modal-toggle="large-modal-1" class="block w-full md:w-auto text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-base px-5 py-2.5 text-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                詳しく見る
+              </button>
+          </div>
+      </div>
 
-    <p class="hidden fade-in-bottom text-neutral-content mb-4 flex items-center justify-start" data-intro-target="element">
-      <svg class="w-6 h-6 mr-4 flex-shrink-0 text-green-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-        <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
-      </svg>
-      自分しか見れない日記機能で、釣行の振り返りができます。
-    </p>
+      <!-- Card 5 -->
+      <div class="mb-6 md:mb-6 lg:mb-0 hidden fade-in-bottom flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full max-w-screen-xl mx-auto hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900" data-intro-target="element">
+          <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/5.png" alt="">
+          <div class="flex flex-col justify-between p-4 leading-normal">
+              <h5 class="mb-2 text-base md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">いいね・コメント</h5>
+              <p class="mb-3 text-sm md:text-base font-normal text-gray-700 dark:text-gray-400">自分や他人の釣果へいいねやコメントをすることができます。コメントを通して、釣れたルアーや釣り方のコツ、場所などを聞いてみましょう。</p>
+              <button data-modal-target="large-modal-1" data-modal-toggle="large-modal-1" class="block w-full md:w-auto text-white bg-gray-800 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-base px-5 py-2.5 text-center dark:bg-gray-800 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                詳しく見る
+              </button>
+          </div>
+      </div>
 
-    <p class="hidden fade-in-bottom text-neutral-content mb-4 flex items-center justify-start" data-intro-target="element">
-      <svg class="w-6 h-6 mr-4 flex-shrink-0 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-        <path fill-rule="evenodd" d="M11.906 1.994a8.002 8.002 0 0 1 8.09 8.421 7.996 7.996 0 0 1-1.297 3.957.996.996 0 0 1-.133.204l-.108.129c-.178.243-.37.477-.573.699l-5.112 6.224a1 1 0 0 1-1.545 0L5.982 15.26l-.002-.002a18.146 18.146 0 0 1-.309-.38l-.133-.163a.999.999 0 0 1-.13-.202 7.995 7.995 0 0 1 6.498-12.518ZM15 9.997a3 3 0 1 1-5.999 0 3 3 0 0 1 5.999 0Z" clip-rule="evenodd"/>
-      </svg>
-      位置情報機能を使えば、釣れた場所まで記録が可能です。
-    </p>
+      <!-- Card 6 -->
+      <div class="mb-6 md:mb-6 lg:mb-0 hidden fade-in-bottom flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full max-w-screen-xl mx-auto hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900" data-intro-target="element">
+          <img class="object-cover w-full rounded-t-lg h-32 md:h-auto md:w-48 md:rounded-none md:rounded-s-lg" src="/6.png" alt="">
+          <div class="flex flex-col justify-between p-4 leading-normal">
+              <h5 class="mb-2 text-base md:text-lg font-bold tracking-tight text-gray-900 dark:text-white">マナーを守りましょう</h5>
+              <p class="mb-3 text-sm md:text-base font-normal text-gray-700 dark:text-gray-400">釣りなどで海や川、山を訪れる際には、ゴミは必ず持ち帰り綺麗な自然を守りましょう。</p>
+          </div>
+      </div>
 
-    <hr class="hidden line-grow border-t border-neutral-content mb-6" data-intro-target="element">
-
-    <p class="hidden fade-in-bottom text-neutral-content mb-4 flex items-center justify-start" data-intro-target="element">
-      <svg class="w-6 h-6 mr-4 flex-shrink-0 text-neutral-content" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16.881V7.119a1 1 0 0 1 1.636-.772l5.927 4.881a1 1 0 0 1 0 1.544l-5.927 4.88A1 1 0 0 1 8 16.882Z"/>
-      </svg>
-      「使い方」ボタンからアプリの使い方を見ることができます。
-    </p>
-
-    <p class="hidden fade-in-bottom text-neutral-content mb-4 flex items-center justify-start" data-intro-target="element">
-      <svg class="w-6 h-6 mr-4 flex-shrink-0 text-neutral-content" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16.881V7.119a1 1 0 0 1 1.636-.772l5.927 4.881a1 1 0 0 1 0 1.544l-5.927 4.88A1 1 0 0 1 8 16.882Z"/>
-      </svg>
-      <span class="underline-fade-in">釣りに出かけた際、ゴミは必ず持ち帰り、綺麗な海や川を守りましょう。</span>
-    </p>
+    </div>
   </div>
+</div>
+
+
+<!-- large-modal-1 -->
+<div id="large-modal-1" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-4xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+                    釣果を記録する
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="large-modal-1">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                </p>
+                <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as soon as possible of high-risk data breaches that could personally affect them.
+                </p>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="large-modal-1" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                <button data-modal-hide="large-modal-1" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Decline</button>
+            </div>
+        </div>
+    </div>
 </div>

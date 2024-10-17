@@ -57,7 +57,7 @@ ja:
         title: パスワード再設定
         forgot_your_password: パスワードを忘れた場合
       form:
-        send_me_reset_password_instructions: 送信
+        send_me_reset_password_instructions: パスワード再設定のメールを送信
       no_token: このページにはアクセスできません。パスワード再設定メールのリンクからアクセスされた場合には、URL をご確認ください。
       send_instructions: パスワードの再設定メールを送信しました。
       send_paranoid_instructions: メールアドレスが登録済みの場合、パスワード再設定用のメールが数分以内に送信されます。

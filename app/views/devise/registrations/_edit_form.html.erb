@@ -1,41 +1,51 @@
 <%= turbo_frame_tag "edit_form" do %>
-  <section class="bg-gray-900">
-    <div class="flex flex-col items-center justify-center px-1 py-1 mx-auto">
-      <div class="w-full rounded-lg shadow dark:border sm:max-w-md bg-gray-800 border-gray-700">
-        <div class="p-6 space-y-4">
-          <!-- Title -->
-          <a href="#" class="flex items-center justify-center mb-6 text-lg text-white">
-            <%= image_tag "/icon_white.svg", class: "w-8 h-8 mr-2", alt: "logo" %>
-            <%= t('.title') %>  
-          </a>
-
-          <!-- Form -->
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-4 md:space-y-6" }) do |f| %>
-            <div data-controller="file-upload">
-              <div class="flex items-center justify-center w-full">
-                <label for="profile-dropzone-file" class="flex items-center w-full bg-gray-50 border border-gray-300 text-gray-500 dark:text-gray-400 text-base rounded-lg cursor-pointer focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  data-file-upload-target="label" style="height: 44px; padding-left: 0;">
-                  <div class="rounded-tl-lg rounded-bl-lg bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-400 px-4 py-2 h-full flex items-center" style="min-width: 120px;">
-                    <%= t('activerecord.attributes.catch.new.upload_prompt') %>
-                  </div>
-                  <div class="flex-1 px-4 py-2 h-full flex items-center bg-gray-50 dark:bg-gray-700 border-l border-gray-300 rounded-tr-lg rounded-br-lg dark:border-gray-600" style="display: inline-block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                    <span class="text-base text-gray-500 dark:text-gray-400 max-w-xs truncate" data-file-upload-target="fileName">
-                      <%= t('activerecord.attributes.catch.new.upload_placeholder') %>
-                    </span>
-                  </div>
-                  <%= f.file_field :profile_image, id: "profile-dropzone-file", class: "hidden", direct_upload: true, data: { action: "change->file-upload#displayFileName", file_upload_target: "fileInput" } %>
-                </label>
-              </div>
-            </div>
-            <%= f.text_field :username, autocomplete: "username", placeholder: t('activerecord.attributes.user.username'), class: "bg-gray-700 border border-gray-600 text-white text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" %>
-            <%= f.email_field :email, autocomplete: "email", placeholder: t('activerecord.attributes.user.email'), class: "bg-gray-700 border border-gray-600 text-white text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" %>
-            
-            <div class="mt-6 flex justify-center w-full">
-              <%= f.submit t('.update'), class: "w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-800 font-medium rounded-lg text-base px-5 py-2.5 text-center bg-primary-600 hover:bg-primary-700" %>
-            </div>
-          <% end %>
-        </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "space-y-6" }) do |f| %>
+    
+    <!-- File Upload -->
+    <div class="space-y-2" data-controller="file-upload">
+      <label for="<%= dom_id(resource, :dropzone_file) %>" class="block text-sm font-medium text-gray-900 dark:text-white">
+        プロフィール画像
+      </label>
+      <div class="flex items-center justify-center w-full">
+        <label for="<%= dom_id(resource, :dropzone_file) %>" 
+          class="flex items-center w-full bg-gray-50 border border-gray-300 text-gray-500 dark:text-white rounded-lg cursor-pointer focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600" 
+          data-file-upload-target="label" style="height: 44px;">
+          <div class="bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-white px-4 py-2 rounded-tl-lg rounded-bl-lg flex items-center min-w-[120px]">
+            <%= t('activerecord.attributes.catch.new.upload_prompt') %>
+          </div>
+          <div class="flex-1 px-4 py-2 bg-gray-50 dark:bg-gray-700 border-l border-gray-300 dark:border-gray-600 rounded-tr-lg rounded-br-lg truncate">
+            <span class="text-sm text-gray-500 dark:text-white truncate" data-file-upload-target="fileName">
+              <%= t('activerecord.attributes.catch.new.upload_placeholder') %>
+            </span>
+          </div>
+          <%= f.file_field :profile_image, id: dom_id(resource, :dropzone_file), class: "hidden", direct_upload: true, data: { action: "change->file-upload#displayFileName", file_upload_target: "fileInput" } %>
+        </label>
       </div>
     </div>
-  </section>
+
+    <!-- Username -->
+    <div class="space-y-2">
+      <label for="username" class="block text-sm font-medium text-gray-900 dark:text-white">
+        Username
+      </label>
+      <%= f.text_field :username, id: "username", autocomplete: "username", placeholder: t('activerecord.attributes.user.username'), 
+        class: "block w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400" %>
+    </div>
+
+    <!-- Email -->
+    <div class="space-y-2">
+      <label for="user_email" class="block text-sm font-medium text-gray-900 dark:text-white">
+        Your email
+      </label>
+      <%= f.email_field :email, id: "user_email", autocomplete: "email", placeholder: t('activerecord.attributes.user.email'), 
+        class: "block w-full p-2.5 bg-gray-700 border border-gray-600 text-white rounded-lg focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400" %>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="mt-6">
+      <%= f.submit t('.update'), 
+        class: "w-full text-white bg-blue-900 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-800 font-medium rounded-lg px-5 py-2.5 text-center" %>
+    </div>
+
+  <% end %>
 <% end %>
