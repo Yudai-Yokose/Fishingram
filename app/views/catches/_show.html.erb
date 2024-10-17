@@ -1,9 +1,8 @@
-<div class="max-w-sm border rounded-lg shadow bg-gray-900 border-gray-700" data-action="click->hello#stopToggle">
-  <%= turbo_frame_tag "catch_show_#{catch.id}_images" do %>
-      <%= render 'show_images', catch: catch %>
-  <% end %>
-
-  <%= turbo_frame_tag "catch_show_#{catch.id}_details" do %>
-      <%= render 'show_details', catch: catch %>
-  <% end %>
+<div class="flex flex-col items-center items-stretch rounded-lg md:flex-row md:max-w-screen-xl mx-auto" data-action="click->hello#stopToggle">
+  <div id="<%= dom_id(catch, :images) %>" class="w-full md:w-1/2 h-72 md:h-96 md:w-58 rounded-lg overflow-hidden bg-gray-800">
+    <%= render 'show_images', catch: catch %>
+  </div>
+  <div id="<%= dom_id(catch, :details) %>" class="flex md:w-1/2 flex-col justify-start mt-6 md:mt-0 md:px-6 leading-normal w-full">
+    <%= render 'show_details', catch: catch %>
+  </div>
 </div>

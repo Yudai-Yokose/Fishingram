@@ -1,7 +1,0 @@
-<% @diaries.each do |diary| %>
-  <%= render partial: "admin_index_content", locals: { diary: diary } %>
-<% end %>
-
-<% if @diaries.next_page %>
-  <%= turbo_frame_tag "admin_diary_index_pagination", loading: :lazy, src: admin_diaries_path(format: :turbo_stream, page: @diaries.next_page) %>
-<% end %>

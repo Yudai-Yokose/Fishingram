@@ -1,20 +1,16 @@
 class Admin::DiariesController < ApplicationController
+  include ActionView::RecordIdentifier
+  before_action :require_admin
   before_action :set_diary, only: %i[show destroy]
 
   def index
-    @diaries = Diary.includes(:user).order(created_at: :desc).page(params[:page]).per(5)
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.append("admin_diary_index_pagination", partial: "admin/diaries/admin_index")
-      end
-      format.html
-    end
+    @diaries = Diary.includes(:user).order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def show
     respond_to do |format|
       format.turbo_stream {
-        render turbo_stream: turbo_stream.replace("admin_diary_index_#{@diary.id}_show", partial: "admin/diaries/admin_show", locals: { diary: @diary })
+        render turbo_stream: turbo_stream.replace(dom_id(@diary, :admin_show), partial: "admin/diaries/admin_show", locals: { diary: @diary })
       }
       format.html
     end

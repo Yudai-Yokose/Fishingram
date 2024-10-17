@@ -13,7 +13,7 @@ Rails.application.routes.draw do
       delete :purge_image
     end
     resource :like, only: [ :create, :destroy ]
-    resources :comments, only: [ :new, :create, :destroy, :edit, :update ]
+    resources :comments, only: [ :new, :create, :index, :destroy, :edit, :update ]
   end
 
   devise_for :users, controllers: {
@@ -34,7 +34,6 @@ Rails.application.routes.draw do
 
   get "terms", to: "home#terms"
   get "privacy_policy", to: "home#privacy_policy"
-  get "tips", to: "home#tips"
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

@@ -113,6 +113,7 @@ ja:
         new:
           title: "日記を作成"
           submit: "日記を作成する"
+          date: "日時"
           upload_prompt: "ファイル選択"
           upload_placeholder: "未選択"
           weather_prompt: "天気"

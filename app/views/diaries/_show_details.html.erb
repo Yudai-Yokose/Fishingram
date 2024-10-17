@@ -1,93 +1,72 @@
-<div class="px-4 py-4">
-  <!-- Details -->
-  <div class="grid grid-cols-2 gap-4">
-    <% attributes = {
-      weather: t('activerecord.attributes.diary.show.weather'),
-      time_of_day: t('activerecord.attributes.diary.show.time_of_day'),
-      temperature: t('activerecord.attributes.diary.show.temperature'),
-      catch_count: t('activerecord.attributes.diary.show.catch_count')
-    } %>
+<div class="grid gap-4 grid-cols-2">
 
-    <% attributes.each do |key, label| %>
-      <div class="flex flex-col">
-        <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">
-          <%= label %>
-        </span>
-        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-3 p-2 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <%= diary.send(key) %>
-        </p>
-      </div>
-    <% end %>
+  <!-- Weather -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.diary.new.weather_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= diary.weather %>
+    </div>
+  </div>
+
+  <!-- Time of day -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.diary.new.time_of_day_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= diary.time_of_day %>
+    </div>
+  </div>
+
+  <!-- Temperature -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.diary.new.temperature_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base xl:text-lg rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= diary.temperature %>
+    </div>
+  </div>
+
+  <!-- Catch_count -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.diary.new.catch_count_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= diary.catch_count %>
+    </div>
   </div>
 
   <!-- Content -->
   <% if diary.content.present? %>
-    <div class="flex flex-col mt-4">
-      <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"><%= t('activerecord.attributes.diary.show.content') %></span>
-      <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-3 p-2 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 break-words whitespace-normal"><%= diary.content %></p>
+    <div class="col-span-2">
+      <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+        <%= t('activerecord.attributes.diary.new.content') %>
+      </div>
+      <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <%= diary.content %>
+      </div>
     </div>
   <% end %>
 
   <!-- Google Map -->
   <% if diary.latitude.present? && diary.longitude.present? %>
-    <div class="flex flex-col mt-4">
-      <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"><%= t('activerecord.attributes.diary.show.map') %></span>
+    <div class="col-span-2">
+      <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+        <%= t('activerecord.attributes.diary.show.map') %>
+      </div>
       <div data-controller="diaryshowmap"
           data-diaryshowmap-latitude-value="<%= diary.latitude %>"
           data-diaryshowmap-longitude-value="<%= diary.longitude %>"
           data-diaryshowmap-map-id-value="<%= Rails.application.credentials.google[:maps_id] %>"
           data-diaryshowmap-api-key-value="<%= Rails.application.credentials.google[:maps_api_key] %>"
           data-diaryshowmap-diary-id-value="<%= diary.id %>">
-        <div id="map_<%= diary.id %>" class="rounded-lg map-container" style="height: 200px;">
+        <div id="map_<%= diary.id %>" class="rounded-lg map-container h-[300px] md:h-[150px]">
         </div>
       </div>
     </div>
   <% end %>
-
-  <!-- Bottom menu -->
-  <div class="grid grid-cols-4 gap-1 mt-4">
-    <% if current_user == @diary.user %>
-      <!-- Delete --> 
-      <%= turbo_frame_tag "diary_#{diary.id}" do %>
-        <%= link_to diary, method: :delete, data: { turbo_method: :delete, turbo_confirm: t('activerecord.attributes.diary.show.confirm') }, class: 'flex items-center justify-center text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs px-3 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' do %>
-          <%= t('activerecord.attributes.diary.show.delete') %>
-        <% end %>
-      <% end %>
-
-      <!-- Edit --> 
-      <button data-modal-target="diaryeditmodal_<%= diary.id %>" data-modal-toggle="diaryeditmodal_<%= diary.id %>" data-action="click->hello#stopToggle" type="button" class="flex items-center justify-center text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs px-3 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-        <%= t('activerecord.attributes.diary.show.edit') %>
-      </button>
-    <% end %>
-  </div>
 </div>
-
-<!-- Editmodal -->
-<% if current_user == @diary.user %>
-  <div id="diaryeditmodal_<%= diary.id %>" 
-    data-diaryeditmodal-diary-id-value="<%= diary.id %>" 
-    data-diaryeditmodal-target="diaryeditmodal" 
-    data-controller="diaryeditmodal" 
-    data-action="click->hello#stopToggle" 
-    tabindex="-1" 
-    aria-hidden="true" 
-    class="hidden fixed inset-0 z-50 flex justify-center items-center overflow-y-auto overflow-x-hidden bg-gray-900 bg-opacity-70">
-    <div class="relative p-4 w-full max-w-sm min-h-[60vh] max-h-full">
-      <div class="border border-gray-700 rounded-lg shadow bg-gray-900">
-        <div class="relative rounded-t text-center">
-          <button type="button" 
-                  class="absolute top-3 right-3 text-gray-400 bg-transparent hover:bg-gray-600 hover:text-white rounded-lg w-8 h-8 inline-flex justify-center items-center" 
-                  data-modal-hide="diaryeditmodal_<%= diary.id %>">
-            <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <div class="py-1 px-1">
-          <%= turbo_frame_tag "edit_diary_#{diary.id}_form", src: edit_diary_path(diary, format: :turbo_stream), data: { turbo_action: "replace" }, loading: "lazy" %>
-        </div>
-      </div>
-    </div>
-  </div>
-<% end %>

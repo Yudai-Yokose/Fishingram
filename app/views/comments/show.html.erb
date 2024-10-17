@@ -1,0 +1,16 @@
+<div id="<%= dom_id(comment) %>" class="py-3 flex items-start gap-2.5">
+  <h2 class="text-lg font-bold mb-4">コメント一覧</h2>
+
+  <div id="comments_for_catch_<%= @catch.id %>">
+    <% if @comments.any? %>
+      <% @comments.each do |comment| %>
+        <%= render partial: 'comments/comment', locals: { comment: comment } %>
+      <% end %>
+    <% else %>
+      <p class="text-sm text-gray-500">コメントはまだありません。</p>
+    <% end %>
+  </div>
+
+  <h3 class="text-lg font-bold mt-6">新しいコメント</h3>
+  <%= render partial: 'comments/new', locals: { catch: @catch, comment: @new_comment } %>
+</div>

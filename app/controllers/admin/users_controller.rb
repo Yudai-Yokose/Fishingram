@@ -1,22 +1,9 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_user, only: [ :show, :edit, :update, :destroy ]
+  before_action :require_admin
+  before_action :set_user, only: [ :destroy ]
 
   def index
-    @users = User.all.order(created_at: :desc).page(params[:page]).per(10)
-  end
-
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-    if @user.update(user_params)
-      redirect_to admin_users_path, notice: "ユーザーを更新しました"
-    else
-      render :edit
-    end
+    @users = User.all.order(created_at: :desc).page(params[:page])
   end
 
   def destroy

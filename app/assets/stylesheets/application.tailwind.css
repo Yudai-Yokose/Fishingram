@@ -1,12 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+/* スマホ画面でのみ表示される要素（768px以下） */
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+
+  .tablet-pc-only {
+    display: none;
+  }
+}
+
+/* タブレット画面以上で表示される要素（769px以上） */
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .tablet-pc-only {
+    display: block;
+  }
+}
+
 /*=================================== general setting ==========================================*/
 
 body {
-  padding-top: 5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   min-height: 100vh; 

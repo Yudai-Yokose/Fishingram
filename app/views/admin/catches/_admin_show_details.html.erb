@@ -1,55 +1,72 @@
-<div class="px-4 pt-6">
-  <!-- Details -->
-  <div class="grid grid-cols-2 gap-4">
-    <% attributes = {
-      tide: t('activerecord.attributes.catch.show.tide'),
-      tide_level: t('activerecord.attributes.catch.show.tide_level'),
-      range: t('activerecord.attributes.catch.show.range'),
-      size: t('activerecord.attributes.catch.show.size')
-    } %>
+<div class="grid gap-4 grid-cols-2">
 
-    <% attributes.each do |key, label| %>
-      <div class="flex flex-col">
-        <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white">
-          <%= label %>
-        </span>
-        <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-3 p-2 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          <%= catch.send(key) %>
-        </p>
-      </div>
-    <% end %>
+  <!-- Tide -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.catch.new.tide_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= catch.tide %>
+    </div>
+  </div>
+
+  <!-- Tide Level -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.catch.new.tide_level_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= catch.tide_level %>
+    </div>
+  </div>
+
+  <!-- Range -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.catch.new.range_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base xl:text-lg rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= catch.range %>
+    </div>
+  </div>
+
+  <!-- Size -->
+  <div class="w-full">
+    <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+      <%= t('activerecord.attributes.catch.new.size_prompt') %>
+    </div>
+    <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <%= catch.size %>
+    </div>
   </div>
 
   <!-- Memo -->
   <% if catch.memo.present? %>
-    <div class="flex flex-col mt-4">
-      <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"><%= t('activerecord.attributes.catch.show.memo') %></span>
-      <p class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full pl-3 p-2 dark:bg-gray-900 dark:border-gray-700 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500 break-words whitespace-normal"><%= catch.memo %></p>
+    <div class="col-span-2">
+      <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+        <%= t('activerecord.attributes.catch.new.memo') %>
+      </div>
+      <div class="bg-gray-50 border border-gray-300 text-gray-900 text-sm md:text-base rounded-lg p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        <%= catch.memo %>
+      </div>
     </div>
   <% end %>
 
   <!-- Google Map -->
   <% if catch.latitude.present? && catch.longitude.present? %>
-    <div class="flex flex-col mt-4">
-      <span class="block mb-2 text-xs font-medium text-gray-900 dark:text-white"><%= t('activerecord.attributes.catch.show.map') %></span>
+    <div class="col-span-2">
+      <div class="block mb-2 text-sm md:text-base font-medium text-gray-900 dark:text-white">
+        <%= t('activerecord.attributes.catch.show.map') %>
+      </div>
       <div data-controller="catchshowmap"
           data-catchshowmap-latitude-value="<%= catch.latitude %>"
           data-catchshowmap-longitude-value="<%= catch.longitude %>"
           data-catchshowmap-map-id-value="<%= Rails.application.credentials.google[:maps_id] %>"
           data-catchshowmap-api-key-value="<%= Rails.application.credentials.google[:maps_api_key] %>"
           data-catchshowmap-catch-id-value="<%= catch.id %>">
-        <div id="map_<%= catch.id %>" class="rounded-lg map-container" style="height: 200px;">
+        <div id="map_<%= catch.id %>" class="rounded-lg map-container h-[300px] md:h-[150px]">
         </div>
       </div>
     </div>
   <% end %>
-
-  <!-- Bottom menu -->
-  <div class="my-4">
-    <!-- Delete --> 
-    <%= turbo_frame_tag "admin_catch_#{catch.id}" do %>
-      <%= link_to admin_catch_path(catch), data: { turbo_confirm: t('activerecord.attributes.catch.show.confirm'), turbo_method: :delete }, class: 'flex items-center justify-center text-gray-900 bg-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-xs px-3 py-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700' do %>
-        <%= t('activerecord.attributes.catch.show.delete') %>
-      <% end %>
-    <% end %>
 </div>

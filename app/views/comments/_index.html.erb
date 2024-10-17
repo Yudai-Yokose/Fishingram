@@ -1,0 +1,11 @@
+<div id="<%= dom_id(catch, :comments) %>" class="space-y-4">
+  <% if catch.comments.any? %>
+    <% catch.comments.each do |comment| %>
+      <%= render partial: "comments/comment", locals: { catch: catch, comment: comment } %>
+    <% end %>
+  <% else %>
+    <div id="<%= dom_id(catch, :no_comments_message) %>" class="flex flex-col leading-1.5 p-2 pl-3 border border-gray-700 rounded-e-lg rounded-es-lg dark:bg-gray-700">
+      <p class="text-sm md:text-base text-gray-900 dark:text-white" style="white-space: normal;">コメントはありません</p>
+    </div>
+  <% end %>
+</div>
