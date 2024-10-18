@@ -2,23 +2,18 @@
   <!-- Title -->
   <div class="flex items-center justify-between max-w-screen-xl mx-auto px-3">
     <h5 class="text-lg md:text-xl font-bold leading-none text-gray-900 dark:text-white">自分の日記</h5>
-    <a href="<%= diaries_path %>" class="text-sm md:text-base font-medium text-blue-600 hover:underline dark:text-blue-500">View all</a>
+    <a href="<%= diaries_path %>" class="text-sm md:text-base font-medium text-blue-600 hover:underline dark:text-blue-500">全て表示</a>
   </div>
-
   <!-- Search -->
-  <form class="max-w-screen-xl mx-auto px-3 py-6">
-    <label for="default-search" class="mb-2 text-sm md:text-base font-medium text-gray-900 sr-only dark:text-white">Search</label>
+  <div class="max-w-screen-xl mx-auto px-3 py-4 md:py-6">
     <div class="relative">
       <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-        </svg>
+        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/></svg>
+        <p class="ps-3 text-gray-500 dark:text-gray-400 text-sm md:text-base">自分の日記を検索する</p>
       </div>
-      <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm md:text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search diaries..." required />
-      <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:text-base px-4 py-2 dark:bg-blue-900 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+      <button type="button" data-modal-target="search-modal" data-modal-toggle="search-modal" class="block w-full p-6 ps-10 text-sm md:text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></button>
     </div>
-  </form>
-
+  </div>
   <!-- Card -->
   <%= turbo_frame_tag "diaries_page_#{@diaries.current_page}" do %>
     <div class="flex flex-col items-center justify-center px-3 w-full max-w-screen-xl mx-auto mb-6">
@@ -30,7 +25,66 @@
     </div>
 
     <% if @diaries.next_page %>
-      <%= turbo_frame_tag "diaries_page_#{@diaries.next_page}", src: diaries_path(page: @diaries.next_page), loading: :lazy %>
+      <%= turbo_frame_tag "diaries_page_#{@diaries.next_page}", src: diaries_path(page: @diaries.next_page, q: params.fetch(:q, {}).permit(:content_cont, :weather_eq, :catch_count_eq, :time_of_day_eq, :temperature_eq)), loading: :lazy %>
     <% end %>
   <% end %>
+</div>
+
+<!-- Search Modal -->
+<div id="search-modal" data-controller="search" data-search-target="searchModal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full"> 
+  <div class="relative p-4 w-full max-w-md max-h-full">
+    <!-- Modal content -->
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-800">
+      <!-- Modal header -->
+      <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-base md:text-lg font-medium text-gray-900 dark:text-white">自分の日記を検索する</h3>
+        <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" 
+          data-modal-hide="search-modal">
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          </svg>
+        </button>
+      </div>
+      <!-- Modal body -->
+      <%= search_form_for @search, html: { class: "relative space-y-6", data: { controller: "reset", reset_target: "form", turbo_frame: "diaries_page_#{@diaries.current_page}" } }, url: diaries_path, method: :get do |f| %>
+        <div class="p-4 md:p-5 space-y-4">
+          <div class="p-4 md:p-5 rounded-lg bg-gray-50 dark:bg-gray-800">
+            <div class="grid grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-6">
+              <!-- Weather -->
+              <div class="relative">
+                <label for="weather-search" class="block mb-2 text-sm md:text-base text-gray-900 dark:text-white">天気で検索</label>
+                <%= f.select :weather_eq, options_for_select(Diary.weathers.keys.map { |key| [key.capitalize, key] }, selected: params.dig(:q, :weather_eq)), { prompt: "天気" }, id: "weather-search", class: "bg-gray-50 border border-gray-300 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+              </div>
+              <!-- Time_of_day -->
+              <div class="relative">
+                <label for="time-of-day-search" class="block mb-2 text-sm md:text-base text-gray-900 dark:text-white">時間帯で検索</label>
+                <%= f.select :time_of_day_eq, options_for_select(Diary.time_of_days.keys.map { |key| [key.capitalize, key] }, selected: params.dig(:q, :time_of_day_eq)), { prompt: "時間帯" }, id: "time-of-day-search", class: "bg-gray-50 border border-gray-300 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+              </div>
+              <!-- Temperature -->
+              <div class="relative">
+                <label for="temperature-search" class="block mb-2 text-sm md:text-base text-gray-900 dark:text-white">気温で検索</label>
+                <%= f.select :temperature_eq, options_for_select(Diary.temperatures.keys.map { |key| [key.capitalize, key] }, selected: params.dig(:q, :temperature_eq)), { prompt: "気温" }, id: "temperature-search", class: "bg-gray-50 border border-gray-300 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+              </div>
+              <!-- Catch_count -->
+              <div class="relative">
+                <label for="catch-count-search" class="block mb-2 text-sm md:text-base text-gray-900 dark:text-white">釣果数で検索</label>
+                <%= f.select :catch_count_eq, options_for_select(Diary.catch_counts.keys.map { |key| [key.capitalize, key] }, selected: params.dig(:q, :catch_count_eq)), { prompt: "釣果数" }, id: "catch-count-search", class: "bg-gray-50 border border-gray-300 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+              </div>
+              <!-- Content -->
+              <div class="col-span-2 relative" data-controller="autocomplete-diary">
+                <label for="memo-search" class="block mb-2 text-sm md:text-base text-gray-900 dark:text-white">本文で検索</label>
+                <input type="text" id="memo-search" name="q[content_cont]" data-autocomplete-diary-target="input" data-action="input->autocomplete-diary#search" class="bg-gray-50 border border-gray-300 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 text-gray-900 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="フリーワード検索" autocomplete="off">
+                <ul data-autocomplete-diary-target="suggestions" class="absolute left-0 right-0 bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-lg rounded-lg mt-1 w-full z-50 max-h-60 overflow-y-auto"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex gap-4 items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button type="button" data-action="reset#resetForm" class="flex-1 bg-gray-50 border border-gray-300 text-sm md:text-base rounded-lg focus:ring-primary-600 focus:border-blue-900 p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-400 text-gray-500 dark:text-white dark:focus:ring-blue-500 dark:hover:bg-gray-700">クリア</button>
+          <%= f.submit "検索", class: "flex-1 bg-blue-700 text-white rounded-lg px-5 py-2.5 hover:bg-blue-800 text-sm md:text-base focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-900 dark:hover:bg-blue-900 dark:focus:ring-blue-900" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>

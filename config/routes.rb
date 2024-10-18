@@ -1,16 +1,24 @@
 Rails.application.routes.draw do
   get "pages/contact"
+
   resources :diaries do
     member do
       delete :purge_image
     end
+    collection do
+      get :autocomplete
+    end
   end
 
   get "index_user", to: "catches#index_user"
+  get "index_user/autocomplete", to: "catches#autocomplete_index_user"
 
   resources :catches do
     member do
       delete :purge_image
+    end
+    collection do
+      get :autocomplete
     end
     resource :like, only: [ :create, :destroy ]
     resources :comments, only: [ :new, :create, :index, :destroy, :edit, :update ]

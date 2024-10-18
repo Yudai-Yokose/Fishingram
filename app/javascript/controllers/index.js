@@ -4,6 +4,15 @@
 
 import { application } from "./application"
 
+import AutocompleteController from "./autocomplete_controller"
+application.register("autocomplete", AutocompleteController)
+
+import AutocompleteDiaryController from "./autocomplete_diary_controller"
+application.register("autocomplete-diary", AutocompleteDiaryController)
+
+import AutocompleteIndexUserController from "./autocomplete_index_user_controller"
+application.register("autocomplete-index-user", AutocompleteIndexUserController)
+
 import CatchSpinnerController from "./catch_spinner_controller"
 application.register("catch-spinner", CatchSpinnerController)
 
@@ -69,3 +78,9 @@ application.register("profilemodal", ProfilemodalController)
 
 import RecordController from "./record_controller"
 application.register("record", RecordController)
+
+import ResetController from "./reset_controller"
+application.register("reset", ResetController)
+
+import SearchController from "./search_controller"
+application.register("search", SearchController)

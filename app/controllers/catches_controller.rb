@@ -1,6 +1,6 @@
 class CatchesController < ApplicationController
   include ActionView::RecordIdentifier
-  before_action :authenticate_user!, except: %i[index show new create]
+  before_action :authenticate_user!, except: %i[index show new create autocomplete]
   before_action :set_catch, only: %i[show edit update destroy purge_image]
   before_action :correct_user, only: %i[edit update destroy purge_image]
 
@@ -57,11 +57,15 @@ class CatchesController < ApplicationController
   end
 
   def index
-    @catches = Catch.includes(:user, :comments, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(8)
+    search_params = params.fetch(:q, {}).permit(:memo_cont, :tide_eq, :tide_level_eq, :range_eq, :size_eq)
+    @search = Catch.ransack(search_params)
+    @catches = @search.result(distinct: true).includes(:user, :comments, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def index_user
-    @catches = current_user.catches.includes(:user, :comments, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(8)
+    search_params = params.fetch(:q, {}).permit(:memo_cont, :tide_eq, :tide_level_eq, :range_eq, :size_eq)
+    @search = current_user.catches.ransack(search_params)
+    @catches = @search.result(distinct: true).includes(:user, :comments, images_attachments: :blob).order(created_at: :desc).page(params[:page]).per(8)
   end
 
   def show
@@ -142,6 +146,18 @@ class CatchesController < ApplicationController
       }
       format.html { redirect_to edit_catch_path(@catch), notice: I18n.t("activerecord.attributes.catch.purge_image.success") }
     end
+  end
+
+  def autocomplete
+    query = params[:q]
+    suggestions = Catch.where("memo LIKE ?", "%#{query}%").limit(10).pluck(:memo)
+    render json: suggestions
+  end
+
+  def autocomplete_index_user
+    query = params[:q]
+    suggestions = current_user.catches.where("memo LIKE ?", "%#{query}%").limit(10).pluck(:memo)
+    render json: suggestions
   end
 
   private

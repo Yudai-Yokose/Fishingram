@@ -56,7 +56,9 @@ class DiariesController < ApplicationController
   end
 
   def index
-    @diaries = current_user.diaries.includes(images_attachments: :blob).order(diary_date: :desc).page(params[:page]).per(8)
+    search_params = params.fetch(:q, {}).permit(:content_cont, :weather_eq, :catch_count_eq, :time_of_day_eq, :temperature_eq)
+    @search = current_user.diaries.ransack(search_params)
+    @diaries = @search.result(distinct: true).includes(images_attachments: :blob).order(diary_date: :desc).page(params[:page]).per(8)
   end
 
   def show
@@ -137,6 +139,12 @@ class DiariesController < ApplicationController
       }
       format.html { redirect_to edit_diary_path(@diary), notice: I18n.t("activerecord.attributes.diary.purge_image.success") }
     end
+  end
+
+  def autocomplete
+    query = params[:q]
+    suggestions = Diary.where("content LIKE ?", "%#{query}%").limit(10).pluck(:content)
+    render json: suggestions
   end
 
   private

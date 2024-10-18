@@ -15,10 +15,26 @@ class Catch < ApplicationRecord
   enum :size,       { "20cm以下" => 0, "20~30cm" => 1, "30~40cm" => 2, "40~50cm" => 3, "50~60cm" => 4, "60~70cm" => 5, "70~80cm" => 6, "80~90cm" => 7, "90cm以上" => 8 }
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "created_at", "id", "latitude", "longitude", "memo", "range", "size", "tide", "tide_level", "updated_at", "user_id" ]
+    [ "memo", "range", "size", "tide", "tide_level" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    [ "comments", "images_attachments", "images_blobs", "liked_users", "likes", "user" ]
+    [ "comments" ]
+  end
+
+  ransacker :tide, formatter: proc { |v| tides[v] } do |parent|
+    parent.table[:tide]
+  end
+
+  ransacker :tide_level, formatter: proc { |v| tide_levels[v] } do |parent|
+    parent.table[:tide_level]
+  end
+
+  ransacker :range, formatter: proc { |v| ranges[v] } do |parent|
+    parent.table[:range]
+  end
+
+  ransacker :size, formatter: proc { |v| sizes[v] } do |parent|
+    parent.table[:size]
   end
 end
