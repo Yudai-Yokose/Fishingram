@@ -84,3 +84,6 @@ application.register("reset", ResetController)
 
 import SearchController from "./search_controller"
 application.register("search", SearchController)
+
+import WishController from "./wish_controller"
+application.register("wish", WishController)

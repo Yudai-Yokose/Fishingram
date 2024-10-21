@@ -4,72 +4,72 @@ require 'open-uri'
 RSpec.describe User, type: :model do
   let(:user) { build(:user) }
 
-  describe 'Validations' do
-    it 'is valid with a username and email' do
+  describe 'バリデーション' do
+    it 'ユーザー名とメールアドレスがあれば有効であること' do
       expect(user).to be_valid
     end
 
-    it 'is invalid without a username' do
+    it 'ユーザー名がない場合は無効であること' do
       user.username = nil
       expect(user).to_not be_valid
     end
 
-    it 'is invalid without a unique username' do
+    it '一意のユーザー名がない場合は無効であること' do
       create(:user, username: user.username)
       expect(user).to_not be_valid
     end
 
-    it 'is invalid without an email' do
+    it 'メールアドレスがない場合は無効であること' do
       user.email = nil
       expect(user).to_not be_valid
     end
 
-    it 'is invalid with a duplicate email' do
+    it '重複したメールアドレスがある場合は無効であること' do
       create(:user, email: user.email)
       expect(user).to_not be_valid
     end
   end
 
-  describe 'Associations' do
-    it 'has many likes' do
+  describe '関連付け' do
+    it '多くのいいねを持つこと' do
       assoc = described_class.reflect_on_association(:likes)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:dependent]).to eq :destroy
     end
 
-    it 'has many liked_catches through likes' do
+    it 'いいねを通じて多くの好きな釣果を持つこと' do
       assoc = described_class.reflect_on_association(:liked_catches)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:through]).to eq :likes
       expect(assoc.options[:source]).to eq :catch
     end
 
-    it 'has many comments' do
+    it '多くのコメントを持つこと' do
       assoc = described_class.reflect_on_association(:comments)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:dependent]).to eq :destroy
     end
 
-    it 'has many catches' do
+    it '多くの釣果を持つこと' do
       assoc = described_class.reflect_on_association(:catches)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:dependent]).to eq :destroy
     end
 
-    it 'has many diaries' do
+    it '多くの日記を持つこと' do
       assoc = described_class.reflect_on_association(:diaries)
       expect(assoc.macro).to eq :has_many
       expect(assoc.options[:dependent]).to eq :destroy
     end
   end
 
-  describe 'Profile Image' do
-    it 'attaches a default profile image if none is uploaded' do
+  describe 'プロフィール画像' do
+    it '画像がアップロードされていない場合はデフォルトのプロフィール画像を添付すること' do
       user.save
       expect(user.profile_image).to be_attached
     end
 
-    it 'does not attach a default profile image if one is uploaded' do
+    it '画像がアップロードされている場合はデフォルトのプロフィール画像を添付しないこと' do
       user.profile_image.attach(
         io: File.open(Rails.root.join('public', 'icon.png')),
         filename: 'icon.png',
@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'from_omniauth method' do
+  describe 'from_omniauthメソッド' do
     let(:auth) do
       OmniAuth::AuthHash.new({
         provider: 'google_oauth2',
@@ -97,14 +97,14 @@ RSpec.describe User, type: :model do
       allow(URI).to receive(:open).and_return(File.open(Rails.root.join('public', 'icon.png')))
     end
 
-    it 'creates a user from google auth' do
+    it 'Google認証からユーザーを作成すること' do
       user = User.from_omniauth(auth)
       expect(user).to be_valid
       expect(user.username).to eq('Sample User')
       expect(user.email).to eq('sampleuser@example.com')
     end
 
-    it 'attaches a profile image from google auth' do
+    it 'Google認証からプロフィール画像を添付すること' do
       user = User.from_omniauth(auth)
       expect(user.profile_image).to be_attached
     end

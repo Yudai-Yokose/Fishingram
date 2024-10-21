@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/*=================================== general setting ==========================================*/
 
-/* スマホ画面でのみ表示される要素（768px以下） */
 @media (max-width: 768px) {
   .mobile-only {
     display: block;
@@ -14,7 +14,6 @@
   }
 }
 
-/* タブレット画面以上で表示される要素（769px以上） */
 @media (min-width: 769px) {
   .mobile-only {
     display: none;
@@ -24,8 +23,6 @@
     display: block;
   }
 }
-
-/*=================================== general setting ==========================================*/
 
 body {
   padding-left: 1rem;
@@ -273,12 +270,4 @@ body {
 .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
   background-color: #303030;
   opacity: 8%;
-}
-
-/*========================================= record tab =======================================*/
-
-.tab.active {
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  background-color: transparent;
 }

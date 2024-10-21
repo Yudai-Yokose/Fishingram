@@ -5,34 +5,34 @@ RSpec.describe Comment, type: :model do
   let(:catch_record) { create(:catch, user: user) }
   let(:comment) { build(:comment, user: user, catch: catch_record) }
 
-  describe 'Validations' do
-    it 'is valid with content, user, and catch' do
+  describe 'バリデーション' do
+    it '内容、ユーザー、および釣果があれば有効であること' do
       expect(comment).to be_valid
     end
 
-    it 'is invalid without content' do
+    it '内容がない場合は無効であること' do
       comment.content = nil
       expect(comment).to_not be_valid
     end
 
-    it 'is invalid without a user' do
+    it 'ユーザーがない場合は無効であること' do
       comment.user = nil
       expect(comment).to_not be_valid
     end
 
-    it 'is invalid without a catch' do
+    it '釣果がない場合は無効であること' do
       comment.catch = nil
       expect(comment).to_not be_valid
     end
   end
 
-  describe 'Associations' do
-    it 'belongs to a user' do
+  describe '関連付け' do
+    it 'ユーザーに属すること' do
       assoc = described_class.reflect_on_association(:user)
       expect(assoc.macro).to eq :belongs_to
     end
 
-    it 'belongs to a catch' do
+    it '釣果に属すること' do
       assoc = described_class.reflect_on_association(:catch)
       expect(assoc.macro).to eq :belongs_to
     end

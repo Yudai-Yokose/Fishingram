@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_out_path_for(resource_or_scope)
@@ -20,6 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin
-    redirect_to root_path, alert: "You are not authorized to access this page." unless current_user.admin?
+    unless current_user&.admin?
+      redirect_to root_path, alert: I18n.t("activerecord.attributes.user.not_admin")
+    end
   end
 end
