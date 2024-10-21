@@ -2,7 +2,7 @@
   <% if user_signed_in? %>
     <% if current_user.liked_catches.include?(catch) %>
       <%= link_to catch_like_path(catch), method: :delete, data: { turbo_method: :delete }, 
-        class: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-2 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800 border dark:border-blue-900 flex items-center justify-center gap-2' do %>
+        class: 'liked text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-2 py-2.5 text-center dark:bg-blue-900 dark:hover:bg-blue-800 dark:focus:ring-blue-800 border dark:border-blue-900 flex items-center justify-center gap-2' do %>
         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
           <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z"/>
         </svg>
@@ -10,7 +10,7 @@
       <% end %>
     <% else %>
       <%= link_to catch_like_path(catch), method: :post, data: { turbo_method: :post }, 
-        class: 'text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-2 py-2.5 text-center dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-600 border dark:border-gray-600 flex items-center justify-center gap-2' do %>
+        class: 'likeButton text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-2 py-2.5 text-center dark:bg-gray-800 dark:hover:bg-gray-600 dark:focus:ring-gray-600 border dark:border-gray-600 flex items-center justify-center gap-2' do %>
         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 18">
           <path d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z"/>
         </svg>

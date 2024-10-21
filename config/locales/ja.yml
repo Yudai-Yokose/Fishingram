@@ -46,6 +46,9 @@ ja:
         password_confirmation: "パスワード(確認)"
         password_requirements: "パスワード(確認)"
         profile_image: "プロフィール画像"
+        google_sign_up: "Googleアカウントで登録"
+        google_sign_in: "Googleアカウントでログイン"
+        not_admin: "管理者ではないためダッシュボードにアクセスできません"
       home:
         terms:
           title: "利用規約"
@@ -78,7 +81,8 @@ ja:
           tide_level_prompt: "潮位"
           range_prompt: "Range"
           size_prompt: "Size"
-          memo: "Memo"
+          memo_prompt: "一言メモ"
+          memo: "メモ"
           map: "位置情報を登録"
         create:
           success: "釣果を記録しました"
@@ -120,7 +124,8 @@ ja:
           catch_count_prompt: "釣果数"
           time_of_day_prompt: "時間帯"
           temperature_prompt: "気温"
-          content: "Memo"
+          content_prompt: "今日の釣行についてなど自由に記載しましょう"
+          content: "内容"
           map: "位置情報を登録"
         create:
           success: "日記を作成しました"

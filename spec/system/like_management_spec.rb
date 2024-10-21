@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe 'Like System', type: :system, js: true do
+RSpec.describe 'いいねシステム', type: :system, js: true do
+  include ActionView::RecordIdentifier
   let(:user) { User.create!(email: 'test@example.com', password: 'password', username: 'testuser') }
   let(:other_user) { User.create!(email: 'other@example.com', password: 'password', username: 'otheruser') }
 
@@ -18,15 +19,15 @@ RSpec.describe 'Like System', type: :system, js: true do
     login_as(user, scope: :user)
   end
 
-  context 'for own catch' do
+  context '自分の投稿について' do
     before do
       visit catches_path
-      within("turbo-frame#catch_#{catch.id}") do
-        find("div.block[role='button']").click
+      within("div##{dom_id(catch)}") do
+        find("button[data-modal-target='#{dom_id(catch, :modal)}']").click
       end
     end
 
-    it 'allows a logged-in user to like and unlike their own catch with button state changes' do
+    it 'ログインしているユーザーが自分の投稿にいいねを付けたり外したりできること' do
       within "turbo-frame#like_button_#{catch.id}" do
         expect(page).to have_selector("a.likeButton", count: 1)
         expect(page).not_to have_css("a.liked")
@@ -42,15 +43,15 @@ RSpec.describe 'Like System', type: :system, js: true do
     end
   end
 
-  context 'for another user\'s catch' do
+  context '他のユーザーの投稿について' do
     before do
       visit catches_path
-      within("turbo-frame#catch_#{other_catch.id}") do
-        find("div.block[role='button']").click
+      within("div##{dom_id(other_catch)}") do
+        find("button[data-modal-target='#{dom_id(other_catch, :modal)}']").click
       end
     end
 
-    it 'allows a logged-in user to like and unlike another user\'s catch with button state changes' do
+    it 'ログインしているユーザーが他のユーザーの投稿にいいねを付けたり外したりできること' do
       within "turbo-frame#like_button_#{other_catch.id}" do
         expect(page).to have_selector("a.likeButton", count: 1)
         expect(page).not_to have_css("a.liked")
