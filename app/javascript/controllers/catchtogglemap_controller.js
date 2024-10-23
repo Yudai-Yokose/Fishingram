@@ -8,41 +8,53 @@ export default class extends Controller {
   }
 
   catchtoggleMap(event) {
-    this.toggleMapVisibility();
+    this.toggleMapVisibility(event.currentTarget);
   }
 
-  toggleMapVisibility() {
-    const checkbox = document.getElementById('location-catch-toggle');
+  toggleMapVisibility(checkbox = null) {
+    const catchId = this.element.dataset.catchIdValue;
+  
+    if (!checkbox) {
+      checkbox = this.element.querySelector(`input[type="checkbox"]#location-catch-toggle-${catchId}`);
+    }
+  
+    if (!checkbox) {
+      console.error(`Checkbox with id="location-catch-toggle-${catchId}" not found.`);
+      return;
+    }
+  
     const locationFields = this.catchLocationFieldsTarget;
-
+  
     if (checkbox.checked) {
       locationFields.style.display = 'block';
-      this.initMap();
+      this.initMap(catchId);
     } else {
       locationFields.style.display = 'none';
-      this.clearMapPosition();
+      this.clearMapPosition(catchId);
     }
   }
 
-  initMap() {
-    const catchnewmapController = this.application.getControllerForElementAndIdentifier(
-      document.querySelector("[data-controller='catchnewmap']"), "catchnewmap"
+  initMap(catchId) {
+    const mapController = this.application.getControllerForElementAndIdentifier(
+      document.querySelector(`[data-controller='catchnewmap'][data-catch-id-value='${catchId}']`),
+      "catchnewmap"
     );
 
-    if (catchnewmapController) {
-      catchnewmapController.initializeMap();
+    if (mapController) {
+      mapController.initializeMap();
     } else {
       console.error('Could not find catchnewmap controller');
     }
   }
 
-  clearMapPosition() {
-    const catchnewmapController = this.application.getControllerForElementAndIdentifier(
-      document.querySelector("[data-controller='catchnewmap']"), "catchnewmap"
+  clearMapPosition(catchId) {
+    const mapController = this.application.getControllerForElementAndIdentifier(
+      document.querySelector(`[data-controller='catchnewmap'][data-catch-id-value='${catchId}']`),
+      "catchnewmap"
     );
 
-    if (catchnewmapController) {
-      catchnewmapController.clearPosition();
+    if (mapController) {
+      mapController.clearPosition();
     }
   }
 }
