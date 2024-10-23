@@ -35,7 +35,7 @@ export default class extends Controller {
     suggestions.forEach((suggestion) => {
       const item = document.createElement("li");
       item.textContent = suggestion;
-      item.className = "p-2 cursor-pointer hover:bg-blue-100 dark:hover:bg-gray-600";
+      item.className = "p-2 cursor-pointer hover:bg-blue-100 dark:hover:bg-gray-700";
       item.addEventListener("click", (event) => this.selectSuggestion(event, suggestion));
       this.suggestionsTarget.appendChild(item);
     });

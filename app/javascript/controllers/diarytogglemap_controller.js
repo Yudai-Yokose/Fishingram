@@ -8,37 +8,49 @@ export default class extends Controller {
   }
 
   diarytoggleMap(event) {
-    this.toggleMapVisibility();
+    this.toggleMapVisibility(event.currentTarget);
   }
 
-  toggleMapVisibility() {
-    const checkbox = document.getElementById('location-diarytoggle');
+  toggleMapVisibility(checkbox = null) {
+    const diaryId = this.element.dataset.diaryIdValue;
+
+    if (!checkbox) {
+      checkbox = this.element.querySelector(`input[type="checkbox"]#location-diary-toggle-${diaryId}`);
+    }
+
+    if (!checkbox) {
+      console.error(`Checkbox with id="location-diary-toggle-${diaryId}" not found.`);
+      return;
+    }
+
     const locationFields = this.diaryLocationFieldsTarget;
 
     if (checkbox.checked) {
       locationFields.style.display = 'block';
-      this.initMap();
+      this.initMap(diaryId);
     } else {
       locationFields.style.display = 'none';
-      this.clearMapPosition();
+      this.clearMapPosition(diaryId);
     }
   }
 
-  initMap() {
+  initMap(diaryId) {
     const diarynewmapController = this.application.getControllerForElementAndIdentifier(
-      document.querySelector("[data-controller='diarynewmap']"), "diarynewmap"
+      document.querySelector(`[data-controller='diarynewmap'][data-diary-id-value='${diaryId}']`),
+      "diarynewmap"
     );
 
     if (diarynewmapController) {
       diarynewmapController.initializeMap();
     } else {
-      console.error('Could not find diarynewmap controller');
+      console.error(`Could not find diarynewmap controller for diary ID ${diaryId}.`);
     }
   }
 
-  clearMapPosition() {
+  clearMapPosition(diaryId) {
     const diarynewmapController = this.application.getControllerForElementAndIdentifier(
-      document.querySelector("[data-controller='diarynewmap']"), "diarynewmap"
+      document.querySelector(`[data-controller='diarynewmap'][data-diary-id-value='${diaryId}']`),
+      "diarynewmap"
     );
 
     if (diarynewmapController) {

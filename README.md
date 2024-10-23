@@ -1,5 +1,5 @@
 ## Fishingram
-[![Image from Gyazo](https://i.gyazo.com/3b271d0c00797339cde364060c76fed2.png)](https://gyazo.com/3b271d0c00797339cde364060c76fed2)
+[![Image from Gyazo](https://i.gyazo.com/66f911f5572edea6c50f51787c8b1a51.png)](https://gyazo.com/66f911f5572edea6c50f51787c8b1a51)
 <p align="left">
   <img src="https://img.shields.io/badge/-Tailwind-06B.svg?logo=tailwind%20css&style=plastic">
   <img src="https://img.shields.io/badge/-Flowbite-111827.svg?logo=&style=plastic">
