@@ -271,3 +271,15 @@ body {
   background-color: #303030;
   opacity: 8%;
 }
+
+.underline-animation {
+  width: 0%;
+  height: 0.5px;
+  background-color: #e5e7eb;
+  transition: width 3s ease-in-out;
+  margin-top: 8px;
+}
+
+.show-underline .underline-animation {
+  width: 100%;
+}
