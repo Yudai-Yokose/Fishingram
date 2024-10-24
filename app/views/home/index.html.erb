@@ -1,14 +1,21 @@
 <div class="py-24 md:pt-8 md:pb-24">
   <!-- Top -->
-  <div class="flex flex-col px-3 w-full items-center justify-center max-w-screen-xl mx-auto" data-controller="intro" data-intro-delay-value="500">
-    <h1 class="hidden fade-in-top mt-36 md:mt-40 mb-2 flex items-center" data-intro-target="element">
+  <div class="flex flex-col px-3 w-full max-w-screen-xl mx-auto" data-controller="intro" data-intro-delay-value="500">
+    <h1 class="hidden fade-in-top mt-36 md:mt-40 mb-2 flex items-center justify-center " data-intro-target="element">
       <%= image_tag "/icon_white.svg", class: "h-32 md:h-48", alt: "Fishingram Logo" %>
     </h1>
-    <p class="hidden fade-in-bottom flex mt-2 items-center  mb-4" data-intro-target="element">
+    <p class="hidden fade-in-bottom flex mt-2 items-center justify-center mb-4" data-intro-target="element">
       <%= image_tag "/banner_white_subtitle.svg", class: "h-16 md:h-24", alt: "Fishingram Banner" %>
     </p>
+    <!-- Tittle -->
+    <div class="block mb-6 md:mb-4 hidden fade-in-bottom w-full px-3 title-container" data-intro-target="element">
+        <h5 class="text-lg md:text-xl font-bold leading-none text-gray-900 dark:text-white text-left mb-2">
+            Welcome to Fishingram
+        </h5>
+        <div class="underline-animation mt-6"></div>
+    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 md:gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 md:gap-6">
       <!-- Card 1 -->
       <div class="mb-6 md:mb-0 hidden fade-in-bottom flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row w-full max-w-screen-xl mx-auto hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900" data-intro-target="element">
           <img class="object-cover w-full rounded-t-lg h-40 md:h-64 md:w-auto md:rounded-none md:rounded-s-lg" src="/1.png" alt="">

@@ -39,18 +39,12 @@ export default class extends Controller {
     this.elementTargets.slice(2).forEach((element, index) => {
       setTimeout(() => {
         element.classList.remove("hidden");
-
-        if (element.tagName === "HR") {
-          element.classList.add("show");
-        } else {
-          element.classList.add("fade-in-bottom");
-
-          const underlineElement = element.querySelector('.underline-fade-in');
-          if (underlineElement) {
-            setTimeout(() => {
-              underlineElement.classList.add('fade-in-complete');
-            }, 1000);
-          }
+        element.classList.add("fade-in-bottom");
+  
+        if (element.classList.contains("title-container")) {
+          setTimeout(() => {
+            element.classList.add("show-underline");
+          }, 500);
         }
       }, this.delayValue * index);
     });
