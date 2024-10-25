@@ -15,7 +15,7 @@
     </div>
 
     <% if @diaries.next_page %>
-      <%= turbo_frame_tag "admin_diaries_page_#{@diaries.next_page}", src: admin_diaries_path(page: @diaries.next_page), loading: :lazy %>
+      <%= turbo_frame_tag "admin_diaries_page_#{@diaries.next_page}", src: admin_diaries_path(page: @diaries.next_page) %>
     <% end %>
   <% end %>
 </div>

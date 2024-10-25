@@ -4,7 +4,7 @@ export default class extends Controller {
   static targets = ["datepicker", "hiddenField"];
 
   connect() {
-    const today = new Date().toISOString().split('T')[0]; // クライアントのローカル日付を使う
+    const today = new Date().toISOString().split('T')[0];
 
     if (!this.hiddenFieldTarget.value) {
       this.hiddenFieldTarget.value = today;

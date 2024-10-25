@@ -52,7 +52,7 @@
       </div>
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
-        <%= turbo_frame_tag dom_id(catch, :show), src: catch_path(catch, format: :turbo_stream), loading: "lazy" %>
+        <%= turbo_frame_tag dom_id(catch, :show), src: catch_path(catch, format: :turbo_stream) %>
       </div>
       <!-- Modal footer -->
       <div class="flex justify-end p-4 md:p-5 gap-3 border-t border-gray-200 rounded-b dark:border-gray-600 text-sm md:text-base">
@@ -103,7 +103,7 @@
             </div>
             <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
-                <%= turbo_frame_tag dom_id(catch, :edit), src: edit_catch_path(catch, format: :turbo_stream), loading: "lazy" %>
+                <%= turbo_frame_tag dom_id(catch, :edit), src: edit_catch_path(catch, format: :turbo_stream) %>
             </div>
             <!-- Modal footer -->
             <div class="flex items-center justify-end p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -132,11 +132,11 @@
       </div>
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
-        <%= turbo_frame_tag dom_id(catch, :comments), src: catch_comments_path(catch, format: :turbo_stream), loading: "lazy" %>
+        <%= turbo_frame_tag dom_id(catch, :comments), src: catch_comments_path(catch, format: :turbo_stream) %>
       </div>
       <!-- Modal footer -->
       <div class="p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 text-sm md:text-base">
-        <%= turbo_frame_tag dom_id(catch, :new_comment_form), src: new_catch_comment_path(catch, format: :turbo_stream), loading: "lazy", class: "w-full" %>
+        <%= turbo_frame_tag dom_id(catch, :new_comment_form), src: new_catch_comment_path(catch, format: :turbo_stream), class: "w-full" %>
       </div>
     </div>
   </div>

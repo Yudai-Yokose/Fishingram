@@ -48,7 +48,7 @@
         </div>
         <!-- Modal body -->
         <div class="py-1 px-1">
-          <%= turbo_frame_tag dom_id(comment, :edit), src: edit_catch_comment_path(catch, comment, format: :turbo_stream), loading: "lazy" %>
+          <%= turbo_frame_tag dom_id(comment, :edit), src: edit_catch_comment_path(catch, comment, format: :turbo_stream) %>
         </div>
       </div>
     </div>
