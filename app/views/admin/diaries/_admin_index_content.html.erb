@@ -58,7 +58,7 @@
       </div>
       <!-- Modal body -->
       <div class="p-4 md:p-5 space-y-4">
-        <%= turbo_frame_tag dom_id(diary, :admin_show), src: admin_diary_path(diary, format: :turbo_stream), loading: "lazy" %>
+        <%= turbo_frame_tag dom_id(diary, :admin_show), src: admin_diary_path(diary, format: :turbo_stream) %>
       </div>
       <!-- Modal footer -->
       <div class="flex justify-end p-4 md:p-5 gap-3 border-t border-gray-200 rounded-b dark:border-gray-600 text-sm md:text-base">

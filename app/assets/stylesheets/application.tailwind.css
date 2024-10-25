@@ -103,6 +103,18 @@ body {
   animation: text-underline-fade 1s ease forwards;
 }
 
+.underline-animation {
+  width: 0%;
+  height: 0.5px;
+  background-color: #e5e7eb;
+  transition: width 3.5s ease-in-out;
+  margin-top: 8px;
+}
+
+.show-underline .underline-animation {
+  width: 100%;
+}
+
 /*================================ flash and error messages' setting ===================================*/
 
 @keyframes slideDown {
@@ -270,16 +282,4 @@ body {
 .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
   background-color: #303030;
   opacity: 8%;
-}
-
-.underline-animation {
-  width: 0%;
-  height: 0.5px;
-  background-color: #e5e7eb;
-  transition: width 3s ease-in-out;
-  margin-top: 8px;
-}
-
-.show-underline .underline-animation {
-  width: 100%;
 }

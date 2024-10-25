@@ -92,10 +92,10 @@
             <div class="p-4 pt-0 md:p-5 md:pt-0 space-y-4">
               <div id="record-tab-content">
                   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="catch" role="tabpanel" aria-labelledby="catch-tab">
-                    <%= turbo_frame_tag "new_catch_form", src: new_catch_path(format: :turbo_stream), loading: "lazy" %>
+                    <%= turbo_frame_tag "new_catch_form", src: new_catch_path(format: :turbo_stream) %>
                   </div>
                   <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="diary" role="tabpanel" aria-labelledby="diary-tab">
-                    <%= turbo_frame_tag "new_diary_form", src: new_diary_path(format: :turbo_stream), loading: "lazy" %>
+                    <%= turbo_frame_tag "new_diary_form", src: new_diary_path(format: :turbo_stream) %>
                   </div>
               </div>
             </div>
