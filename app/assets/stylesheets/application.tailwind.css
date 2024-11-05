@@ -105,8 +105,8 @@ body {
 
 .underline-animation {
   width: 0%;
-  height: 0.5px;
-  background-color: #e5e7eb;
+  height: 2.0px;
+  background-color: #4B5563;
   transition: width 3.5s ease-in-out;
   margin-top: 8px;
 }
